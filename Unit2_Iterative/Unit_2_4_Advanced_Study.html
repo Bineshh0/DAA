@@ -1,49 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 2 Advanced Note</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 2 — Advanced</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.7}.c{max-width:900px;margin:0 auto}h1{color:#4d96ff;text-align:center}h2{color:#88aaff;border-left:4px solid #4d96ff;padding-left:10px;margin-top:22px}.b{background:#12121a;border:1px solid #1e1e30;padding:12px;border-radius:8px;margin:10px 0;font-size:.9rem}.w{background:#1a1a0a;border:1px solid #ffd93d40;padding:10px;border-radius:8px;margin:10px 0;font-size:.85rem;color:#ffd93d}code{background:#1a1a2e;color:#88aaff;padding:2px 5px;border-radius:4px}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🧠 Unit 2 — Advanced &amp; Viva Edge</h1>
+<h2>Why Euclid is logarithmic — Lamé’s theorem</h2><div class="b">The number of steps of Euclid's algorithm on $(a,b)$ with $a&gt;b$ is at most $5\log_{10} b$. The worst case is exactly when $(a,b)$ are consecutive Fibonacci numbers. This is the first historical result connecting algorithm analysis with number theory.</div>
 
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
+<h2>Closed-form Fibonacci (Binet)</h2><div class="b">$F_n = \dfrac{\varphi^n - \psi^n}{\sqrt 5}$ where $\varphi=(1+\sqrt 5)/2,\ \psi=(1-\sqrt 5)/2$. Computing $\varphi^n$ by fast exponentiation gives $O(\log n)$ arithmetic ops, but floating-point loses accuracy for large $n$. Matrix-power method $\binom{F_{n+1}}{F_n}=\binom{1\,1}{1\,0}^n\binom{1}{0}$ also runs in $O(\log n)$ multiplications.</div>
 
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 2: Advanced Real-World Context</h1>
-    
-<h2>Advanced Algorithms: Python's Timsort & Hardware Optimization</h2>
-<div class="box">
-    <h3>Why Insertion Sort Defeats Advanced Algorithms in Real Life</h3>
-    <p>You learned that Merge Sort and Quick Sort are $O(N \log N)$, completely dominating Insertion Sort's $O(N^2)$. So why does the V8 JavaScript Engine, Python's sorted(), and Java's Arrays.sort() rely heavily on Insertion Sort under the hood?</p>
-    <ul>
-        <li><strong>Timsort:</strong> Timsort leverages the fact that real-world data contains pre-sorted sub-arrays (called "runs"). It splits a massive array into tiny chunks of 32 or 64 elements, uses <strong>Insertion Sort</strong> to perfectly sort those tiny chunks, and then uses Merge Sort to sew them together!</li>
-        <li><strong>Constant Overhead & Caching:</strong> $O(N \log N)$ comes with huge constant hardware overheads (recursion stack setup, object tracking). For small $N$ (e.g., $N < 50$), the overhead crushes the CPU. Furthermore, Insertion Sort operates perfectly sequentially backwards, ensuring a 100% L1 Cache Hit Rate because it never jumps randomly. The hardware executes it instantly.</li>
-    </ul>
+<h2>Sequential search variations</h2><div class="b">• <strong>Sentinel search:</strong> append the key at the end; the loop body removes one comparison per iteration (still $O(n)$ but ~2× faster in practice).<br>• <strong>On sorted data</strong> we can stop early when $A[i]&gt;$ key, but this does not change the asymptotic bound — if you have sorted data, prefer Binary Search ($O(\log n)$, Unit 3).</div>
 
-    <h3>Branch Predictor Failure in Sorting</h3>
-    <p>CPUs "guess" which branch an `if` statement will take to execute instructions in advance (Lookahead pipelines). If you sort random data, the CPU's branch predictor guesses `A[i] > key` correctly only 50% of the time, resulting in massive hardware penalty stalls! If the data is almost sorted, the branch predictor reaches near 100% accuracy, making iterative comparisons blazing fast at the microarchitecture level.</p>
-</div>
+<h2>Adaptive sorting and “number of inversions”</h2><div class="b">Insertion sort runs in $\Theta(n+d)$ where $d$ is the number of inversions in the input. For nearly-sorted arrays ($d=O(n)$) it beats $O(n\log n)$ algorithms in practice.</div>
 
-</body>
-</html>
+<h2>Lower bound on comparison sorts</h2><div class="w">Any comparison-based sort requires $\Omega(n\log n)$ comparisons in the worst case (decision-tree argument: $n!$ leaves → depth $\ge \log_2 n! = \Theta(n\log n)$). All three iterative sorts here are $\Theta(n^2)$ — they do not meet this lower bound, which motivates the $O(n\log n)$ divide-and-conquer sorts in Unit 3.</div>
+
+<h2>Stability — why it matters</h2><div class="b">When records have multiple keys (e.g. sort by date, then by name), a stable sort preserves the prior ordering of equal keys, allowing multi-criteria sorting via successive passes.</div>
+
+<h2>Common pitfalls</h2><div class="b">• Forgetting the early-termination flag makes bubble sort lose its $\Theta(n)$ best case.<br>• Selection sort is "the same" regardless of input — no best-case speed-up.<br>• Recursive Fibonacci is the textbook example of <em>overlapping sub-problems</em> — mention this when motivating dynamic programming.</div>
+
+<h2>Viva quick-fire</h2><div class="b"><strong>Q:</strong> Why is Euclid faster than checking every divisor? <strong>A:</strong> The mod operation shrinks the input by a factor of at least 2 every two steps → $O(\log n)$ instead of $O(\sqrt n)$.<br><strong>Q:</strong> Which sort would you use for an <em>almost sorted</em> array? <strong>A:</strong> Insertion sort — $\Theta(n+d)$.<br><strong>Q:</strong> Which sort minimises the number of writes? <strong>A:</strong> Selection sort — only $n-1$ swaps.<br><strong>Q:</strong> Is the iterative Fibonacci asymptotically optimal? <strong>A:</strong> For pure addition arithmetic, yes — $\Theta(n)$ additions. Matrix exponentiation reduces it to $\Theta(\log n)$ but with large constants.<br><strong>Q:</strong> Why is bubble sort considered "educational only"? <strong>A:</strong> It has the worst constant factor among the three $\Theta(n^2)$ sorts.</div>
+</div></body></html>

@@ -1,186 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit 2 — Iterative Algorithms | Detailed Notes</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}
-.container{max-width:900px;margin:0 auto}
-h1{font-size:1.8rem;background:linear-gradient(135deg,#6b9bff,#8eeaff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px;text-align:center}
-.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}
-h2{color:#6b9bff;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#6b9bff10;border-left:4px solid #6b9bff;border-radius:0 8px 8px 0}
-h3{color:#8eeaff;font-size:1.05rem;margin:20px 0 8px}
-h4{color:#aaccff;font-size:.95rem;margin:14px 0 6px}
-p{margin-bottom:10px;font-size:.92rem}
-ul,ol{padding-left:22px;margin-bottom:12px;font-size:.92rem}
-li{margin-bottom:6px}
-.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}
-.def strong{color:#8eeaff}
-.formula{background:#1a1020;border:1px solid #9b59b640;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#dda0dd}
-.table-wrap{overflow-x:auto;margin:12px 0}
-table{width:100%;border-collapse:collapse;font-size:.85rem}
-th,td{padding:10px;border:1px solid #1e1e30;text-align:left}
-th{background:#1a1a2e;color:#8eeaff;font-weight:600}
-tr:nth-child(even){background:#0e0e18}
-.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}
-.note strong{color:#6bcb77}
-.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}
-.warn strong{color:#ffd93d}
-.diagram{background:#0f0f1a;border:1px solid #4d96ff40;border-radius:10px;padding:16px;margin:14px 0;text-align:left;font-size:.85rem;color:#88aaff; white-space:pre-wrap; font-family:monospace}
-code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#ff8888}
-</style>
-<script>
-MathJax = {
-  tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']] }
-};
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-<div class="container">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Unit 2 — Iterative Algorithms</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}.c{max-width:920px;margin:0 auto}h1{font-size:1.85rem;background:linear-gradient(135deg,#4d96ff,#88aaff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}h2{color:#4d96ff;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#4d96ff10;border-left:4px solid #4d96ff;border-radius:0 8px 8px 0}h3{color:#88aaff;font-size:1.05rem;margin:18px 0 8px}h4{color:#aabbff;font-size:.95rem;margin:14px 0 6px}p{margin-bottom:10px;font-size:.93rem}ul,ol{padding-left:22px;margin-bottom:12px;font-size:.93rem}li{margin-bottom:6px}.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}.def strong{color:#88aaff}.formula{background:#101a20;border:1px solid #4d96ff40;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#aaccff}table{width:100%;border-collapse:collapse;font-size:.85rem;margin:12px 0}th,td{padding:10px;border:1px solid #1e1e30;text-align:left;vertical-align:top}th{background:#1a1a2e;color:#88aaff}tr:nth-child(even){background:#0e0e18}.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.86rem}.note strong{color:#6bcb77}.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.86rem}.warn strong{color:#ffd93d}.diagram{background:#0f0f1a;border:1px solid #4d96ff40;border-radius:10px;padding:16px;margin:14px 0;font-size:.85rem;color:#88aaff;white-space:pre-wrap;font-family:monospace;overflow-x:auto}code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#88aaff}</style><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🔁 Unit 2 — Iterative Algorithms</h1><p class="sub">CSC 314 · 4 Hrs · Detailed Notes</p>
 
-<h1>📘 Unit 2: Iterative Algorithms</h1>
-<p class="sub">Detailed Notes — Design and Analysis of Algorithms (CSC 314)</p>
+<h2>2.1 Basic Iterative Algorithms</h2>
 
-<!-- SEQUENTIAL SEARCH -->
-<h2>2.1 Iterative Searching (Sequential Search)</h2>
+<h3>2.1.1 Greatest Common Divisor (GCD)</h3><div class="def">The <strong>GCD</strong> of two non-negative integers $a,b$ (not both zero) is the largest integer that divides both. <strong>Euclid's principle:</strong> $\gcd(a,b)=\gcd(b,\,a\bmod b)$ with base case $\gcd(a,0)=a$.</div>
+<h4>Iterative Euclidean algorithm</h4><div class="diagram">Algorithm GCD(a, b):
+  while b ≠ 0 do
+      r ← a mod b
+      a ← b
+      b ← r
+  return a</div>
+<p><strong>Trace</strong> GCD(48, 18):</p>
+<div class="diagram">a=48 b=18   r = 48 mod 18 = 12  →  a=18 b=12
+a=18 b=12   r = 18 mod 12 = 6   →  a=12 b=6
+a=12 b=6    r = 12 mod 6  = 0   →  a=6  b=0
+return 6</div>
+<h4>Complexity analysis</h4><p>After two iterations the value of $b$ falls below $a/2$ (a consequence of the Fibonacci-based proof by Lamé). Hence the number of iterations is bounded by $2\log_2(\min(a,b))$.</p>
+<ul><li><strong>Time:</strong> $T(a,b)=O(\log(\min(a,b)))$</li><li><strong>Space:</strong> $O(1)$ — only constant variables.</li><li><strong>Worst case:</strong> $a,b$ are consecutive Fibonacci numbers (slowest reduction).</li></ul>
 
-<div class="def">
-<strong>Sequential Search (Linear Search)</strong> evaluates the array strictly elements by element chronologically from index $0$ to $N-1$ until the target value `X` is physically discovered or the array terminates limit bounds.
-</div>
+<h3>2.1.2 Fibonacci Number</h3><div class="def">Fibonacci sequence: $F_0=0,F_1=1,F_n=F_{n-1}+F_{n-2}$ for $n\ge 2$ → $0,1,1,2,3,5,8,13,\dots$</div>
+<h4>(a) Naive recursive version</h4><div class="diagram">Algorithm Fib(n):
+  if n ≤ 1: return n
+  return Fib(n-1) + Fib(n-2)</div>
+<p>Recurrence $T(n)=T(n-1)+T(n-2)+O(1) \Rightarrow T(n)=\Theta(\varphi^n)\approx\Theta(1.618^n)$ — <em>exponential</em>. Space $=\Theta(n)$ for the call stack.</p>
+<h4>(b) Iterative (bottom-up) version</h4><div class="diagram">Algorithm FibIter(n):
+  if n ≤ 1: return n
+  a ← 0; b ← 1
+  for i = 2 to n do
+      c ← a + b
+      a ← b
+      b ← c
+  return b</div>
+<ul><li><strong>Time:</strong> $\Theta(n)$ — a single linear loop.</li><li><strong>Space:</strong> $\Theta(1)$ — only three variables (no array required).</li></ul>
+<div class="note"><strong>Insight:</strong> The iterative version is exponentially faster than the naive recursive one because it eliminates the repeated re-computation of overlapping sub-problems — the same idea that motivates dynamic programming in Unit 5.</div>
 
-<div class="diagram">
-Algorithm SequentialSearch(A, N, X):
-1.  for i = 0 to N-1 do
-2.      if A[i] == X then
-3.          return i         // Element inherently found
-4.  return -1                // Execution fully exhausted, NOT FOUND
-</div>
+<h2>2.2 Searching — Sequential (Linear) Search</h2><div class="def"><strong>Sequential search</strong> scans the array from left to right comparing each element with the search key, returning the index when found or −1 if absent. Works on any array (sorted or unsorted).</div>
+<div class="diagram">Algorithm SequentialSearch(A[0..n-1], key):
+  for i = 0 to n-1 do
+      if A[i] = key then return i
+  return -1</div>
+<h4>Analysis</h4><table><tr><th>Case</th><th>Comparisons</th><th>Complexity</th></tr><tr><td>Best</td><td>1 — key at index 0</td><td>$\Omega(1)$</td></tr><tr><td>Worst</td><td>$n$ — key absent / at last index</td><td>$O(n)$</td></tr><tr><td>Average</td><td>$\approx n/2$ — uniform position</td><td>$\Theta(n)$</td></tr></table>
+<p>Space: $\Theta(1)$. The strength of sequential search is its simplicity and its independence from data ordering; its weakness is the linear worst-case cost.</p>
 
-<h4>Deriving the Mathematical Time Complexity:</h4>
-<ul>
-    <li><strong>Best Case Bound $\Omega(1)$:</strong> The target $X$ resides perfectly precisely at $A[0]$. The `if` condition inherently evaluates strictly to TRUE upon the absolute $1st$ execution sequence. The loop aborts safely. Thus, $T(N) = \Omega(1)$.</li>
-    <li><strong>Worst Case Bound $O(N)$:</strong> The integer $X$ is mathematically totally missing from the array memory banks, OR strictly placed at the terminal absolute index $A[N-1]$. The loop must universally loop $N$ times natively. Total cost algebraically sums: $T(N) = \sum_{i=1}^{N} c \Rightarrow c \cdot N$. Result definitively matches $O(N)$.</li>
-</ul>
+<h2>2.3 Iterative Sorting Algorithms</h2>
+<p>All three sorts below are <strong>comparison sorts</strong>, <strong>in-place</strong> (auxiliary $O(1)$), and have worst-case time $\Theta(n^2)$.</p>
 
+<h3>2.3.1 Bubble Sort</h3><div class="def">Repeatedly steps through the list, compares adjacent pairs and swaps them if out of order. After pass $i$, the $i$-th largest element "bubbles" into its final position at the end of the array.</div>
+<div class="diagram">Algorithm BubbleSort(A[0..n-1]):
+  for i = 0 to n-2 do
+      swapped ← false
+      for j = 0 to n-2-i do
+          if A[j] > A[j+1] then
+              swap(A[j], A[j+1])
+              swapped ← true
+      if not swapped then break        // already sorted
+  return A</div>
+<p><strong>Trace</strong> on $(5,1,4,2,8)$:</p>
+<div class="diagram">Pass 1: (1,4,2,5,8)
+Pass 2: (1,2,4,5,8)
+Pass 3: no swap → done</div>
+<h4>Analysis</h4><ul><li><strong>Comparisons:</strong> $\sum_{i=0}^{n-2}(n-1-i)=n(n-1)/2$.</li><li><strong>Best case</strong> (already sorted, with the <code>swapped</code> flag) $=\Theta(n)$.</li><li><strong>Worst / average</strong> $=\Theta(n^2)$.</li><li><strong>Space:</strong> $\Theta(1)$. <strong>Stable:</strong> yes.</li></ul>
 
-<!-- BUBBLE SORT -->
-<h2>2.2 Sorting: Bubble Sort</h2>
+<h3>2.3.2 Selection Sort</h3><div class="def">Repeatedly selects the <em>minimum</em> element from the unsorted suffix and swaps it into the next position of the sorted prefix.</div>
+<div class="diagram">Algorithm SelectionSort(A[0..n-1]):
+  for i = 0 to n-2 do
+      min ← i
+      for j = i+1 to n-1 do
+          if A[j] < A[min] then min ← j
+      swap(A[i], A[min])
+  return A</div>
+<p><strong>Trace</strong> on $(64,25,12,22,11)$:</p>
+<div class="diagram">i=0 min=11 → (11,25,12,22,64)
+i=1 min=12 → (11,12,25,22,64)
+i=2 min=22 → (11,12,22,25,64)
+i=3 min=25 → (11,12,22,25,64)</div>
+<h4>Analysis</h4><ul><li><strong>Comparisons:</strong> exactly $n(n-1)/2$ regardless of input.</li><li><strong>Swaps:</strong> at most $n-1$ — the fewest among the three sorts (useful when writes are expensive).</li><li><strong>Time:</strong> $\Theta(n^2)$ best / average / worst.</li><li><strong>Space:</strong> $\Theta(1)$. <strong>Stable:</strong> no (a swap can move an equal-valued element past another).</li></ul>
 
-<div class="def">
-<strong>Bubble Sort</strong> scans the array natively repeatedly, strictly verifying adjacent neighboring memory integers, and forcibly swapping them dynamically if their magnitude is critically out of structured order. Largest integers "bubble" upwards rapidly toward the sequence boundaries continuously.
-</div>
+<h3>2.3.3 Insertion Sort</h3><div class="def">Builds the sorted array one element at a time: each new element is shifted left across the sorted prefix until it lands in its correct position. Mirrors how people sort playing cards.</div>
+<div class="diagram">Algorithm InsertionSort(A[0..n-1]):
+  for i = 1 to n-1 do
+      key ← A[i]
+      j   ← i - 1
+      while j ≥ 0 and A[j] > key do
+          A[j+1] ← A[j]
+          j ← j - 1
+      A[j+1] ← key
+  return A</div>
+<p><strong>Trace</strong> on $(5,2,4,6,1,3)$:</p>
+<div class="diagram">i=1 key=2 → (2,5,4,6,1,3)
+i=2 key=4 → (2,4,5,6,1,3)
+i=3 key=6 → (2,4,5,6,1,3)
+i=4 key=1 → (1,2,4,5,6,3)
+i=5 key=3 → (1,2,3,4,5,6)</div>
+<h4>Analysis</h4><ul><li><strong>Best</strong> (already sorted, inner loop never runs) $=\Theta(n)$.</li><li><strong>Worst</strong> (reverse sorted) $=\Theta(n^2)$ — each new element shifts past every prior one.</li><li><strong>Average</strong> $=\Theta(n^2)$.</li><li><strong>Space:</strong> $\Theta(1)$. <strong>Stable:</strong> yes.</li><li><strong>Adaptive:</strong> runs in $\Theta(n+d)$ where $d$ = number of inversions, so it is very fast on nearly-sorted data.</li></ul>
 
-<div class="diagram">
-Algorithm BubbleSort(A, N):
-1.  for i = 0 to N-2 do
-2.      for j = 0 to N-i-2 do
-3.          if A[j] > A[j+1] then
-4.              SWAP(A[j], A[j+1])
-</div>
+<h3>2.3.4 Comparison of the three iterative sorts</h3><table><tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable</th><th>Adaptive</th><th>Swaps</th></tr><tr><td>Bubble</td><td>$\Theta(n)$</td><td>$\Theta(n^2)$</td><td>$\Theta(n^2)$</td><td>$\Theta(1)$</td><td>Yes</td><td>Yes</td><td>$O(n^2)$</td></tr><tr><td>Selection</td><td>$\Theta(n^2)$</td><td>$\Theta(n^2)$</td><td>$\Theta(n^2)$</td><td>$\Theta(1)$</td><td>No</td><td>No</td><td>$O(n)$</td></tr><tr><td>Insertion</td><td>$\Theta(n)$</td><td>$\Theta(n^2)$</td><td>$\Theta(n^2)$</td><td>$\Theta(1)$</td><td>Yes</td><td>Yes</td><td>$O(n^2)$</td></tr></table>
 
-<h4>Derivation of the Time Complexity:</h4>
-<p>Unlike recursive equations requiring Master Method checks, iterative nested boundary limits explicitly require evaluating standard <strong>Arithmetic Series mathematical sums</strong>:</p>
+<div class="note"><strong>Take-away:</strong> After Unit 2 you should be able to (a) write iterative pseudocode for GCD, Fibonacci, sequential search and the three sorts, (b) derive each algorithm's $T(n)$ by counting primitive operations (the RAM-model technique from Unit 1), (c) state best / average / worst-case complexities with reasoning, (d) trace any of them on a small input, and (e) compare the three sorts on the criteria stability, adaptivity, and number of swaps.</div>
 
-<div class="formula">
-On the first iteration of $i$, $j$ natively spans from $0$ up to $N-2$, resulting in exactly $N-1$ element comparisons.<br>
-On the second structural iteration of $i$, $j$ strictly spans $0$ to $N-3$, yielding $N-2$ comparisons.<br>
-This algebraically maps indefinitely until generating exactly $1$ comparison on the terminal $i$ sequence loop.
-
-Total Runtime Mathematical $T(N)$ = Total comparisons:<br>
-$T(N) = (N-1) + (N-2) + (N-3) + \dots + 2 + 1$<br>
-
-This represents precisely a formal Arithmetic Series sequence: $\sum_{k=1}^{n-1} k$<br>
-Using algebraic substitution format equations: $S_n = \frac{n(a_1 + a_n)}{2}$<br>
-$T(N) = \frac{(N-1) \cdot (1 + N - 1)}{2} = \frac{N(N-1)}{2}$<br>
-
-Expanding the exact parameters: 
-$T(N) = \frac{1}{2}N^2 - \frac{1}{2}N$
-</div>
-
-<p>Because asymptotic boundaries natively drop fractional coefficients ($\frac{1}{2}$) and drastically discard subordinate lower powers ($N$), the dominant limit bound executes entirely upon $N^2$.</p>
-<div class="note" style="color:#6b9bff;"><strong>Bubble Sort Worst/Average Case Time Limit:</strong> $T(N) = O(N^2)$</div>
-
-
-<!-- SELECTION SORT -->
-<h2>2.3 Sorting: Selection Sort</h2>
-
-<div class="def">
-<strong>Selection Sort</strong> forcefully isolates the absolute minimum element from the chaotic unsorted array partition explicitly, replacing the very front-most index variable linearly.
-</div>
-
-<div class="diagram">
-Algorithm SelectionSort(A, N):
-1.  for i = 0 to N-2 do
-2.      minIndex = i
-3.      for j = i+1 to N-1 do          // Scan specifically searching the absolute minimum
-4.          if A[j] < A[minIndex] then
-5.              minIndex = j           // Continuously update tracking limit
-6.      SWAP(A[i], A[minIndex])        // Execute solitary physical memory overwrite swapping action
-</div>
-
-<h4>Derivation of the Time Complexity:</h4>
-<p>The structural loop execution bounds map almost universally exactly matching Bubble Sort's algebraic boundaries natively. For each index space $i$, the scanning sequence `j` executes explicitly $N - i - 1$ times to confirm the exact physical minimum index target position.</p>
-
-<div class="formula">
-Total Comparisons strictly evaluates mapping:<br>
-$T(N) = (N-1) + (N-2) + \dots + 1$<br>
-$T(N) = \frac{N(N-1)}{2}$
-$T(N) = \frac{N^2}{2} - \frac{N}{2}$
-</div>
-
-<div class="warn">
-<strong>⚠️ Important Property:</strong> Unlike all other sorting variants internally, Selection Sort performs precisely EXACTLY $\Theta(N^2)$ sequence evaluations regardless of pre-sorted limits. Best case natively still scans everything to verify $N^2$. However, the physical memory `<SWAP>` array rewriting operations execute strictly at max bounds $O(N)$, which saves physical RAM wear natively.
-</div>
-
-
-<!-- INSERTION SORT -->
-<h2>2.4 Sorting: Insertion Sort</h2>
-
-<div class="def">
-<strong>Insertion Sort</strong> mimics how humans physically structure decks of playing cards dynamically. The algorithm aggressively identifies a solitary integer index sequentially, extracting it entirely from the target slot, and executes an array limit backward traverse precisely to insert the integer seamlessly into internal mathematical sorted format bounds.
-</div>
-
-<div class="diagram">
-Algorithm InsertionSort(A, N):
-1.  for j = 1 to N-1 do
-2.      key = A[j]
-3.      i = j - 1
-4.      while i >= 0 AND A[i] > key do    // Backward linear tracking
-5.          A[i+1] = A[i]                 // Physical array element memory Right Shift
-6.          i = i - 1
-7.      A[i+1] = key                      // Precisely write the target token
-</div>
-
-<h4>Derivation of the Time Complexity constraints:</h4>
-
-<p><strong>1. Resolving the BEST Case Limits Configuration:</strong></p>
-<p>If the array structure memory strictly initializes <strong>already pre-sorted perfectly</strong> e.g. $[1, 2, 3, 4, 5]$:</p>
-<ul>
-    <li>The primary line evaluating `A[i] > key` inherently maps strictly executing false immediately universally every `j` sequence!</li>
-    <li>Consequent result: The internal structural `while` loop completely totally systematically aborts every loop, evaluating zero native mathematical shifts.</li>
-    <li>Total algebraic equation sequences trace precisely identically limiting to exactly $N-1$ sequence execution operations strictly.</li>
-    <li><span style="color:#6bcb77; font-weight:bold;">Mathematical Best Case Constraint: $T(N) = \Omega(N)$</span></li>
-</ul>
-
-<p><strong>2. Resolving the WORST Case Limits Configuration:</strong></p>
-<p>If the array fundamentally reverses universally initially e.g. $[9, 8, 7, 6, 5]$, every solitary numeric integer element executes exhaustive shifting recursively backwards universally hitting index $0$.</p>
-<div class="formula">
-Iteration j=1: The embedded while loop checks $1$ element natively evaluating true, shifting 1 spot.<br>
-Iteration j=2: Loop evaluates $2$ elements sequentially physically.<br>
-Iteration j=N-1: Loop completely sequentially executes $N-1$ limit checks.<br><br>
-
-Algebraic Total Execution Sequences Native = $\Sigma_{j=1}^{N-1} j$<br>
-Result = $1 + 2 + 3 + \dots + (N-1)$<br>
-Calculated Structural Math Resulting Bound: $\frac{N(N-1)}{2}$
-</div>
-
-<p>Because the $\frac{N(N-1)}{2}$ executes expanding strictly matching identical polynomial boundaries limiting natively as $O(N^2)$ structure.</p>
-<div class="note" style="color:#ff8888;"><strong>Insertion Sort Worst/Average Case Time Limit:</strong> $T(N) = O(N^2)$</div>
-
-</div>
-</body>
-</html>
+</div></body></html>
