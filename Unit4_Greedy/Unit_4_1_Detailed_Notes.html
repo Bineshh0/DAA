@@ -1,82 +1,161 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 4 Detailed Notes</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Unit 4 — Greedy Algorithms</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}.c{max-width:920px;margin:0 auto}h1{font-size:1.85rem;background:linear-gradient(135deg,#ffd93d,#ffe88c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}h2{color:#ffd93d;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#ffd93d10;border-left:4px solid #ffd93d;border-radius:0 8px 8px 0}h3{color:#ffe88c;font-size:1.05rem;margin:18px 0 8px}h4{color:#fff0aa;font-size:.95rem;margin:14px 0 6px}p{margin-bottom:10px;font-size:.93rem}ul,ol{padding-left:22px;margin-bottom:12px;font-size:.93rem}li{margin-bottom:6px}.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}.def strong{color:#ffe88c}.formula{background:#1a1810;border:1px solid #ffd93d40;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#ffe88c}table{width:100%;border-collapse:collapse;font-size:.85rem;margin:12px 0}th,td{padding:10px;border:1px solid #1e1e30;text-align:left;vertical-align:top}th{background:#1a1a2e;color:#ffe88c}tr:nth-child(even){background:#0e0e18}.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.86rem}.note strong{color:#6bcb77}.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.86rem}.warn strong{color:#ffd93d}.diagram{background:#1a1810;border:1px solid #ffd93d40;border-radius:10px;padding:16px;margin:14px 0;font-size:.85rem;color:#ffe88c;white-space:pre-wrap;font-family:monospace;overflow-x:auto}code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#ffe88c}</style><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>💰 Unit 4 — Greedy Algorithms</h1><p class="sub">CSC 314 · 6 Hrs · Detailed Notes</p>
 
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
+<h2>4.1 Optimization Problems &amp; the Greedy Strategy</h2><div class="def">An <strong>optimization problem</strong> asks for a feasible solution that maximises (or minimises) some objective function under a set of constraints. A <strong>greedy algorithm</strong> builds the solution one piece at a time, at every step taking the choice that looks <em>locally best</em>, with the hope that the resulting sequence of locally optimal choices yields a <strong>globally optimal</strong> solution.</div>
 
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 4: Greedy Algorithms</h1>
-    
-<h2>4.1 Elements of Greedy Strategy</h2>
-<div class="box">
-    <p>A greedy algorithm makes the local optimal choice at every step with the hope that these local optimal choices will lead to a globally optimal solution. It never reconsiders previous choices (no backtracking).</p>
-    <ul>
-        <li><strong>Greedy Choice Property:</strong> A global optimum can be logically built by making a series of local optimum choices.</li>
-        <li><strong>Optimal Substructure:</strong> An optimal solution to the problem contains optimal solutions to its sub-problems.</li>
-    </ul>
-</div>
+<h3>Elements of the greedy strategy</h3><ol><li><strong>Greedy-choice property</strong> — a globally optimal solution can be constructed by making a locally optimal (greedy) choice at every step.</li><li><strong>Optimal substructure</strong> — an optimal solution to the problem contains within it optimal solutions to sub-problems.</li><li><strong>Feasibility check</strong> — after each greedy choice, the partial solution must remain feasible (satisfies constraints).</li></ol>
+<p><strong>When does greedy give the optimum?</strong> When the problem has the two properties above. Examples that satisfy them: Fractional Knapsack, MST (Kruskal/Prim), Single-source shortest path with non-negative weights (Dijkstra), Huffman coding. Examples that do NOT: 0/1 Knapsack, Travelling Salesman — these need Dynamic Programming or Backtracking.</p>
 
-<h2>4.2 Classic Greedy Algorithms</h2>
-<div class="box">
-    <h3>Fractional Knapsack</h3>
-    <p>We can take fractions of items. Strategy: Sort items descending by value-to-weight ratio (Value/Weight). Take as much of the highest ratio item as possible until the capacity is full.</p>
-    <p><strong>Complexity:</strong> $O(N \log N)$ strictly due to the prerequisite sorting.</p>
+<h3>General greedy template</h3><div class="diagram">Greedy(C):                    // C is the candidate set
+  S ← ∅                       // solution set
+  while C ≠ ∅ and not solution(S):
+      x ← select(C)           // pick locally best item
+      C ← C − {x}
+      if feasible(S ∪ {x}):
+          S ← S ∪ {x}
+  return S</div>
 
-    <h3>Job Sequencing with Deadlines</h3>
-    <p>Given $N$ jobs, each with a deadline and a profit (earned if completed before deadline), schedule them to maximize profit.</p>
-    <p><strong>Strategy:</strong> Sort jobs descending by profit. Track the days available using boolean slots. Always assign the job to the latest completely possible empty slot on or before its deadline.</p>
+<h2>4.2 Fractional Knapsack</h2><div class="def">Given $n$ items, each with weight $w_i$ and value $v_i$, and a knapsack of capacity $W$, choose <em>fractions</em> $x_i\in[0,1]$ to maximise $\sum x_i v_i$ subject to $\sum x_i w_i \le W$.</div>
+<h4>Greedy choice</h4><p>Sort items by <strong>value-per-weight</strong> ratio $v_i/w_i$ in <em>decreasing</em> order. Take items whole until the next one no longer fits; then take a fraction of that item to exactly fill the knapsack.</p>
+<div class="diagram">Algorithm FractionalKnapsack(v[], w[], n, W):
+  for i = 1 to n: r[i] ← v[i]/w[i]
+  sort items by r[] in decreasing order
+  total ← 0; remain ← W
+  for i = 1 to n:
+      if w[i] ≤ remain:
+          x[i] ← 1; total ← total + v[i]; remain ← remain − w[i]
+      else:
+          x[i] ← remain / w[i]
+          total ← total + x[i] * v[i]
+          break
+  return total</div>
+<h4>Worked example</h4><p>Items with $(v_i, w_i)$ = (60,10), (100,20), (120,30); $W=50$.</p>
+<div class="diagram">Ratios: 6, 5, 4 → already in decreasing order
+Take item 1 fully  : w=10, v=60     remain=40
+Take item 2 fully  : w=20, v=100    remain=20
+Take item 3: 20/30 : v=120*20/30=80 remain=0
+Total value = 60 + 100 + 80 = 240</div>
+<h4>Analysis</h4><ul><li>Sorting dominates → <strong>$O(n\log n)$</strong>.</li><li>Space: $O(n)$ for ratios.</li><li><strong>Correctness:</strong> exchange argument — swapping any fraction of a higher-ratio item out for a lower-ratio item cannot increase total value.</li></ul>
+<div class="warn"><strong>⚠ 0/1 Knapsack:</strong> greedy by ratio is NOT optimal because you can't take fractions. Needs DP (Unit 5) or backtracking (Unit 6).</div>
 
-    <h3>Prim's Algorithm (Minimum Spanning Tree)</h3>
-    <p>Starts from an arbitrary starting vertex. Keeps tracking the minimum weight edge that connects an unvisited vertex to the already visited MST set. Grabs the cheapest edge iteratively.</p>
-    <p><strong>Complexity:</strong> $O(E \log V)$ using a Min Priority Queue (Binary Heap).</p>
+<h2>4.3 Job Sequencing with Deadlines</h2><div class="def">Given $n$ jobs, each with a deadline $d_i$ and profit $p_i$ (each job takes 1 unit of time), schedule them on a single machine to maximise total profit, where a job earns its profit only if it finishes on or before its deadline.</div>
+<h4>Greedy choice</h4><p>Sort jobs by profit in <em>decreasing</em> order. Maintain a time-slot array of size $\max(d_i)$. For each job, place it in the latest free slot $\le d_i$. If no free slot exists, discard the job.</p>
+<div class="diagram">Algorithm JobSequencing(jobs[], n):
+  sort jobs by profit in decreasing order
+  D ← max deadline
+  slot[1..D] ← empty
+  profit ← 0
+  for each job j (in sorted order):
+      for t = min(D, j.deadline) down to 1:
+          if slot[t] is empty:
+              slot[t] ← j; profit += j.profit; break
+  return slot, profit</div>
+<h4>Worked example</h4><p>Jobs: J1(p=20,d=2), J2(p=15,d=2), J3(p=10,d=1), J4(p=5,d=3), J5(p=1,d=3).</p>
+<div class="diagram">After sorting by profit → J1, J2, J3, J4, J5  (D = 3)
+slot: [ _ , _ , _ ]
+J1 d=2 → slot[2]=J1  : [ _, J1, _ ]
+J2 d=2 → slot[1]=J2  : [J2, J1, _ ]
+J3 d=1 → slot[1] busy, slot[0] none → discard
+J4 d=3 → slot[3]=J4  : [J2, J1, J4]
+J5 d=3 → all full → discard
+Schedule = J2, J1, J4 ; Profit = 15+20+5 = 40</div>
+<h4>Analysis</h4><ul><li>Sort jobs: $O(n\log n)$. Slot scan per job: $O(D)$ → worst total $O(n\cdot D)$ which is $O(n^2)$ since $D\le n$.</li><li>Using Disjoint-Set Union for slot search reduces it to $O(n\,\alpha(n))\approx O(n)$ after sorting.</li></ul>
 
-    <h3>Kruskal's Algorithm (Minimum Spanning Tree)</h3>
-    <p>Considers Edges rather than vertices. Sorts all edges by strict ascending weight. Iteratively adds edges to the spanning forest as long as they don't form a Cycle.</p>
-    <p><strong>Complexity:</strong> $O(E \log E)$ due to sorting the edges, and requires a Disjoint-Set (Union-Find) data structure to verify cycles.</p>
+<h2>4.4 Minimum Spanning Tree (MST)</h2><div class="def">A <strong>spanning tree</strong> of a connected weighted graph $G(V,E)$ is a sub-graph that connects all vertices using exactly $|V|-1$ edges and has no cycles. An <strong>MST</strong> minimises the total edge weight.</div>
 
-    <h3>Dijkstra's Shortest Path Algorithm</h3>
-    <p>Finds shortest paths from a single source vertex to all other vertices. Continually relaxes outward edges from the currently closest unvisited node.</p>
-    <p><strong>Complexity:</strong> $O((V+E) \log V)$ utilizing a Min-Heap. Extremely similar to Prim's, but it computes the *cumulative* distance from the source instead of just the edge weight itself.</p>
-</div>
+<h3>4.4.1 Kruskal’s Algorithm</h3><p>Build the MST by considering edges in <em>increasing</em> order of weight, adding an edge only if it does not form a cycle. Cycle-check uses Union-Find (DSU).</p>
+<div class="diagram">Algorithm Kruskal(G):
+  sort E by weight ascending
+  MakeSet(v) for each v ∈ V
+  T ← ∅
+  for each edge (u,v) in sorted order:
+      if Find(u) ≠ Find(v):
+          T ← T ∪ {(u,v)}
+          Union(u, v)
+      if |T| = |V|−1: break
+  return T</div>
+<h4>Worked example</h4><p>Edges of a 5-vertex graph (a,b,c,d,e):</p>
+<div class="diagram">(a,b)=1  (c,d)=2  (b,c)=3  (a,c)=4  (d,e)=5  (b,e)=6
+Sorted already.
+Pick (a,b)=1  → {a,b}
+Pick (c,d)=2  → {a,b},{c,d}
+Pick (b,c)=3  → {a,b,c,d}
+Skip (a,c)=4  (same set)
+Pick (d,e)=5  → {a,b,c,d,e} ✓
+MST weight = 1+2+3+5 = 11</div>
+<h4>Analysis</h4><ul><li>Sort edges: $O(E\log E)$.</li><li>$E$ DSU operations: $O(E\,\alpha(V))\approx O(E)$.</li><li><strong>Total:</strong> $O(E\log E)=O(E\log V)$.</li></ul>
 
-<h2>4.3 Huffman Coding (Prefix Codes)</h2>
-<div class="box">
-    <p>An optimal prefix-free binary encoding for data compression. Frequencies of characters determine their bit length (frequent characters get short paths, rare characters get long paths).</p>
-    <p>No code is a prefix of another (e.g. if '0' is `'a'`, no other code can start with '0').</p>
-    
-    <p><strong>Algorithm:</strong></p>
-    <ul>
-        <li>Sort characters as leaf nodes in a Min-Priority Queue by their occurrence frequency.</li>
-        <li>Extract the two lowest frequencies, merge them under a parent node with a combined frequency, and re-insert the parent back in.</li>
-        <li>Repeat until $1$ tree remains. Left branch paths = 0, Right branch paths = 1.</li>
-    </ul>
-    <p><strong>Complexity:</strong> $O(N \log N)$ to construct the tree.</p>
-</div>
+<h3>4.4.2 Prim’s Algorithm</h3><p>Start from an arbitrary vertex; grow the tree one vertex at a time by adding the cheapest edge that connects a vertex inside the tree to a vertex outside it.</p>
+<div class="diagram">Algorithm Prim(G, r):
+  key[v] ← ∞ for all v; key[r] ← 0
+  parent[v] ← NIL
+  Q ← V                                      // min-priority queue keyed by key[]
+  while Q ≠ ∅:
+      u ← ExtractMin(Q)
+      for each (u,v) ∈ E:
+          if v ∈ Q and w(u,v) < key[v]:
+              key[v] ← w(u,v); parent[v] ← u
+  return {(v, parent[v]) : v ∈ V \ {r}}</div>
+<h4>Analysis</h4><ul><li>Binary-heap priority queue: $O((V+E)\log V) = O(E\log V)$.</li><li>Fibonacci heap: $O(E + V\log V)$ — theoretically faster on dense graphs.</li></ul>
 
-</body>
-</html>
+<h3>Kruskal vs Prim</h3><table><tr><th></th><th>Kruskal</th><th>Prim</th></tr><tr><td>Approach</td><td>Edge-based, global</td><td>Vertex-based, local growth</td></tr><tr><td>Best for</td><td>Sparse graphs ($E\approx V$)</td><td>Dense graphs ($E\approx V^2$)</td></tr><tr><td>Data structure</td><td>Union-Find</td><td>Min-priority queue</td></tr><tr><td>Time</td><td>$O(E\log V)$</td><td>$O(E\log V)$ binary-heap</td></tr></table>
+
+<h2>4.5 Dijkstra’s Single-Source Shortest Path</h2><div class="def">Given a directed/undirected graph with <strong>non-negative</strong> edge weights and a source $s$, compute the shortest-path distance from $s$ to every other vertex.</div>
+<div class="diagram">Algorithm Dijkstra(G, s):
+  dist[v] ← ∞ for all v; dist[s] ← 0
+  parent[v] ← NIL
+  Q ← V                                  // min-priority queue keyed by dist[]
+  while Q ≠ ∅:
+      u ← ExtractMin(Q)
+      for each (u,v) ∈ E:
+          if dist[u] + w(u,v) < dist[v]:
+              dist[v] ← dist[u] + w(u,v)  // RELAX
+              parent[v] ← u
+  return dist, parent</div>
+<h4>Worked example</h4><p>Graph with edges from source A: A→B(4), A→C(1), C→B(2), C→D(5), B→D(1).</p>
+<div class="diagram">Init  dist=[A:0, B:∞, C:∞, D:∞]
+Extract A : relax A→B(4) → dist[B]=4 ; A→C(1) → dist[C]=1
+Extract C : relax C→B(1+2=3) < 4 → dist[B]=3 ; C→D(1+5=6) → dist[D]=6
+Extract B : relax B→D(3+1=4) < 6 → dist[D]=4
+Extract D : done
+Result dist[A,B,C,D] = [0, 3, 1, 4]</div>
+<h4>Analysis</h4><ul><li>Binary-heap PQ: $O((V+E)\log V)$.</li><li>Fibonacci heap: $O(E + V\log V)$.</li><li>Array (no PQ): $O(V^2)$ — better for dense graphs.</li></ul>
+<div class="warn"><strong>⚠ Negative-weight edges</strong> break Dijkstra (a vertex can be "finalised" too early). Use Bellman–Ford ($O(VE)$) instead.</div>
+
+<h2>4.6 Huffman Coding</h2><div class="def">A <strong>prefix code</strong> is a set of binary codewords in which no codeword is a prefix of another. <strong>Huffman</strong> produces an optimal prefix code that minimises the total bit length $\sum f_i \cdot |c_i|$ for a given symbol-frequency table.</div>
+<h4>Algorithm</h4><div class="diagram">Huffman(C):                          // C = set of n symbols
+  Q ← C                              // min-heap by frequency
+  for i = 1 to n-1:
+      z ← new node
+      x ← ExtractMin(Q)
+      y ← ExtractMin(Q)
+      z.left ← x; z.right ← y
+      z.freq ← x.freq + y.freq
+      Insert(Q, z)
+  return ExtractMin(Q)               // root of Huffman tree</div>
+<p>Codeword of a symbol = path from root to its leaf (0 = left, 1 = right).</p>
+<h4>Worked example</h4><p>Frequencies: a=30, b=20, c=25, d=15, e=35. Build:</p>
+<div class="diagram">Sorted   d:15, b:20, c:25, a:30, e:35
+Merge d+b → 35     queue: c:25, a:30, e:35, 35
+Merge c+a → 55     queue: e:35, 35, 55
+Merge e+35 → 70    queue: 55, 70
+Merge 55+70 → 125  (root)
+
+Tree paths:
+        125
+       /    \
+      55     70
+     /  \   /  \
+    c   a  e   35
+               /  \
+              d    b
+Codes:
+ c = 00   a = 01   e = 10   d = 110   b = 111
+
+Total bits = 30·2 + 20·3 + 25·2 + 15·3 + 35·2
+           = 60 + 60 + 50 + 45 + 70 = 285 bits
+Compare with fixed 3-bit: 125·3 = 375 bits  → 24 % saving.</div>
+<h4>Analysis</h4><ul><li>Each merge: 2 extract-min + 1 insert = $O(\log n)$.</li><li>$n-1$ merges → <strong>$O(n\log n)$</strong> total.</li><li><strong>Optimality:</strong> proof by exchange argument — the two lowest-frequency symbols can always be siblings at the deepest level.</li></ul>
+
+<div class="note"><strong>Take-away:</strong> After Unit 4 you must be able to (a) explain the greedy-choice + optimal-substructure properties and when greedy succeeds, (b) solve Fractional Knapsack and prove its optimality via ratio sort, (c) schedule jobs with deadlines maximising profit, (d) construct MSTs by Kruskal &amp; Prim, comparing their complexities, (e) compute single-source shortest paths with Dijkstra and explain why negative weights break it, and (f) build a Huffman tree and compute total bits / compression ratio.</div>
+
+</div></body></html>

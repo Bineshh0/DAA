@@ -1,52 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 4 Advanced Note</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 4 — Tricky Variations &amp; Common Mistakes</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.7}.c{max-width:900px;margin:0 auto}h1{color:#ffd93d;text-align:center}h2{color:#ffe88c;border-left:4px solid #ffd93d;padding-left:10px;margin-top:22px}.b{background:#12121a;border:1px solid #1e1e30;padding:12px;border-radius:8px;margin:10px 0;font-size:.9rem}.w{background:#1a1a0a;border:1px solid #ffd93d40;padding:10px;border-radius:8px;margin:10px 0;font-size:.85rem;color:#ffd93d}code{background:#1a1a2e;color:#ffe88c;padding:2px 5px;border-radius:4px}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🧪 Unit 4 — Tricky Variations &amp; Common Mistakes</h1>
 
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
+<h2>1. Fractional vs 0/1 Knapsack — the classic trap</h2><div class="w">Examiners love to give a 0/1 knapsack problem and watch students apply ratio-greedy. <strong>If items are indivisible, greedy is NOT optimal</strong> — use DP (Unit 5). Always check the problem wording first.</div>
 
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 4: Advanced Optimizations</h1>
-    
-<h2>Advanced Theoretical Analysis</h2>
-<div class="box">
-    <h3>Why does Greedy fail the discrete 0-1 Knapsack problem?</h3>
-    <p>Consider a Knapsack with Capacity 50. Items (Weight, Value): Item A (10, $60, Ratio 6), Item B (20, $100, Ratio 5), Item C (30, $120, Ratio 4).</p>
-    <p><strong>Greedy Choice:</strong> Picks highest ratio first. It will select Item A (Ratio 6). Weight used = 10, space left = 40. Then it picks Item B. Total weight = 30, space left = 20. It cannot fit Item C ($30 > 20$). The algorithm halts. <strong>Total Val: $160</strong>.</p>
-    <p><strong>Globally Optimal Reality:</strong> If it entirely ignored the "Greedy Metric" and skipped Item A completely, it could select Item B (20) and Item C (30). Total weight = 50. Capacity perfectly filled. <strong>Total Val: $220.</strong></p>
-    <p>Greedy assumes a fully fluid (fractional) continuum! If items are solid indivisible discrete chunks, one greedy action permanently locks out larger interlocking combinations.</p>
+<h2>2. Job Sequencing — picking the LATEST free slot</h2><div class="b">A common bug: placing a job in the <em>earliest</em> free slot. That wastes late slots for jobs that have larger deadlines. <strong>Rule:</strong> for each job, scan from <code>min(D, deadline)</code> <em>down</em> to 1; first empty slot wins.</div>
 
-    <h3>Modern World: Deflate & Huffman</h3>
-    <p>Huffman coding alone isn't used today. Instead, modern software relies on `DEFLATE`, the core algorithm powering `.ZIP` files, `.PNG` images, and HTTP web traffic. DEFLATE combines two algorithms:</p>
-    <ul>
-        <li><strong>LZ77:</strong> Eliminates duplicate recurring phrases in a file via sliding window pointers.</li>
-        <li><strong>Huffman Coding:</strong> Takes the result of LZ77 and compresses the alphabetic distribution. By stripping out grammatical duplicates first, the entropy drops severely, allowing the Greedy Huffman algorithm to build incredibly dense prefix trees compared to plain text!</li>
-    </ul>
-</div>
+<h2>3. Kruskal vs Prim — which to choose?</h2><div class="b">Both produce MSTs of the same total weight (MST may not be unique, but its weight is). Use <strong>Kruskal</strong> when graph is sparse (edge list given). Use <strong>Prim</strong> when graph is dense (adjacency matrix given) — the $O(V^2)$ array implementation can beat $O(E\log V)$.</div>
 
-</body>
-</html>
+<h2>4. Dijkstra and negative edges</h2><div class="w">Even a single negative edge can produce wrong answers because Dijkstra commits to the first finalised distance. Use <strong>Bellman–Ford</strong> ($O(VE)$) for negatives, or <strong>Johnson’s algorithm</strong> for all-pairs.</div>
+
+<h2>5. Re-insertion of relaxed vertices</h2><div class="b">Pseudocode often uses ExtractMin / DecreaseKey. In implementations without DecreaseKey (e.g. <code>std::priority_queue</code> in C++), one usually <em>re-inserts</em> a vertex with the smaller key and ignores stale entries when popped. Complexity stays $O(E\log V)$.</div>
+
+<h2>6. Huffman — tie-breaking</h2><div class="b">When two nodes share a frequency, the choice can change the tree shape (and individual code lengths) but never the total bit count — every valid Huffman tree achieves the optimum sum. So examiners can’t mark you wrong for picking either order, as long as the merge step is correct.</div>
+
+<h2>7. Prefix code property</h2><div class="b">Why prefix codes? Because the receiver decodes left-to-right without delimiters. If <code>10</code> is a code, <code>1010</code> cannot also be one — else “1010” would be ambiguous.</div>
+
+<h2>8. Optimal substructure check</h2><div class="b">Before applying greedy, prove (informally OK) that an optimal solution remains optimal when you remove the first greedy choice. If it doesn’t, greedy fails (e.g. “make change” with coin set {1,3,4} for amount 6 — greedy gives 4+1+1, optimum is 3+3).</div>
+
+<h2>9. Complexity confusion</h2><div class="b">$O(E\log V) = O(E\log E)$ because $E \le V^2 \Rightarrow \log E \le 2\log V$. Either notation is acceptable in exams.</div>
+
+<h2>10. Greedy proofs in 2 lines</h2><div class="b"><strong>Fractional Knapsack:</strong> swap any fraction of a lower-ratio item for a higher-ratio item → value cannot decrease.<br><strong>Huffman:</strong> two least-frequent symbols can always be siblings at the deepest level (exchange argument).<br><strong>Kruskal / Prim:</strong> cut property — the lightest edge crossing any cut belongs to <em>some</em> MST.</div>
+</div></body></html>
