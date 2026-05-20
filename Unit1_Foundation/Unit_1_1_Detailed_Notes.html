@@ -1,210 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit 1 — Foundation of Algorithm Analysis | Detailed Notes</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}
-.container{max-width:900px;margin:0 auto}
-h1{font-size:1.8rem;background:linear-gradient(135deg,#ff6b6b,#ff8e8e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px;text-align:center}
-.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}
-h2{color:#ff6b6b;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#ff6b6b10;border-left:4px solid #ff6b6b;border-radius:0 8px 8px 0}
-h3{color:#ff8e8e;font-size:1.05rem;margin:20px 0 8px}
-h4{color:#ffaaaa;font-size:.95rem;margin:14px 0 6px}
-p{margin-bottom:10px;font-size:.92rem}
-ul,ol{padding-left:22px;margin-bottom:12px;font-size:.92rem}
-li{margin-bottom:6px}
-.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}
-.def strong{color:#ff8888}
-.formula{background:#1a1020;border:1px solid #9b59b640;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#dda0dd}
-.table-wrap{overflow-x:auto;margin:12px 0}
-table{width:100%;border-collapse:collapse;font-size:.85rem}
-th,td{padding:10px;border:1px solid #1e1e30;text-align:left}
-th{background:#1a1a2e;color:#ff8888;font-weight:600}
-tr:nth-child(even){background:#0e0e18}
-.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}
-.note strong{color:#6bcb77}
-.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}
-.warn strong{color:#ffd93d}
-.diagram{background:#0f0f1a;border:1px solid #4d96ff40;border-radius:10px;padding:16px;margin:14px 0;text-align:left;font-size:.85rem;color:#88aaff; white-space:pre-wrap; font-family:monospace}
-code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#ff8888}
-</style>
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-<div class="container">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Unit 1 — Detailed Notes</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}.container{max-width:900px;margin:0 auto}h1{font-size:1.8rem;background:linear-gradient(135deg,#ff6b6b,#ff8e8e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px;text-align:center}.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}h2{color:#ff6b6b;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#ff6b6b10;border-left:4px solid #ff6b6b;border-radius:0 8px 8px 0}h3{color:#ff8e8e;font-size:1.05rem;margin:20px 0 8px}h4{color:#ffaaaa;font-size:.95rem;margin:14px 0 6px}p{margin-bottom:10px;font-size:.92rem}ul,ol{padding-left:22px;margin-bottom:12px;font-size:.92rem}li{margin-bottom:6px}.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}.def strong{color:#ff8888}.formula{background:#1a1020;border:1px solid #9b59b640;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#dda0dd}table{width:100%;border-collapse:collapse;font-size:.85rem;margin:12px 0}th,td{padding:10px;border:1px solid #1e1e30;text-align:left}th{background:#1a1a2e;color:#ff8888}tr:nth-child(even){background:#0e0e18}.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}.note strong{color:#6bcb77}.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}.warn strong{color:#ffd93d}.diagram{background:#0f0f1a;border:1px solid #4d96ff40;border-radius:10px;padding:16px;margin:14px 0;font-size:.85rem;color:#88aaff;white-space:pre-wrap;font-family:monospace}.board{background:#1a0f1a;border:1px solid #ff6b6b40;border-radius:8px;padding:10px;margin:8px 0;font-size:.8rem;color:#ff9999}code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#ff8888}</style><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="container"><h1>📘 Unit 1: Foundation of Algorithm Analysis</h1><p class="sub">Detailed Notes — CSC 314 — 4 Hrs.</p><h2>1.1 Algorithm &amp; Its Properties</h2><div class="def"><strong>Algorithm:</strong> A finite, ordered sequence of unambiguous, executable instructions that transforms a given input into the desired output in a finite amount of time.</div><h3>Five Elementary Properties (Knuth)</h3><ol><li><strong>Input:</strong> Zero or more well-defined inputs.</li><li><strong>Output:</strong> At least one output that satisfies the problem.</li><li><strong>Definiteness:</strong> Each step must be precise and unambiguous.</li><li><strong>Finiteness:</strong> Must terminate after a finite number of steps.</li><li><strong>Effectiveness:</strong> Every operation must be basic enough to be performed exactly in finite time using pencil and paper.</li></ol><div class="board">📝 <strong>Board 2078 Q1:</strong> “What are the elementary properties of algorithm?” — answered above.</div><h3>Why Do We Need Algorithms / Analysis?</h3><ul><li>Predict resource usage (time, space) <em>before</em> coding.</li><li>Compare two algorithms independent of hardware/language.</li><li>Identify bottlenecks and choose the best approach for given input size.</li><li>Prove correctness and termination.</li></ul><h2>1.2 RAM Model (Random Access Machine)</h2><div class="def">A theoretical machine where every <strong>primitive operation</strong> (arithmetic +,-,*,/, comparison, assignment, array index, function call/return) costs exactly <strong>$O(1)$</strong> time. Memory access is also $O(1)$ (random access). There is <em>no</em> concurrency, no memory hierarchy, no cache effects.</div><div class="board">📝 <strong>Board 2080 Q4 / 2078 Q1:</strong> “Define RAM model.” — answered above.</div><h3>Worked Example: Factorial Algorithm (Iterative)</h3><div class="diagram">Algorithm Factorial(n):
+1.  fact = 1                  // c1, 1 time
+2.  for i = 1 to n do         // c2, (n+1) times
+3.      fact = fact * i       // c3, n times
+4.  return fact               // c4, 1 time</div><p>Total: $T(n)=c_1+c_2(n+1)+c_3 n+c_4 = (c_2+c_3)n+(c_1+c_2+c_4)$.</p><div class="note"><strong>Result:</strong> $T(n)=\Theta(n)$, Space $=\Theta(1)$ (only <code>fact</code>, <code>i</code>).</div><div class="board">📝 <strong>Board 2080 Q4:</strong> “Iterative algorithm for finding factorial and provide detailed analysis.” — full derivation above.</div><h2>1.3 Time &amp; Space Complexity — Best, Worst, Average</h2><table><tr><th>Case</th><th>Meaning</th><th>Example: Linear Search</th></tr><tr><td><strong>Best</strong> $\Omega$</td><td>Minimum operations over all inputs of size n</td><td>$O(1)$ — key at index 0</td></tr><tr><td><strong>Worst</strong> $O$</td><td>Maximum operations — used for guarantees</td><td>$O(n)$ — key absent / at end</td></tr><tr><td><strong>Average</strong> $\Theta$</td><td>Expected operations over a probability distribution of inputs</td><td>$O(n/2)=O(n)$</td></tr></table><div class="board">📝 <strong>Board 2079 Q8a:</strong> “Best, Worst and Average case complexity.” — answered.</div><h2>1.4 Aggregate Analysis</h2><div class="def"><strong>Aggregate Analysis</strong> shows that the total cost of a sequence of $n$ operations is $T(n)$, so the <em>amortized</em> cost per operation is $T(n)/n$ — even if some individual operations are expensive.</div><p><strong>Classic example:</strong> Incrementing a binary counter from 0 to n.</p><ul><li>Bit 0 flips every increment → n times</li><li>Bit 1 flips every 2 increments → n/2 times</li><li>Bit k flips n/$2^k$ times</li><li>Total flips $= \sum_{k=0}^{\lfloor \log n\rfloor} n/2^k < 2n = O(n)$</li><li>Amortized cost per INCREMENT $= O(n)/n = O(1)$.</li></ul><div class="board">📝 <strong>Board 2080 Q12a:</strong> “Aggregate Analysis” — above.</div><h2>1.5 Asymptotic Notations (Big-O, Big-Ω, Big-Θ)</h2><table><tr><th>Notation</th><th>Definition</th><th>Meaning</th><th>Geometric Interpretation</th></tr><tr><td><strong>Big-O</strong> $O(g(n))$</td><td>$\exists c,n_0>0$ s.t. $0\le f(n)\le c\cdot g(n)$ for $n\ge n_0$</td><td>Upper bound (worst-case ceiling)</td><td>$f(n)$ lies <em>below</em> $c\cdot g(n)$ eventually</td></tr><tr><td><strong>Big-Ω</strong> $\Omega(g(n))$</td><td>$\exists c,n_0>0$ s.t. $0\le c\cdot g(n)\le f(n)$</td><td>Lower bound (best-case floor)</td><td>$f(n)$ lies <em>above</em> $c\cdot g(n)$ eventually</td></tr><tr><td><strong>Big-Θ</strong> $\Theta(g(n))$</td><td>$\exists c_1,c_2,n_0>0$ s.t. $c_1g(n)\le f(n)\le c_2g(n)$</td><td>Tight bound</td><td>$f(n)$ is <em>sandwiched</em> between $c_1g$ and $c_2g$</td></tr></table><div class="diagram">      ↑ time
+      |          c·g(n)  ← Big-O ceiling
+      |        /‾‾‾‾‾‾
+      |      /  f(n)
+      |    / /
+      |  / /    c'·g(n) ← Big-Ω floor
+      |/_/______________→ n
+         n₀</div><h3>Examples</h3><ul><li>$3n^2+5n+7 = O(n^2)$ — pick $c=4, n_0=10$.</li><li>$3n^2+5n+7 = \Omega(n^2)$ — pick $c=3$.</li><li>$3n^2+5n+7 = \Theta(n^2)$.</li><li>$n\log n = O(n^2)$ but $\ne \Theta(n^2)$.</li></ul><div class="board">📝 <strong>Board 2076 Q1, 2081 Q12a:</strong> Asymptotic notations with geometric interpretation — fully covered.</div><h2>1.6 Recurrences: Recursive Algorithms &amp; Recurrence Relations</h2><div class="def">A <strong>recurrence</strong> expresses $T(n)$ in terms of $T$ on smaller inputs. General divide-and-conquer form: $T(n)=aT(n/b)+f(n)$.</div><h3>(a) Substitution Method (Guess + Induction)</h3><p><strong>Board 2080 Q1:</strong> Prove $T(n)=2T(n/2)+1$ is $O(n)$.</p><div class="diagram">Guess: T(n) ≤ c·n − 1
+Base: T(1)=1 ≤ c·1 − 1 ⟹ c ≥ 2 ✓
+Inductive step: assume T(n/2) ≤ c(n/2) − 1
+T(n) = 2T(n/2)+1 ≤ 2[c(n/2)−1]+1 = cn − 2 + 1 = cn − 1 ✓
+Therefore T(n) = O(n).</div><h3>(b) Recursion-Tree Method</h3><p><strong>Board 2078 Q4:</strong> Solve $T(n)=2T(n/2)+1$ by recursion tree.</p><div class="diagram">Level 0:                 1                  cost = 1
+Level 1:           1            1           cost = 2
+Level 2:        1   1        1   1          cost = 4
+...
+Level k:        2^k nodes each cost 1       cost = 2^k
+Depth d = log₂ n  (when subproblem = 1)
+Leaves at depth d:  2^d = n  →  cost = n
 
-<h1>📘 Unit 1: Foundation of Algorithm Analysis</h1>
-<p class="sub">Detailed Notes — Design and Analysis of Algorithms (CSC 314)</p>
+Total = 1 + 2 + 4 + … + n = 2n − 1 = O(n)</div><h3>(c) Master Theorem</h3><p>For $T(n)=aT(n/b)+f(n)$ with $a\ge 1, b>1$, compare $f(n)$ with $n^{\log_b a}$:</p><table><tr><th>Case</th><th>Condition</th><th>Result</th></tr><tr><td>1</td><td>$f(n)=O(n^{\log_b a-\epsilon})$ for some $\epsilon>0$</td><td>$T(n)=\Theta(n^{\log_b a})$</td></tr><tr><td>2</td><td>$f(n)=\Theta(n^{\log_b a})$</td><td>$T(n)=\Theta(n^{\log_b a}\log n)$</td></tr><tr><td>3</td><td>$f(n)=\Omega(n^{\log_b a+\epsilon})$ + regularity</td><td>$T(n)=\Theta(f(n))$</td></tr></table><h4>Worked Board Examples</h4><div class="diagram">📝 Board 2081 Q5(a):  T(n)=2T(n/2)+n²
+   a=2, b=2, n^log₂2 = n¹
+   f(n)=n² = Ω(n^{1+1}) → Case 3 → T(n)=Θ(n²)
 
-<!-- HOW COMPLEXITY IS OBTAINED -->
-<h2>1.1 How is Time Complexity Actually Obtained?</h2>
+📝 Board 2081 Q5(b):  T(n)=2T(n/2)+1
+   n^log₂2 = n; f(n)=1=O(n^{1−ε}) → Case 1 → T(n)=Θ(n)
 
-<div class="def">
-<strong>Time Complexity</strong> is not calculated in "seconds" because hardware varies (a supercomputer is faster than a phone). Instead, it is obtained by <strong>counting the exact number of basic primitive operations</strong> (assignment, comparison, arithmetic) that a processor must execute relative to an input size $N$.
-</div>
+📝 Board 2079 Q9(a):  T(n)=2T(n/4)+n²
+   n^log₄2 = n^{0.5}; f(n)=n² = Ω(n^{0.5+ε}) → Case 3 → Θ(n²)
 
-<p>According to the <strong>RAM Model</strong>, every single primitive operation takes exactly $O(1)$ constant time limit. To derive the time complexity of any algorithm, we meticulously sum the mathematical operations.</p>
+📝 Board 2079 Q9(b):  T(n)=5T(n/4)+kn
+   n^log₄5 ≈ n^{1.16}; f(n)=kn=O(n^{1.16−ε}) → Case 1 → Θ(n^{log₄5})
 
-<h3>Example Derivation: Nested Loops Analysis</h3>
-<p>Let's find the exact time complexity of the following code snippet:</p>
+📝 Board 2076 Q5(a):  T(n)=7T(n/2)+n²
+   n^log₂7 ≈ n^{2.81}; f(n)=n²=O(n^{2.81−ε}) → Case 1 → Θ(n^{log₂7})
 
-<div class="diagram">
-Algorithm MatrixSum(A, N):
-1.  sum = 0                           // Cost: c1, Times Executed: 1
-2.  for i = 1 to N do                 // Cost: c2, Times Executed: N+1
-3.      for j = 1 to N do             // Cost: c3, Times Executed: N(N+1)
-4.          sum = sum + A[i][j]       // Cost: c4, Times Executed: N * N
-5.  return sum                        // Cost: c5, Times Executed: 1
-</div>
+📝 Board 2076 Q5(b):  T(n)=4T(n/4)+n
+   n^log₄4 = n¹ = f(n) → Case 2 → Θ(n log n)
 
-<h4>Mathematical Derivation of the Sum:</h4>
-<ol>
-    <li><strong>Line 1:</strong> Assignment operation executes exactly once. -> $c_1 \times 1$</li>
-    <li><strong>Line 2:</strong> The outer loop runs $N$ times successfully, plus $1$ final time where the condition fails. -> $c_2 \times (N+1)$</li>
-    <li><strong>Line 3:</strong> The inner loop executes successfully $N$ times <em>for every single iteration of the outer loop</em>. PLUS, it fails exactly 1 time per outer loop. So it executes $N \times (N+1)$ total times. -> $c_3 \times (N^2 + N)$</li>
-    <li><strong>Line 4:</strong> The core addition and array access executes exactly $N \times N$ times safely. -> $c_4 \times N^2$</li>
-    <li><strong>Line 5:</strong> Return runs exactly once. -> $c_5 \times 1$</li>
-</ol>
+📝 Model Q5(a):  T(n)=3T(n/2)+n
+   n^log₂3 ≈ n^{1.58}; f=n=O(n^{1.58−ε}) → Case 1 → Θ(n^{log₂3})
 
-<div class="formula">
-Total Time T(N) = c1 + c2(N+1) + c3(N^2 + N) + c4(N^2) + c5<br>
-T(N) = (c3 + c4)N^2 + (c2 + c3)N + (c1 + c2 + c5)
-</div>
-
-<p>Because asymptotic analysis ignores constant fractions ($c_i$) and explicitly drops the lower-order growth limits (like the independent $N$ and the constants), we strictly keep the most dominant term. Because the dominant mathematical expression is strictly $N^2$, we scientifically derive the time bound as:</p>
-<div class="answer" style="color:#ff8e8e; font-weight:bold; font-size:1.2em; padding:10px; background:#2a1111; border:1px solid red; text-align:center;">
-    Result: $T(N) = O(N^2)$
-</div>
-
-
-<!-- SOLVING RECURRENCE RELATIONS -->
-<h2>1.2 Solving Recurrence Relations</h2>
-
-<p>When algorithms use <strong>Recursion</strong> (like Merge Sort or Binary Search), they do not use `for` loops. We cannot just "count" loop iterations. We must solve a <strong>Recurrence Relation</strong> — a mathematical equation natively defining the algorithm operation sequence in terms of itself.</p>
-<p>General form: $T(N) = aT(N/b) + f(N)$, where <strong>a</strong> is the physical number of recursive calls, <strong>b</strong> is the input shrinkage division variable, and <strong>f(N)</strong> is the computational cost of dividing/merging outside the recursive mechanism.</p>
-
-<h3>Method 1: The Substitution Method (Mathematical Induction)</h3>
-<div class="def">
-The Substitution methodology forces us to mathematically guess the bound structure, and subsequently use <strong>Mathematical Induction</strong> to rigorously prove our guess is definitively correct.
-</div>
-
-<p><strong>Example Objective:</strong> Solve the recurrence $T(N) = 2T(N/2) + N$ (The Merge Sort recurrence).</p>
-<p><strong>Step 1: Make a Guess.</strong> We suspect the bound limit converges at $O(N \log N)$. So our formal assumption is: $T(N) \le C \cdot N \log N$ for some constant $C > 0$.</p>
-
-<p><strong>Step 2: Proof via Induction Trace.</strong></p>
-<div class="diagram">
-Assume the limit property identically applies to the smaller constraint sub-problem $T(N/2)$:
-So,  $T(N/2) \le C \cdot (\frac{N}{2}) \log(\frac{N}{2})$
-
-We precisely substitute this assumption directly back into the originating general recurrence:
-$T(N) = 2 \cdot T(N/2) + N$
-$T(N) \le 2 \cdot [C \cdot (\frac{N}{2}) \log(\frac{N}{2})] + N$
-
-Execute Algebraic Expansion natively:
-$T(N) \le C \cdot N \log(\frac{N}{2}) + N$
-Using strictly logarithm properties ($\log(A/B) = \log A - \log B$):
-$T(N) \le C \cdot N \cdot (\log N - \log 2) + N$
-Since $\log_2 2 = 1$:
-$T(N) \le C \cdot N \log N - C \cdot N + N$
-$T(N) \le C \cdot N \log N - N(C - 1)$
-</div>
-
-<p><strong>Step 3: Verification.</strong> To strictly prove $T(N) \le C \cdot N \log N$, the residual remainder polynomial $-N(C-1)$ must mathematically be $\le 0$. This rigorously holds true arbitrarily whenever we select $C \ge 1$. Therefore, our mathematical hypothesis is flawless.</p>
-<div class="note"><strong>Final Concluded Bound:</strong> $T(N) = O(N \log N)$</div>
-
-
-<h3>Method 2: The Recursion Tree Method</h3>
-<div class="def">
-The Recursion Tree strategy maps out the explicit recursive hierarchy structurally as a visual tree graph. We accurately track the computational $f(N)$ cost globally across every single horizontal tree level, and mathematically execute an <strong>absolute geometric summation $\Sigma$</strong> aggregating all dimensional levels to precisely calculate $T(N)$.
-</div>
-
-<p><strong>Example Objective:</strong> Solve the unequal recurrence $T(N) = 3T(N/4) + C \cdot N^2$.</p>
-
-<p><strong>Step 1: Draw the Branching Structure.</strong></p>
-<div class="diagram">
-Level 0: The root cost is naturally $C \cdot N^2$.
-         It physically branches into exactly 3 divergent nodes, each processing subset dimensions of $N/4$.
-
-Level 1: The 3 descendant nodes structurally cost:
-         Node 1: $C \cdot (\frac{N}{4})^2 = C \cdot \frac{N^2}{16}$
-         Node 2: $C \cdot (\frac{N}{4})^2 = C \cdot \frac{N^2}{16}$
-         Node 3: $C \cdot (\frac{N}{4})^2 = C \cdot \frac{N^2}{16}$
-         
-         => Aggregated Level 1 Cost = $3 \times (C \cdot \frac{N^2}{16}) = \frac{3}{16} C \cdot N^2$
-
-Level 2: The 3 nodes exponentially shatter into 9 sub-nodes total.
-         Subset dimensions shrink identically to $(N/16)$.
-         Cost natively per secondary sub-node: $C \cdot (\frac{N}{16})^2 = C \cdot \frac{N^2}{256}$
-         
-         => Aggregated Level 2 Cost = $9 \times (C \cdot \frac{N^2}{256}) = \frac{9}{256} C \cdot N^2 = (\frac{3}{16})^2 C \cdot N^2$
-</div>
-
-<p><strong>Step 2: Geometrically Sum the Structural Hierarchy.</strong></p>
-<div class="formula">
-$T(N) = (\text{Cost Level 0}) + (\text{Cost Level 1}) + (\text{Cost Level 2}) + \dots + (\text{Cost Level } d)$<br><br>
-$T(N) = C \cdot N^2 + \frac{3}{16} C \cdot N^2 + (\frac{3}{16})^2 C \cdot N^2 + \dots$<br><br>
-We factor precisely out the identical $C \cdot N^2$ root matrix:<br>
-$T(N) = C \cdot N^2 \cdot \sum_{i=0}^{d} (\frac{3}{16})^i$
-</div>
-
-<p><strong>Step 3: Limits Convergence Verification.</strong> Because the geometric scalar integer $(3/16)$ is emphatically less than $1$, the infinite polynomial summation rigorously converges universally forcing a restricted constant $K$. Thus $T(N) = K \cdot C \cdot N^2$.</p>
-<div class="note"><strong>Final Concluded Bound:</strong> $T(N) = \Theta(N^2)$</div>
-
-
-<h3>Method 3: The Master Theorem</h3>
-<p>Provides a direct shortcut for recurrences exactly formatted as: <strong>$T(n) = a \cdot T(n/b) + f(n)$</strong></p>
-
-<div class="warn">
-<strong>⚠️ Exam Strategy:</strong> Natively calculate the logarithmic branch boundary: <strong>$n^{\log_b a}$</strong>. Then explicitly compare this polynomial weight against the merging cost <strong>$f(n)$</strong>!
-</div>
-
-<table style="margin-top:15px; margin-bottom:15px;">
-    <tr><th>Master Theorem Conditions</th><th>Mathematical Meaning</th><th>Exact Complexity Result</th></tr>
-    <tr>
-        <td><strong>Case 1: Heavy Leaves</strong><br>$f(n) = O(n^{\log_b a - \epsilon})$</td>
-        <td>The branching $n^{\log_b a}$ is substantially much larger natively than $f(n)$. The root merge cost is useless. Leaves dominate absolute computation.</td>
-        <td style="color:#6bcb77; font-weight:bold;">$T(n) = \Theta(n^{\log_b a})$</td>
-    </tr>
-    <tr>
-        <td><strong>Case 2: Exact Balance</strong><br>$f(n) = \Theta(n^{\log_b a})$</td>
-        <td>The branch recursion generation cost and the external merge algorithm cost scale beautifully exactly at the exact same bound scalar limits.</td>
-        <td style="color:#6bcb77; font-weight:bold;">$T(n) = \Theta(n^{\log_b a} \cdot \log n)$</td>
-    </tr>
-    <tr>
-        <td><strong>Case 3: Heavy Root</strong><br>$f(n) = \Omega(n^{\log_b a + \epsilon})$</td>
-        <td>The external merge calculation limits mathematically dominate. Generating the recursion tree limits is effectively free compared to it.</td>
-        <td style="color:#6bcb77; font-weight:bold;">$T(n) = \Theta(f(n))$</td>
-    </tr>
-</table>
-
-<h4>Examples of Mathematical Master Execution:</h4>
-<p><strong>Example 1:</strong> $T(N) = 9T(N/3) + N$</p>
-<ul>
-    <li>Identify parameters: $a=9, b=3, f(N)=N^1$.</li>
-    <li>Execute weight bound logic: $N^{\log_3 9} = N^2$.</li>
-    <li>Compare exactly $N^1$ against $N^2$. Since $N^1 < N^2$, Case 1 universally triggers.</li>
-    <li>Result limit = $\Theta(N^2)$.</li>
-</ul>
-
-<p><strong>Example 2:</strong> $T(N) = 2T(N/2) + N \log N$</p>
-<ul>
-    <li>Identify parameters: $a=2, b=2, f(N)=N \log N$.</li>
-    <li>Execute weight bound logic: $N^{\log_2 2} = N^1$.</li>
-    <li>Compare exactly $N \log N$ against $N^1$. It is NOT identically equal (fails Case 2), and NOT polynomially larger (fails Case 3 strict $\epsilon$ requirement constraint).</li>
-    <li><strong>WARNING:</strong> The Master Theorem mathematically fails here! You must strictly use the Recursion Tree or Advanced Akra-Bazzi method to natively resolve this!</li>
-</ul>
-
-</div>
-</body>
-</html>
+📝 Model Q5(b):  T(n)=2T(n/4)+√n
+   n^log₄2 = n^{0.5} = √n = f(n) → Case 2 → Θ(√n · log n)</div><div class="warn"><strong>⚠️ Master Theorem fails when:</strong> $f(n)$ is between cases (e.g., $n\log n$ vs $n$). Use recursion-tree or Akra–Bazzi instead.</div></div></body></html>

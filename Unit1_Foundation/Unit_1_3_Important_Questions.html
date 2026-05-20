@@ -1,130 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 1 Questions</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}
-.container{max-width:900px;margin:0 auto}
-h1{font-size:1.8rem;background:linear-gradient(135deg,#6b9bff,#8eeaff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px;text-align:center}
-.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}
-h2{color:#6b9bff;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#6b9bff10;border-left:4px solid #6b9bff;border-radius:0 8px 8px 0}
-h3{color:#8eeaff;font-size:1.05rem;margin:20px 0 8px}
-h4{color:#aaccff;font-size:.95rem;margin:14px 0 6px}
-p{margin-bottom:10px;font-size:.92rem}
-ul,ol{padding-left:22px;margin-bottom:12px;font-size:.92rem}
-li{margin-bottom:6px}
-.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}
-.def strong{color:#8eeaff}
-.formula{background:#1a1020;border:1px solid #9b59b640;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#dda0dd}
-.table-wrap{overflow-x:auto;margin:12px 0}
-table{width:100%;border-collapse:collapse;font-size:.85rem}
-th,td{padding:10px;border:1px solid #1e1e30;text-align:left}
-th{background:#1a1a2e;color:#8eeaff;font-weight:600}
-tr:nth-child(even){background:#0e0e18}
-.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}
-.note strong{color:#6bcb77}
-.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}
-.warn strong{color:#ffd93d}
-.diagram{background:#0f0f1a;border:1px solid #4d96ff40;border-radius:10px;padding:16px;margin:14px 0;text-align:center;font-size:.85rem;color:#88aaff; white-space:pre}
-code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#ff8888}
-</style>
-<script>
-MathJax = {
-  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-};
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-</head>
-<body>
-    <div class="container">
-        <h1>📘 Unit 1: Board Exam Past Papers</h1>
-        <p class="sub">Detailed Notes — CSC 314 Design and Analysis of Algorithms | Exam Orientated</p>
-        
-<!-- IMPORTANT QUESTIONS -->
-<h2>Unit 1 Board & Pre-board Analysis</h2>
-
-<div class="warn">
-    <strong>⚠️ Analytical Insight:</strong> This chapter exclusively guarantees questions strictly revolving around defining the 3 Asymptotic Notations natively and mathematically resolving Recurrence Relations using the Master Method. Prepare accordingly.
-</div>
-
-<div class="step">
-    <h3>Q1. Why do you need algorithm analysis? Discuss about RAM model. Also discuss about Big Oh, Big Omega and Big theta with corresponding examples. (2+3+5 = 10 Marks) [Boards]</h3>
-    <br>
-    <strong>Requirement 1: Need for Analysis</strong>
-    <ul>
-        <li><strong>Predictability:</strong> We analyze algorithms to precisely estimate runtime bounds independent of varying hardware logic, shielding deployments from critical infinite execution.</li>
-        <li><strong>Resource Engineering:</strong> Evaluates optimization vectors (Space-Time tradeoff limits).</li>
-    </ul>
-    
-    <strong>Requirement 2: RAM Model Framework</strong>
-    <p>The "Random Access Machine" is the generalized math construct utilized to normalize comparisons. It dictates that every basic execution (add, sub, allocate) takes identically $1$ uniform time step $O(1)$. Simultaneously, it mandates infinite memory lacking cache boundaries, thus discarding real-world L1/L2 Cache latency variables from pure algorithmic evaluation.</p>
-    
-    <strong>Requirement 3: Asymptotic Definitions</strong>
-    <p>See Detailed Notes for formal definitions equations. For examples:</p>
-    <ul>
-        <li><strong>Big-Oh ($O$):</strong> Upper bound constraint limit. Consider $7n^2 + 20$. Pick bounding $g(n) = n^2$. For $c=8, n_0=20$, $7n^2 + 20 \le 8n^2$. Therefore it is absolutely $O(n^2)$.</li>
-        <li><strong>Big-Omega ($\Omega$):</strong> Lower bound structure. If $T(N)$ is best case, $7n^2 + 20 \ge 7n^2$ for all positive $n$, thus $\Omega(n^2)$.</li>
-        <li><strong>Big-Theta ($\Theta$):</strong> Tight lock convergence. Since it scales identically constrained between $7n^2$ and $8n^2$, the complexity formally locks at $\Theta(n^2)$.</li>
-    </ul>
-</div>
-
-<div class="step">
-    <h3>Q2. State and solve by Master method: T(n) = 7T(n/2) + n² (5 Marks) [Pre-board 2023]</h3>
-    <p>Using the standard Master Theorem format: $T(n) = aT(n/b) + f(n)$</p>
-    <p>Here mathematically extracted values are: $a = 7$, $b = 2$, and $f(n) = n^2$.</p>
-    <p><strong>Step 1: Compute Branch Weight Limit</strong></p>
-    <div class="formula">
-        $n^{\log_b a} = n^{\log_2 7} \approx n^{2.807}$
-    </div>
-    <p><strong>Step 2: Comparison Execution</strong></p>
-    <p>We directly compare $f(n) = n^2$ against the weight $n^{2.807}$. Since $n^2$ is asymptotically far smaller than $n^{2.807}$, this explicitly falls under <strong>Case 1 (Heavy Leaves Scenario)</strong>. The cost of generating branches exponentially overwhelms the $O(n^2)$ effort to merge them.</p>
-    <p><strong>Step 3: Resolution</strong></p>
-    <p>Under Case 1, $f(n) = O(n^{\log_b a - \epsilon})$. The boundary complexity is natively dictated by the leaf nodes.</p>
-    <div class="answer">Final Answer: $T(n) = \Theta(n^{\log_2 7})$</div>
-</div>
-
-<div class="step">
-    <h3>Q3. Solve by Master Method: T(n) = 3T(n/2) + n AND T(n) = 2T(n/4) + √n (2.5 + 2.5) [Boards]</h3>
-    <p><strong>Equation A Resolution: $T(n) = 3T(n/2) + n$</strong></p>
-    <ul>
-        <li>$a=3, b=2, f(n)=n^1$</li>
-        <li>Calculate scalar weight: $n^{\log_2 3} \approx n^{1.58}$</li>
-        <li>Compare $n^1$ vs $n^{1.58}$. The scalar $n^{1.58}$ dominates. This is exclusively <strong>Case 1</strong>.</li>
-        <li><span style="color:#6bcb77; font-weight:bold;">Result: $\Theta(n^{\log_2 3})$</span></li>
-    </ul>
-
-    <p><strong>Equation B Resolution: $T(n) = 2T(n/4) + \sqrt{n}$</strong></p>
-    <ul>
-        <li>$a=2, b=4, f(n)=n^{0.5}$</li>
-        <li>Calculate scalar weight: $n^{\log_4 2} = n^{0.5}$ (Since $4^{0.5} = 2$)</li>
-        <li>Compare $n^{0.5}$ vs $n^{0.5}$. The scales are <strong>identically matched!</strong> Result falls squarely into <strong>Case 2 (Perfect Balance)</strong>.</li>
-        <li>Under Case 2, we multiply the boundary directly by a logarithmic scaling dimension $\log n$.</li>
-        <li><span style="color:#6bcb77; font-weight:bold;">Result: $\Theta(\sqrt{n} \log n)$</span></li>
-    </ul>
-</div>
-
-<div class="step">
-    <h3>Q4. Solve by Recursion tree: T(n) = 3T(n/4) + Θ(n²) (5 Marks) [Pre-board 2023]</h3>
-    <p><strong>Trace Logistics:</strong></p>
-    <p>We build a theoretical mathematical tree mapping all operation costs.</p>
-    <ul>
-        <li>Level 0 Root Cost: $n^2$</li>
-        <li>Level 1 splits into exactly 3 sub-nodes, each inheriting sub-problem dimension $(n/4)$. Cost per node: $(n/4)^2 = n^2/16$. Total Level 1 aggregate cost: $3 \times (n^2/16) = \frac{3}{16}n^2$.</li>
-        <li>Level 2 splits into 9 sub-nodes. Dimension $(n/16)$. Cost per node: $(n/16)^2 = n^2/256$. Total Level 2 aggregate cost: $9 \times (n^2/256) = \frac{9}{256}n^2 = (\frac{3}{16})^2 n^2$.</li>
-    </ul>
-    <p><strong>Geometric Formulation:</strong></p>
-    <p>The total time function creates an infinite summation series:<br>
-    $T(n) = n^2 + \frac{3}{16}n^2 + (\frac{3}{16})^2n^2 + \dots$<br>
-    $T(n) = n^2 \sum_{i=0}^{\log_4 n} (\frac{3}{16})^i$</p>
-    <p>Because the geometric internal ratio $(3/16)$ is strictly less than 1, the series intrinsically converges upon an absolute bounded constant multiplier.</p>
-    <div class="answer">Final Verification: $T(n) = \Theta(n^2)$</div>
-</div>
-
-    </div>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 1 — Important Questions</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.75}.c{max-width:900px;margin:0 auto}h1{color:#ff6b6b;text-align:center}h2{color:#ff8e8e;margin-top:25px;padding:8px 12px;background:#ff6b6b15;border-left:4px solid #ff6b6b}.q{background:#1a0f1a;border:1px solid #ff6b6b40;border-radius:8px;padding:10px;margin:8px 0;color:#ffaaaa;font-weight:600}.a{background:#12121a;border:1px solid #1e1e30;border-radius:8px;padding:12px;margin:8px 0 18px;font-size:.92rem}.diag{background:#0f0f1a;border:1px solid #4d96ff40;padding:12px;font-family:monospace;font-size:.85rem;color:#88aaff;white-space:pre-wrap;border-radius:6px;margin:8px 0}code{background:#1a1a2e;color:#ff8888;padding:2px 5px;border-radius:4px}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🎯 Unit 1 — Important Questions (Model + Boards)</h1><h2>Q1. [Model 10M / Board 2078] Need of algorithm analysis + RAM model + Big-O,Ω,Θ with examples</h2><div class="a"><strong>Need:</strong> compare algorithms, predict resource use, prove correctness, choose best for input size — independent of language/hardware.<br><br><strong>RAM Model:</strong> theoretical machine; every primitive op (arithmetic, compare, assign, array index, call/return) = $O(1)$; memory random-access; no cache or parallelism.<br><br><strong>Big-O:</strong> $f(n)\le c\cdot g(n)$ ⟹ upper bound. e.g. $3n+5=O(n)$.<br><strong>Big-Ω:</strong> $f(n)\ge c\cdot g(n)$ ⟹ lower bound. e.g. $3n+5=\Omega(n)$.<br><strong>Big-Θ:</strong> both ⟹ tight bound. $3n+5=\Theta(n)$.</div><h2>Q2. [Board 2080] Iterative factorial + detailed analysis</h2><div class="a"><div class="diag">Factorial(n):
+  fact ← 1            // c1, 1 time
+  for i = 1 to n:     // c2, n+1 times
+      fact ← fact * i // c3, n times
+  return fact         // c4, 1 time</div>$T(n)=c_1+c_2(n+1)+c_3 n+c_4 = \Theta(n)$. Space $=\Theta(1)$.</div><h2>Q3. [Model Q5 / Board 2081 Q5] Master Method</h2><div class="a"><strong>(a) T(n)=3T(n/2)+n</strong>: $n^{\log_2 3}\approx n^{1.58}$; $f=n$ is smaller ⟹ Case 1 ⟹ $\Theta(n^{\log_2 3})$.<br><strong>(b) T(n)=2T(n/4)+\sqrt{n}</strong>: $n^{\log_4 2}=n^{0.5}=\sqrt n=f$ ⟹ Case 2 ⟹ $\Theta(\sqrt n\log n)$.<br><strong>(c) Board 2081(a) T(n)=2T(n/2)+n²</strong> ⟹ Case 3 ⟹ $\Theta(n^2)$.<br><strong>(d) Board 2081(b) T(n)=2T(n/2)+1</strong> ⟹ Case 1 ⟹ $\Theta(n)$.<br><strong>(e) Board 2076(a) T(n)=7T(n/2)+n²</strong>: $n^{\log_2 7}\approx n^{2.81}$ ⟹ Case 1 ⟹ $\Theta(n^{\log_2 7})$.<br><strong>(f) Board 2076(b) T(n)=4T(n/4)+n</strong>: $n^1=f$ ⟹ Case 2 ⟹ $\Theta(n\log n)$.</div><h2>Q4. [Board 2080 Q1] T(n)=2T(n/2)+1 by Substitution → O(n)</h2><div class="a"><div class="diag">Guess: T(n) ≤ cn − 1
+Base: T(1)=1 ≤ c−1 ⟹ c≥2
+IH:  T(n/2) ≤ c(n/2) − 1
+Step: T(n) = 2T(n/2)+1 ≤ 2[c(n/2)−1]+1 = cn−1 ✓
+∴ T(n) = O(n)</div></div><h2>Q5. [Board 2078 Q4] Recursion-tree method for T(n)=2T(n/2)+1</h2><div class="a"><div class="diag">Level   nodes   cost/node   level cost
+  0       1        1            1
+  1       2        1            2
+  2       4        1            4
+  …
+  k      2^k       1           2^k
+Depth = log₂n; leaves = n
+Total = 1+2+…+n = 2n−1 = O(n)</div></div><h2>Q6. [Board 2080 Q12a] Aggregate Analysis</h2><div class="a">Total cost of n ops divided by n gives amortized cost. Example: binary counter — incrementing from 0 to n flips $\sum n/2^k < 2n$ bits ⟹ $O(1)$ amortized per increment.</div><h2>Q7. [Board 2079 Q8a] Best, Worst, Average case</h2><div class="a"><strong>Best</strong> ($\Omega$): least operations (Linear Search → $O(1)$).<br><strong>Worst</strong> ($O$): max operations — gives guarantee ($O(n)$).<br><strong>Average</strong> ($\Theta$): expected over input distribution ($O(n/2)$).</div></div></body></html>
