@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 6 Revision Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 6: Quick Revision</h1>
+    
+<h2>Summary: Backtracking</h2>
+<ul>
+    <li><strong>Core Concept:</strong> Depth First Search (DFS) over a logical State Space Tree combined with severe Bounding Function pruning.</li>
+    <li><strong>N-Queens:</strong> Constraints check array elements left-diagonal, right-diagonal, and horizontal rows. Prunes trillions of invalid board states.</li>
+    <li><strong>Subset Sum:</strong> Evaluates subsets sequentially. State Space left node = Include current. Right node = Exclude current. Prunes if running tally exceeds Target.</li>
+    <li><strong>0/1 Knapsack:</strong> Uses bounding fractions. If (Current Profit + Bound Profit of remaining) $<=$ Max Found Profit, it skips explicitly calculating that whole subtree!</li>
+</ul>
+
+</body>
+</html>

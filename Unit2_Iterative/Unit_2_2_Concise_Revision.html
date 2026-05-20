@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 2 Revision Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 2: Quick Revision</h1>
+    
+<h2>Summary: Iterative Algorithms</h2>
+<ul>
+    <li><strong>GCD Algorithm:</strong> Uses $a, b$ modulo substitutions. Space: $O(1)$. Time: $O(\log(\min(a,b)))$. Extremely fast.</li>
+    <li><strong>Fibonacci:</strong> Iterative > Recursive. $O(N)$ Time. $O(1)$ Space. The recursive approach takes $O(2^n)$ Time which is intractable!</li>
+    <li><strong>Linear/Sequential Search:</strong> Simple <code>for</code> loop. Constant $O(1)$ space. Worst case $O(N)$. Doesn't require array to be sorted.</li>
+    <li><strong>Bubble Sort:</strong> $O(N^2)$. Compares and swaps adjacent pairs. Optimized version halts if no swaps occurred in a pass.</li>
+    <li><strong>Selection Sort:</strong> $O(N^2)$ always. Scans strictly for the global minimum for the next index position. Least number of Memory Swaps ($O(N)$ swaps maximum).</li>
+    <li><strong>Insertion Sort:</strong> $O(N^2)$. Acts like sorting playing cards in your hand. Best case is $O(N)$ if nearly sorted. Often used in hybrid algorithms for small chunks.</li>
+</ul>
+
+</body>
+</html>

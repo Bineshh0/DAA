@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Board Question 2076 - Solved</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a1a; color: #d1d5db; line-height: 1.8; padding: 30px; }
+        .wrap { max-width: 900px; margin: auto; }
+        h1 { text-align: center; font-size: 1.8em; padding: 24px; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border-radius: 16px; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-style: italic; }
+        .group-hdr { text-align: center; font-size: 1.4em; color: #10b981; margin: 30px 0 10px; padding: 12px; border: 2px solid #10b981; border-radius: 12px; background: rgba(16, 185, 129, 0.05); }
+        .q-card { background: #18182f; border: 1px solid #2d2d4a; border-radius: 14px; padding: 22px 26px; margin: 22px 0; transition: border-color .3s; }
+        .q-card:hover { border-color: #3b82f6; }
+        .q-num { display: inline-block; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; font-weight: 700; padding: 4px 14px; border-radius: 20px; font-size: .85em; margin-bottom: 4px; }
+        .marks { display: inline-block; background: #7c3aed; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: .8em; margin-left: 8px; }
+        .q-title { color: #10b981; font-size: 1.1em; font-weight: 700; margin: 8px 0 14px; }
+        h4 { color: #3b82f6; margin: 16px 0 8px; font-size: 1em; }
+        p { margin: 8px 0; text-align: justify; }
+        b { color: #34d399; }
+        em { color: #f472b6; font-style: normal; }
+        ul, ol { margin: 8px 0 8px 22px; }
+        li { margin: 4px 0; }
+        .def { background: linear-gradient(135deg, #064e3b, #1e3a8a); padding: 14px 18px; border-radius: 10px; margin: 10px 0; border-left: 4px solid #3b82f6; }
+        .formula { text-align: center; margin: 14px auto; padding: 14px; background: #1a1a3e; border: 1px dashed #6366f1; border-radius: 10px; font-size: 1.05em; color: #c4b5fd; font-family: 'Courier New', monospace; }
+        .solve { background: #1a1a3e; border: 1px solid #3b3b5e; padding: 14px; border-radius: 10px; margin: 10px 0; overflow-x: auto;}
+        .result { background: #14532d; border: 1px solid #22c55e; padding: 10px 14px; border-radius: 8px; margin: 10px 0; color: #86efac; font-weight: 600; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; border-radius: 10px; overflow: hidden; }
+        th { background: linear-gradient(135deg, #10b981, #059669); color: #fff; padding: 10px; font-size: .9em; }
+        td { padding: 8px 10px; border: 1px solid #2d2d4a; background: #1a1a30; font-size: .9em; text-align: center; }
+        tr:nth-child(even) td { background: #1f1f3a; }
+        pre { background: #111128; padding: 14px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; color: #93c5fd; font-size: 0.95em; margin: 10px 0; border: 1px solid #2d2d4a; }
+    </style>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <h1>🚀 DAA Board Question 2076 — Solved</h1>
+    <p class="subtitle">Design and Analysis of Algorithms (CSC314)</p>
+
+    <div class="group-hdr">📋 SECTION A — 10 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q1</span><span class="marks">10 marks</span>
+        <div class="q-title">Complexity & Asymptotic Notations</div>
+        
+        <h4>A. Complexity of an Algorithm</h4>
+        <p>Complexity refers to the theoretical measurement of resources (time and memory space) an algorithm consumes as a function of the input size \( n \). It helps predict scalability.</p>
+
+        <h4>B. Asymptotic Notations</h4>
+        <ul>
+            <li><b>Big Oh \( O(g(n)) \):</b> Defines the asymptotic upper bound (worst-case). \( f(n) \leq c \cdot g(n) \) for all \( n \geq n_0 \).</li>
+            <li><b>Big Omega \( \Omega(g(n)) \):</b> Defines the asymptotic lower bound (best-case). \( f(n) \geq c \cdot g(n) \) for all \( n \geq n_0 \).</li>
+            <li><b>Big Theta \( \Theta(g(n)) \):</b> Defines tight bound (average/exact case). \( c_1 g(n) \leq f(n) \leq c_2 g(n) \).</li>
+        </ul>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q2</span><span class="marks">10 marks</span>
+        <div class="q-title">Divide and Conquer & Randomized Quick Sort</div>
+        <p><b>Divide and Conquer:</b> Divide problem into smaller instances, Conquer them recursively, Combine results.</p>
+        <pre><code>Algorithm RandPartition(A, p, r):
+  i = Random(p, r)
+  swap(A[i], A[r])
+  return Partition(A, p, r) // Standard partition using A[r] as pivot
+
+Algorithm RandQuickSort(A, p, r):
+  if p < r:
+      q = RandPartition(A, p, r)
+      RandQuickSort(A, p, q-1)
+      RandQuickSort(A, q+1, r)</code></pre>
+        <p><b>Time Complexity:</b> The expected case is <b>\( O(n \log n) \)</b> because the random pivot eliminates the dependency on the input distribution, ensuring perfectly terrible partitions (\( n-1 \) and \( 0 \)) are highly improbable.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q3</span><span class="marks">10 marks</span>
+        <div class="q-title">Backtracking vs Recursion & N-Queen Problem</div>
+        <h4>A. Backtracking vs Recursion</h4>
+        <p>Backtracking is an intelligent application of recursion. It uses a "bounding function" to test if the current partial solution can ever lead to a valid final solution. If it cannot, it immediately stops exploring that path (prunes the tree) and "backtracks", whereas standard recursion would exhaustively explore all paths.</p>
+
+        <h4>B. N-Queen Problem</h4>
+        <div class="def">
+            Place N chess queens on an N×N chessboard so that no two queens threaten each other (no two queens share the same row, column, or diagonal).
+        </div>
+        <pre><code>Algorithm NQueens(k, n) // Place kth queen
+  For i = 1 to n:
+      If Place(k, i) is True: // check bounds
+          x[k] = i            // Place queen at row k, col i
+          If k == n:
+              Print x[1..n]   // Solution found
+          Else:
+              NQueens(k+1, n) // Recurse to next row</code></pre>
+        <p><b>Time Complexity:</b> \( O(n!) \) in worst-case (though drastically pruned compared to pure brute force \( O(n^n) \)).</p>
+    </div>
+
+    <div class="group-hdr">📋 SECTION B — 5 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q4</span><span class="marks">5 marks</span>
+        <div class="q-title">Selection Sort</div>
+        <pre><code>Algorithm SelectionSort(A):
+  n = length(A)
+  for i = 0 to n-2:
+      min_idx = i
+      for j = i+1 to n-1:
+          if A[j] < A[min_idx]:
+              min_idx = j
+      swap(A[i], A[min_idx])</code></pre>
+        <ul>
+            <li><b>Time Complexity:</b> \( O(n^2) \) in Best, Average, and Worst cases (it always scans the remaining array).</li>
+            <li><b>Space Complexity:</b> \( O(1) \) (in-place sorting).</li>
+        </ul>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q5</span><span class="marks">5 marks</span>
+        <div class="q-title">Master Method</div>
+        
+        <h4>(a) \( T(n) = 7T(n/2) + n^2 \)</h4>
+        <div class="solve">
+            <p>\( a=7, b=2, f(n)=O(n^2) \)</p>
+            <p>\( n^{\log_b a} = n^{\log_2 7} \approx n^{2.8} \)</p>
+            <p>Since \( f(n) = n^2 \) is polynomially smaller than \( n^{2.8} \), we are in <b>Case 1</b>.</p>
+        </div>
+        <div class="result">Complexity: \( \Theta(n^{\log_2 7}) \)</div>
+
+        <h4>(b) \( T(n) = 4T(n/4) + n \)</h4>
+        <div class="solve">
+            <p>\( a=4, b=4, f(n)=O(n) \)</p>
+            <p>\( n^{\log_b a} = n^{\log_4 4} = n^1 \)</p>
+            <p>Since \( f(n) = n^1 \) matches \( n^{\log_b a} \), we are in <b>Case 2</b>.</p>
+        </div>
+        <div class="result">Complexity: \( \Theta(n \log n) \)</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q6</span><span class="marks">5 marks</span>
+        <div class="q-title">Greedy Algorithm for Fractional Knapsack</div>
+        <p>The Fractional Knapsack allows items to be broken into smaller pieces. The greedy approach always yields the optimal solution.</p>
+        <pre><code>Algorithm FractionalKnapsack(items, W):
+  Calculate value/weight ratio for all items
+  Sort items descending by ratio
+  total_value = 0
+  For each item in sorted list:
+      if W == 0: break
+      a = min(item.weight, W)
+      total_value = total_value + a * (item.value / item.weight)
+      W = W - a
+  return total_value</code></pre>
+        <p><b>Time Complexity:</b> \( O(n \log n) \) purely due to the sorting step. The iteration takes \( O(n) \).</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q7</span><span class="marks">5 marks</span>
+        <div class="q-title">Heap Sort Trace</div>
+        <p><b>Array:</b> {2, 9, 3, 12, 15, 8, 11}</p>
+        <div class="solve">
+            <p><b>1. Build Max Heap:</b> Convert array to binary tree and heapify non-leaf nodes.</p>
+            <p>Max Heap array: <code>{15, 12, 11, 9, 2, 8, 3}</code></p>
+            <p><b>2. Sorting Phase (Swap root with end, reduce heap size, heapify root):</b></p>
+            <p>Swap 15 & 3 → <code>{3, 12, 11, 9, 2, 8, | 15}</code>. Heapify(3) → <code>{12, 9, 11, 3, 2, 8}</code></p>
+            <p>Swap 12 & 8 → <code>{8, 9, 11, 3, 2, | 12, 15}</code>. Heapify(8) → <code>{11, 9, 8, 3, 2}</code></p>
+            <p>Swap 11 & 2 → <code>{2, 9, 8, 3, | 11, 12, 15}</code>. Heapify(2) → <code>{9, 3, 8, 2}</code></p>
+            <p>Swap 9 & 2 → <code>{2, 3, 8, | 9...}</code>. Heapify(2) → <code>{8, 3, 2}</code></p>
+            <p>Swap 8 & 2 → <code>{2, 3, | 8...}</code>. Heapify(2) → <code>{3, 2}</code></p>
+            <p>Swap 3 & 2 → <code>{2, | 3...}</code></p>
+        </div>
+        <div class="result">Sorted: {2, 3, 8, 9, 11, 12, 15}</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q8</span><span class="marks">5 marks</span>
+        <div class="q-title">Dynamic Programming Elements</div>
+        <p>DP requires a problem to have two key mathematical elements:</p>
+        <ol>
+            <li><b>Optimal Substructure:</b> An optimal solution to the overall problem can be constructed from optimal solutions of its subproblems.</li>
+            <li><b>Overlapping Subproblems:</b> The recursive algorithm breaks the problem down into the <i>same</i> subproblems over and over. DP solves this by caching answers.</li>
+        </ol>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q9</span><span class="marks">5 marks</span>
+        <div class="q-title">Vertex Cover Approximation</div>
+        <p>A greedy approach is to pick an arbitrary edge (u, v), add both vertices to the cover, and remove all incident edges. Repeat until no edges remain.</p>
+        <p><b>Why Approximation?</b> Finding the exact minimum cover is NP-Complete. This simple \( O(E) \) algorithm provides an approximation ratio of exactly <b>2</b>, meaning the cover found will never be larger than twice the size of the true optimal minimum cover.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q10</span><span class="marks">5 marks</span>
+        <div class="q-title">Prim's Algorithm for MST</div>
+        <p>Prim's algorithm builds the Minimum Spanning Tree one vertex at a time by greedily connecting the lowest weight edge originating from the growing MST to an unvisited vertex.</p>
+        <pre><code>Algorithm Prim(G, start):
+  Initialize min-priority queue Q with all vertices
+  set key[v] = INFINITY for all v, key[start] = 0
+  while Q is not empty:
+      u = ExtractMin(Q)
+      for each neighbor v of u:
+          if v is in Q and weight(u,v) < key[v]:
+              parent[v] = u
+              key[v] = weight(u,v)</code></pre>
+        <p><b>Time Complexity:</b> \( O(E \log V) \) using a Min-Heap (or \( O(E + V \log V) \) with a Fibonacci Heap).</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q11</span><span class="marks">5 marks</span>
+        <div class="q-title">Classes P, NP, NP-Complete</div>
+        <ul>
+            <li><b>P:</b> Solvable in polynomial time. Example: Matrix Multiplication.</li>
+            <li><b>NP:</b> Verifiable in polynomial time. Example: Subset Sum.</li>
+            <li><b>NP-Complete:</b> The hardest problems in NP. If one is solved in polynomial time, all are (P=NP). Example: 3-SAT, TSP.</li>
+        </ul>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q12</span><span class="marks">5 marks</span>
+        <div class="q-title">Short Notes</div>
+        <h4>(a) Backtracking Strategy</h4>
+        <p>Depth-First Search (DFS) combined with bounding functions. It builds solutions incrementally and abandons paths when they violate conditions, saving massive computation time compared to brute force.</p>
+
+        <h4>(b) Tractable and Intractable Problem</h4>
+        <p><b>Tractable:</b> Solvable in practical time (Polynomial). <b>Intractable:</b> Technically solvable, but algorithms run in Exponential Time, making them practically unsolvable for large inputs.</p>
+    </div>
+
+</div>
+</body>
+</html>

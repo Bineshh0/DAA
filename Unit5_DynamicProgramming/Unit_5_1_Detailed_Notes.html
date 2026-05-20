@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 5 Detailed Notes</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 5: Dynamic Programming</h1>
+    
+<h2>5.1 Strategy: Dynamic Programming vs Greedy</h2>
+<div class="box">
+    <p><strong>Dynamic Programming (DP)</strong> solves complex optimization problems by breaking them down into simpler, overlapping subproblems. Unlike Greedy tracking only local minimums, DP computes <em>all</em> possible scenarios completely, tabulates their values to avoid redundant computation, and finally picks the optimal aggregate path.</p>
+    <ul>
+        <li><strong>Optimal Substructure:</strong> Optimal solution to problem contains optimal solutions to sub-problems.</li>
+        <li><strong>Overlapping Subproblems:</strong> Subproblems recur heavily. Recursion computes them $2^N$ times. DP computes them exactly once, fetching from an array hereafter $O(1)$.</li>
+    </ul>
+    <h3>Memoization vs Tabulation Strategy</h3>
+    <p><strong>Memoization (Top-Down):</strong> Writing a standard recursive function, but wrapping a cache array at the top. If `cache[n]` exists, return it, else compute. Pros: Only computes strictly required nodes. Cons: Heavy Call Stack overhead.</p>
+    <p><strong>Tabulation (Bottom-Up):</strong> Fully abandoning recursion. Building a massive ND-array from size 0, 1... up to N incrementally in iterative loops. Pros: No recursion limit crashes. Cons: Computes every single cell regardless of need.</p>
+</div>
+
+<h2>5.2 DP Algorithms</h2>
+<div class="box">
+    <h3>Floyd-Warshall (All-Pairs Shortest Path)</h3>
+    <p>Instead of running Dijkstra $V$ times, it builds a massive DP matrix. It checks if passing through an intermediate vertex $k$ creates a shorter path extending from $i$ to $j$.</p>
+    <p>Formula: $D^k[i][j] = \min(D^{k-1}[i][j], D^{k-1}[i][k] + D^{k-1}[k][j])$<br>
+    <strong>Complexity:</strong> Time $O(V^3)$, Space $O(V^2)$.</p>
+
+    <h3>0/1 Knapsack Problem</h3>
+    <p>You cannot take partial items. Fractional Greedy fails. We build a DP matrix where rows = Items available, cols = Weight Capacity.<br>
+    Formula: `DP[i][w] = max(DP[i-1][w], val[i] + DP[i-1][w-wt[i]])`</p>
+    <p><strong>Complexity:</strong> strictly $O(N \times W)$. Note this is <em>Pseudo-polynomial</em>. If W is $10^9$, runtime hangs.</p>
+
+    <h3>String Editing (Edit Distance)</h3>
+    <p>Converts String A to String B using insertions, deletions, and substitutions. Forms a 2D matrix comparing prefixes.</p>
+
+    <h3>Matrix Chain Multiplication</h3>
+    <p>Determines the perfectly optimal Parenthesization sequence for multiplying $N$ matrices to minimize scalar arithmetic multiplications. It calculates all split intervals $k$ across sequence length $i$ to $j$. Time: $O(N^3)$.</p>
+</div>
+
+</body>
+</html>

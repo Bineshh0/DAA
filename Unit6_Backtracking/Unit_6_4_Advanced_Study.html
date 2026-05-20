@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 6 Advanced Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 6: CSP AI Heuristics</h1>
+    
+<h2>Advanced Theoretical Analysis</h2>
+<div class="box">
+    <h3>Optimization via Constraint Satisfaction Problems (CSPs)</h3>
+    <p>In modern AI systems, plain Backtracking is extremely weak. Backtracking naively attempts the very next valid option in sequential order. In <strong>Constraint Satisfaction Problems (CSPs)</strong> (used in Sudoku solvers, Google Maps graph routing, and Logistics), AI algorithms use two profound upgrades:</p>
+    <ul>
+        <li><strong>Minimum Remaining Values (MRV) Heuristic:</strong> Instead of picking "Column 2" next in N-Queens, the algorithm scans the entire board and actively picks the variable that has the <em>fewest</em> legal remaining options. If a column only has 1 safe tile left, it assigns it immediately. This aggressively shrinks the backtracking tree depth.</li>
+        <li><strong>Forward Checking:</strong> Whenever the algorithm assigns $X_1$, it instantly scans $X_2, X_3... X_n$ and crosses out incompatible domains exactly at that given moment. If any future variable's domain becomes empty $0$, the algorithm catches the impending failure $N$ layers early and backtracks immediately! This eliminates millions of wasted node computations that naive backtracking blindly falls into.</li>
+    </ul>
+</div>
+
+</body>
+</html>

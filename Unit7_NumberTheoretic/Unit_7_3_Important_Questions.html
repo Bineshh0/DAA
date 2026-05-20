@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 7 Questions</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 7: Board & Pre-board Analysis</h1>
+    
+<h2>Board & Pre-Board Important Questions</h2>
+
+<div class="step">
+    <h3>Q1. Write and trace recursive Extended Euclidean algorithm. (2+3) [Pre-board 2024]</h3>
+    <p><strong>Algorithm:</strong></p>
+<pre>
+EXTENDED-GCD(a, b)
+    if b == 0
+        return (a, 1, 0)
+    (d, x', y') = EXTENDED-GCD(b, a % b)
+    return (d, y', x' - floor(a/b) * y')
+</pre>
+</div>
+
+<div class="step">
+    <h3>Q2. Solve using CRT: $x \equiv 2 \pmod 3, x \equiv 4 \pmod 5, x \equiv 5 \pmod 7$ (5 Marks) [Pre-board 2023]</h3>
+    <p><strong>Answer Trace:</strong><br>
+    Given: $a_1=2, a_2=4, a_3=5$. Moduli: $m_1=3, m_2=5, m_3=7$.<br>
+    Check coprimes: GCD is 1 for all pairs. Valid.<br>
+    Calculate $M = 3 \times 5 \times 7 = 105$.<br>
+    $M_1 = 105/3 = 35$. $M_2 = 105/5 = 21$. $M_3 = 105/7 = 15$.<br>
+    Mod Inverses:<br>
+    $y_1 = 35^{-1} \pmod 3 \Rightarrow 2y_1 \equiv 1 \pmod 3 \Rightarrow y_1 = 2$.<br>
+    $y_2 = 21^{-1} \pmod 5 \Rightarrow 1y_2 \equiv 1 \pmod 5 \Rightarrow y_2 = 1$.<br>
+    $y_3 = 15^{-1} \pmod 7 \Rightarrow 1y_3 \equiv 1 \pmod 7 \Rightarrow y_3 = 1$.<br>
+    Formula: $X = (a_1 M_1 y_1 + a_2 M_2 y_2 + a_3 M_3 y_3) \pmod M$<br>
+    $X = (2 \cdot 35 \cdot 2) + (4 \cdot 21 \cdot 1) + (5 \cdot 15 \cdot 1)$<br>
+    $X = 140 + 84 + 75 = 299$<br>
+    $299 \pmod{105} = 89$.<br>
+    <span class="answer">Final Solution: $\mathbf{X = 89}$</span>
+    </p>
+</div>
+
+<div class="step">
+    <h3>Q3. Explain Euclid's method to solve modular linear equations with an example. (5) [Boards]</h3>
+    <p><strong>Explanation:</strong> Resolving $aX \equiv b \pmod n$. Utilize the Extended-Euclidean function to extract $d=\gcd(a,n)$ and coefficient variable $x'$. Confirm divisibility ($b \pmod d == 0$). Define initial variable $x_0 = x' \times (b/d) \pmod n$. The array of legitimate answers maps out across adding $+ (n/d)$ iteratively.</p>
+</div>
+
+</body>
+</html>

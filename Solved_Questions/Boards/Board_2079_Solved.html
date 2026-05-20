@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Board Question 2079 - Solved</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a1a; color: #d1d5db; line-height: 1.8; padding: 30px; }
+        .wrap { max-width: 900px; margin: auto; }
+        h1 { text-align: center; font-size: 1.8em; padding: 24px; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border-radius: 16px; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-style: italic; }
+        .group-hdr { text-align: center; font-size: 1.4em; color: #10b981; margin: 30px 0 10px; padding: 12px; border: 2px solid #10b981; border-radius: 12px; background: rgba(16, 185, 129, 0.05); }
+        .q-card { background: #18182f; border: 1px solid #2d2d4a; border-radius: 14px; padding: 22px 26px; margin: 22px 0; transition: border-color .3s; }
+        .q-card:hover { border-color: #3b82f6; }
+        .q-num { display: inline-block; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; font-weight: 700; padding: 4px 14px; border-radius: 20px; font-size: .85em; margin-bottom: 4px; }
+        .marks { display: inline-block; background: #7c3aed; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: .8em; margin-left: 8px; }
+        .q-title { color: #10b981; font-size: 1.1em; font-weight: 700; margin: 8px 0 14px; }
+        h4 { color: #3b82f6; margin: 16px 0 8px; font-size: 1em; }
+        p { margin: 8px 0; text-align: justify; }
+        b { color: #34d399; }
+        em { color: #f472b6; font-style: normal; }
+        ul, ol { margin: 8px 0 8px 22px; }
+        li { margin: 4px 0; }
+        .def { background: linear-gradient(135deg, #064e3b, #1e3a8a); padding: 14px 18px; border-radius: 10px; margin: 10px 0; border-left: 4px solid #3b82f6; }
+        .formula { text-align: center; margin: 14px auto; padding: 14px; background: #1a1a3e; border: 1px dashed #6366f1; border-radius: 10px; font-size: 1.05em; color: #c4b5fd; font-family: 'Courier New', monospace; }
+        .solve { background: #1a1a3e; border: 1px solid #3b3b5e; padding: 14px; border-radius: 10px; margin: 10px 0; overflow-x: auto;}
+        .result { background: #14532d; border: 1px solid #22c55e; padding: 10px 14px; border-radius: 8px; margin: 10px 0; color: #86efac; font-weight: 600; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; border-radius: 10px; overflow: hidden; }
+        th { background: linear-gradient(135deg, #10b981, #059669); color: #fff; padding: 10px; font-size: .9em; }
+        td { padding: 8px 10px; border: 1px solid #2d2d4a; background: #1a1a30; font-size: .9em; text-align: center; }
+        tr:nth-child(even) td { background: #1f1f3a; }
+        pre { background: #111128; padding: 14px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; color: #93c5fd; font-size: 0.95em; margin: 10px 0; border: 1px solid #2d2d4a; }
+        .warn { background: #451a03; border-left: 4px solid #f59e0b; padding: 10px 14px; border-radius: 0 10px 10px 0; margin: 12px 0; color: #fde68a; font-size: .95em; }
+    </style>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <h1>🚀 DAA Board Question 2079 — Solved</h1>
+    <p class="subtitle">Design and Analysis of Algorithms (CSC314)</p>
+
+    <div class="group-hdr">📋 SECTION A — 10 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q1</span><span class="marks">10 marks</span>
+        <div class="q-title">Divide & Conquer and Median-of-Medians Selection</div>
+        
+        <h4>A. Divide and Conquer Strategy</h4>
+        <p>A recursive problem-solving paradigm that breaks a problem into smaller subproblems, solves them, and combines their solutions. It has three steps:</p>
+        <ol>
+            <li><b>Divide:</b> Break the problem into \( k \) smaller, independent subproblems.</li>
+            <li><b>Conquer:</b> Solve the subproblems recursively. If they are small enough, solve them as base cases.</li>
+            <li><b>Combine:</b> Merge the solutions of the subproblems into the solution for the original problem.</li>
+        </ol>
+
+        <h4>B. Worst-Case Linear Time Selection (Median-of-Medians)</h4>
+        <div class="def">
+            The standard QuickSelect algorithm has a worst-case time complexity of \( O(n^2) \) if the pivot is chosen poorly. The <b>Median-of-Medians</b> algorithm guarantees a good pivot, achieving an \( O(n) \) worst-case time complexity.
+        </div>
+        <pre><code>Algorithm Select(A, k):
+1. Divide the n elements into groups of 5.
+2. Find the median of each group (using insertion sort).
+3. Recursively call Select() on the array of n/5 medians to find the "median of medians" (M).
+4. Partition array A around the pivot M. Let M end up at index q. Let rank = q - left + 1.
+5. If k == rank: return M
+   If k < rank: return Select(A[left..q-1], k)
+   If k > rank: return Select(A[q+1..right], k - rank)</code></pre>
+
+        <h4>Complexity Analysis</h4>
+        <p>The recurrence relation is: <b>\( T(n) \leq T(n/5) + T(7n/10) + O(n) \)</b></p>
+        <p>This is because finding the median of medians takes \( T(n/5) \). The chosen pivot guarantees that at least \( 3/10 \) of the elements are smaller/larger than it, meaning the maximum size of the recursive partition call is \( 7n/10 \). Solving this recurrence yields <b>\( O(n) \)</b>.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q2</span><span class="marks">10 marks</span>
+        <div class="q-title">Matrix Chain Multiplication (ABCD)</div>
+
+        <h4>A. DP Algorithm for Matrix Chain Multiplication</h4>
+        <pre><code>Algorithm MatrixChainOrder(p):
+  n = length(p) - 1
+  Let M[1..n, 1..n] and S[1..n, 1..n] be new tables
+  For i = 1 to n: M[i, i] = 0
+  For L = 2 to n: // chain length
+      For i = 1 to n - L + 1:
+          j = i + L - 1
+          M[i, j] = INFINITY
+          For k = i to j - 1:
+              q = M[i, k] + M[k+1, j] + p[i-1]*p[k]*p[j]
+              if q < M[i, j]:
+                  M[i, j] = q
+                  S[i, j] = k
+  return M and S</code></pre>
+
+        <h4>B. Solve for ABCD (A:5x10, B:10x5, C:5x20, D:20x30)</h4>
+        <div class="solve">
+            <p>Dimension array <b>\( P = [5, 10, 5, 20, 30] \)</b></p>
+            <p><b>Chain Length L=2:</b></p>
+            <p>\( M[1,2] = A \times B = 5 \times 10 \times 5 = 250 \)</p>
+            <p>\( M[2,3] = B \times C = 10 \times 5 \times 20 = 1000 \)</p>
+            <p>\( M[3,4] = C \times D = 5 \times 20 \times 30 = 3000 \)</p>
+
+            <p><b>Chain Length L=3:</b></p>
+            <p>\( M[1,3] = \min(M[1,1]+M[2,3]+P_0P_1P_3, M[1,2]+M[3,3]+P_0P_2P_3) \)</p>
+            <p>\( = \min(0 + 1000 + 5 \cdot 10 \cdot 20,\ 250 + 0 + 5 \cdot 5 \cdot 20) \)</p>
+            <p>\( = \min(1000 + 1000, 250 + 500) = \min(2000, 750) = 750 \) (Split at k=2)</p>
+
+            <p>\( M[2,4] = \min(M[2,2]+M[3,4]+P_1P_2P_4, M[2,3]+M[4,4]+P_1P_3P_4) \)</p>
+            <p>\( = \min(0 + 3000 + 10 \cdot 5 \cdot 30,\ 1000 + 0 + 10 \cdot 20 \cdot 30) \)</p>
+            <p>\( = \min(3000 + 1500, 1000 + 6000) = \min(4500, 7000) = 4500 \) (Split at k=2)</p>
+
+            <p><b>Chain Length L=4 (Final Answer M[1,4]):</b></p>
+            <p>\( M[1,4] = \min \begin{cases} 
+            k=1: M[1,1] + M[2,4] + P_0P_1P_4 = 0 + 4500 + (5 \times 10 \times 30) = 4500 + 1500 = 6000 \\ 
+            k=2: M[1,2] + M[3,4] + P_0P_2P_4 = 250 + 3000 + (5 \times 5 \times 30) = 3250 + 750 = 4000 \\ 
+            k=3: M[1,3] + M[4,4] + P_0P_3P_4 = 750 + 0 + (5 \times 20 \times 30) = 750 + 3000 = 3750 
+            \end{cases} \)</p>
+            <p>Minimum is 3750, occurring at \( k=3 \).</p>
+        </div>
+        <div class="result">Minimum Cost = 3750. Optimal Parenthesization: ((AB)C)D</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q3</span><span class="marks">10 marks</span>
+        <div class="q-title">Backtracking 0-1 Knapsack</div>
+        <h4>A. What is Backtracking?</h4>
+        <p>An algorithmic technique that explores the state-space tree depth-first. It builds solutions incrementally and abandons (backtracks) paths that violate constraints or cannot possibly yield an optimal solution, using a <b>bounding function</b>. This makes it faster than brute-force.</p>
+
+        <h4>B. 0-1 Knapsack Trace (W=10)</h4>
+        <p>Items: \( w_1=2(p_1=3), w_2=3(p_2=5), w_3=4(p_3=6), w_4=5(p_4=10) \)</p>
+        <div class="solve">
+            <p><b>Step 1:</b> Calculate Profit/Weight density and sort descending (for bounding function).</p>
+            <p>10/5=2.0 (I4), 5/3=1.66 (I2), 3/2=1.5 (I1), 6/4=1.5 (I3).</p>
+            <p>Sorted Order: I4(5kg,$10), I2(3kg,$5), I1(2kg,$3), I3(4kg,$6).</p>
+            <p><b>Step 2:</b> Build State-Space Tree with capacity W=10.</p>
+            <ul>
+                <li>Take I4 (wt=5, p=10). Remaining cap=5.</li>
+                <li>Take I2 (wt=5+3=8, p=15). Remaining cap=2.</li>
+                <li>Take I1 (wt=8+2=10, p=18). Remaining cap=0.</li>
+                <li>Cannot take I3 (wt=10+4=14 > 10). Backtrack.</li>
+                <li>Exclude I1. Take I3? (wt=8+4=12 > 10). Backtrack.</li>
+                <li>Exclude I2. Take I1 (wt=5+2=7, p=13). Take I3 (wt=7+4=11 > 10). Backtrack.</li>
+            </ul>
+            <p>Through systematic exploration, the max profit path is including I4, I2, and I1.</p>
+        </div>
+        <div class="result">Maximum Profit = 18. Items chosen: I4(5kg), I2(3kg), I1(2kg)</div>
+    </div>
+
+    <div class="group-hdr">📋 SECTION B — 5 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q4</span><span class="marks">5 marks</span>
+        <div class="q-title">Iterative GCD Algorithm (Euclidean)</div>
+        <pre><code>Algorithm IterativeGCD(a, b):
+  while b ≠ 0
+      temp = b
+      b = a mod b
+      a = temp
+  return a</code></pre>
+        <p><b>Time Complexity:</b> <b>\( O(\log(\min(a,b))) \)</b>. In the worst case (Fibonacci numbers), the remainder reduces by at least half every two steps.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q5</span><span class="marks">5 marks</span>
+        <div class="q-title">Huffman Algorithm for "CYBER CRIME"</div>
+        <div class="solve">
+            <p><b>1. Frequencies:</b> C=2, R=2, E=2, Space=1, Y=1, B=1, I=1, M=1. Total length = 11 chars.</p>
+            <p><b>2. Build Tree (Merging smallest pairs):</b></p>
+            <ul>
+                <li>Merge B(1), I(1) → N1(2)</li>
+                <li>Merge Y(1), M(1) → N2(2)</li>
+                <li>Merge Space(1), C(2) → N3(3)</li>
+                <li>Merge R(2), E(2) → N4(4)</li>
+                <li>Merge N1(2), N2(2) → N5(4)</li>
+                <li>Merge N3(3), N4(4) → N6(7)</li>
+                <li>Merge N5(4), N6(7) → Root(11)</li>
+            </ul>
+            <p><i>Note: Multiple valid trees exist depending on tie-breaking rules. Code length remains optimal.</i></p>
+            <p><b>3. Total Bits:</b> Original ASCII (11 chars × 8 bits = 88 bits). With Huffman, frequent characters get shorter codes. Multiply each character's frequency by its tree depth.</p>
+        </div>
+        <div class="result">Total Bits required ≈ 33 bits (depending on exact tree structure tie-breaks)</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q6</span><span class="marks">5 marks</span>
+        <div class="q-title">Tractable vs Intractable & Vertex Cover</div>
+        <ul>
+            <li><b>Tractable Problem:</b> A problem that can be solved by a polynomial-time algorithm (e.g., \( O(n), O(n \log n), O(n^2) \)). Belong to Class P. Example: Sorting.</li>
+            <li><b>Intractable Problem:</b> A problem for which no polynomial-time algorithm exists (they require exponential time \( O(2^n), O(n!) \)). Belong to NP-Complete/NP-Hard.</li>
+        </ul>
+        <p><b>Vertex Cover Problem:</b> Given a graph G, find the minimum number of vertices such that every edge in the graph is connected to at least one of these vertices. Finding the exact minimum is intractable (NP-Complete).</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q7</span><span class="marks">5 marks</span>
+        <div class="q-title">Edit Distance: ARTIFICIAL vs NATURAL</div>
+        <div class="solve">
+            <p>Let's map transformations from ARTIFICIAL (len 10) to NATURAL (len 7):</p>
+            <ul>
+                <li>A → N (Substitute)</li>
+                <li>R → A (Substitute)</li>
+                <li>T → T (Match)</li>
+                <li>I → U (Substitute)</li>
+                <li>F → R (Substitute)</li>
+                <li>I → A (Substitute)</li>
+                <li>C → L (Substitute)</li>
+                <li>I, A, L → (Delete 3 chars)</li>
+            </ul>
+            <p>Alternative cheaper path (DP Table):</p>
+            <p>A R T I F I C I A L <br>
+               N A T U R . . . A L (aligning T, A, L)</p>
+        </div>
+        <div class="result">Edit Distance = 7 (e.g., 5 Substitutions, 2 Deletions)</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q8</span><span class="marks">5 marks</span>
+        <div class="q-title">Short Notes</div>
+        <h4>(a) Best, Worst, and Average Case</h4>
+        <ul>
+            <li><b>Best Case (\( \Omega \)):</b> Minimum time required for the most favorable input (e.g., Insertion Sort on sorted array).</li>
+            <li><b>Worst Case (O):</b> Maximum time required for the most unfavorable input (e.g., Quick Sort on sorted array).</li>
+            <li><b>Average Case (\( \Theta \)):</b> Expected time calculated over all possible inputs assuming uniform distribution.</li>
+        </ul>
+        <h4>(b) Greedy Strategy</h4>
+        <p>An algorithmic paradigm that builds up a solution piece by piece, always choosing the next piece that offers the most immediate (local) benefit. Used in Kruskal's, Prim's, Dijkstra's, and Fractional Knapsack.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q9</span><span class="marks">5 marks</span>
+        <div class="q-title">Master's Method</div>
+        <h4>(a) \( T(n) = 2T(n/4) + n^2 \)</h4>
+        <div class="solve">
+            <p>\( a=2, b=4, f(n)=O(n^2) \)</p>
+            <p>\( n^{\log_b a} = n^{\log_4 2} = n^{0.5} \)</p>
+            <p>Since \( f(n) = n^2 \) is polynomially larger than \( n^{0.5} \), we are in <b>Case 3</b>.</p>
+        </div>
+        <div class="result">Complexity: \( \Theta(n^2) \)</div>
+
+        <h4>(b) \( T(n) = 5T(n/4) + k \cdot n \)</h4>
+        <div class="solve">
+            <p>\( a=5, b=4, f(n)=O(n) \)</p>
+            <p>\( n^{\log_b a} = n^{\log_4 5} \approx n^{1.16} \)</p>
+            <p>Since \( f(n) = n^1 \) is polynomially smaller than \( n^{1.16} \), we are in <b>Case 1</b>.</p>
+        </div>
+        <div class="result">Complexity: \( \Theta(n^{\log_4 5}) \)</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q10</span><span class="marks">5 marks</span>
+        <div class="q-title">Chinese Remainder Theorem</div>
+        <div class="solve">
+            <p>Equations: \( x \equiv 1 \pmod 2 \), \( x \equiv 3 \pmod 5 \), \( x \equiv 6 \pmod 7 \).</p>
+            <p>\( M = 2 \times 5 \times 7 = 70 \).</p>
+            <p>\( M_1 = 35 \). Inverse \( y_1 \): \( 35y_1 \equiv 1 \pmod 2 \implies 1y_1 \equiv 1 \pmod 2 \implies y_1 = 1 \)</p>
+            <p>\( M_2 = 14 \). Inverse \( y_2 \): \( 14y_2 \equiv 1 \pmod 5 \implies 4y_2 \equiv 1 \pmod 5 \implies y_2 = 4 \)</p>
+            <p>\( M_3 = 10 \). Inverse \( y_3 \): \( 10y_3 \equiv 1 \pmod 7 \implies 3y_3 \equiv 1 \pmod 7 \implies y_3 = 5 \)</p>
+            <p>\( x = (1 \cdot 35 \cdot 1 + 3 \cdot 14 \cdot 4 + 6 \cdot 10 \cdot 5) \pmod{70} \)</p>
+            <p>\( x = (35 + 168 + 300) \pmod{70} = 503 \pmod{70} \)</p>
+            <p>\( 503 / 70 = 7 \) remainder \( 13 \).</p>
+        </div>
+        <div class="result">x = 13</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q11</span><span class="marks">5 marks</span>
+        <div class="q-title">Kruskal's Algorithm for MST</div>
+        <div class="warn">⚠️ Note: Graph missing from transcript. Standard Algorithm logic provided below.</div>
+        <pre><code>Algorithm Kruskal(G):
+  A = empty set (will hold MST edges)
+  Sort edges of G in ascending order by weight
+  For each vertex v in G: Make-Set(v)
+  
+  For each edge (u, v) in sorted order:
+      if Find-Set(u) != Find-Set(v):  // no cycle formed
+          A = A U {(u, v)}
+          Union(u, v)
+  return A</code></pre>
+        <p><b>Concept:</b> Greedily picks the smallest weight edge across the entire graph that does not form a cycle. Uses Disjoint Set (Union-Find) data structure to detect cycles.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q12</span><span class="marks">5 marks</span>
+        <div class="q-title">Trace Quick Sort & Complexity</div>
+        <p><b>Array:</b> {15, 7, 5, 2, 13, 4, 25}. Pivot = 25 (last element).</p>
+        <div class="solve">
+            <p>1. Compare all to 25. All elements (15,7,5,2,13,4) are < 25. Pivot 25 swaps with itself. Left partition: {15, 7, 5, 2, 13, 4}. Right: Empty.</p>
+            <p>2. Partition {15, 7, 5, 2, 13, 4}. Pivot = 4. Only 2 is < 4. Swap 15 and 2. Array: {2, 7, 5, 15, 13, 4}. Swap 7 and 4. New: {2, <b>4</b>, 5, 15, 13, 7}.</p>
+            <p>3. Partition {5, 15, 13, 7}. Pivot = 7. 5 < 7. Swap 15 and 7. New: {5, <b>7</b>, 13, 15}.</p>
+            <p>4. Array fully sorted: {2, 4, 5, 7, 13, 15, 25}.</p>
+        </div>
+        <ul>
+            <li><b>Best Case Complexity:</b> \( O(n \log n) \) (Pivot divides array in equal halves)</li>
+            <li><b>Worst Case Complexity:</b> \( O(n^2) \) (Pivot is always largest/smallest, creating heavily unbalanced 0 and n-1 partitions).</li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Model Question - Solved</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e4e4e4;
+            line-height: 1.7;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d4ff;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .header-info {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        h2 {
+            color: #ff6b6b;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+        }
+
+        h3 {
+            color: #4ecdc4;
+            margin: 25px 0 15px;
+            padding: 10px;
+            background: rgba(78, 205, 196, 0.1);
+            border-left: 4px solid #4ecdc4;
+            border-radius: 0 8px 8px 0;
+        }
+
+        h4 {
+            color: #ffd93d;
+            margin: 20px 0 10px;
+        }
+
+        .question {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        ul,
+        ol {
+            margin: 10px 0 10px 25px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        code {
+            background: #2d2d44;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: #00ff88;
+        }
+
+        pre {
+            background: #1e1e30;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid #333;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+        }
+
+        .marks {
+            color: #ffd93d;
+            font-weight: bold;
+        }
+
+        .formula {
+            background: #2a2a40;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            margin: 10px 0;
+            border-left: 3px solid #ff6b6b;
+        }
+
+        .answer {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📚 DAA Model Question - Solved</h1>
+        <div class="header-info">
+            <strong>Full Marks: 60 | Pass Marks: 24 | Time: 3 hours</strong>
+        </div>
+
+        <h2>Section A <span class="marks">(2 × 10 = 20)</span></h2>
+
+        <div class="question">
+            <h3>Question 1: Algorithm Analysis, RAM Model, and Asymptotic Notations <span class="marks">(2+3+5)</span>
+            </h3>
+
+            <h4>Why Algorithm Analysis is Needed (2 marks)</h4>
+            <ul>
+                <li><strong>Performance Prediction:</strong> Helps predict how an algorithm will perform with different
+                    input sizes</li>
+                <li><strong>Algorithm Comparison:</strong> Allows comparison between different algorithms solving the
+                    same problem</li>
+                <li><strong>Resource Optimization:</strong> Helps in efficient utilization of time and memory resources
+                </li>
+                <li><strong>Scalability Assessment:</strong> Determines if an algorithm is suitable for large-scale
+                    applications</li>
+            </ul>
+
+            <h4>RAM Model (3 marks)</h4>
+            <p>The <strong>Random Access Machine (RAM)</strong> model is a theoretical model used for algorithm
+                analysis:</p>
+            <ul>
+                <li><strong>Sequential Execution:</strong> Instructions are executed one after another</li>
+                <li><strong>Simple Operations:</strong> Each simple operation takes constant time O(1)</li>
+                <li><strong>Memory Access:</strong> Accessing any memory location takes constant time</li>
+                <li><strong>No Concurrency:</strong> Single processor with no parallel operations</li>
+            </ul>
+
+            <h4>Asymptotic Notations (5 marks)</h4>
+
+            <p><strong>1. Big-O Notation (Upper Bound)</strong></p>
+            <div class="formula">f(n) = O(g(n)) if f(n) ≤ c·g(n) for all n ≥ n₀</div>
+            <p>Example: f(n) = 3n² + 2n + 1 = O(n²). Represents <strong>worst-case</strong> time complexity.</p>
+
+            <p><strong>2. Big-Ω (Omega) Notation (Lower Bound)</strong></p>
+            <div class="formula">f(n) = Ω(g(n)) if f(n) ≥ c·g(n) for all n ≥ n₀</div>
+            <p>Example: f(n) = 3n² + 2n + 1 = Ω(n²). Represents <strong>best-case</strong> time complexity.</p>
+
+            <p><strong>3. Big-Θ (Theta) Notation (Tight Bound)</strong></p>
+            <div class="formula">f(n) = Θ(g(n)) if f(n) = O(g(n)) and f(n) = Ω(g(n))</div>
+            <p>Example: f(n) = 3n² + 2n + 1 = Θ(n²). Represents <strong>average-case</strong> or exact growth rate.</p>
+        </div>
+
+        <div class="question">
+            <h3>Question 2: Order Statistics and Worst-Case Linear Time Selection <span class="marks">(2+8)</span></h3>
+
+            <h4>Order Statistics (2 marks)</h4>
+            <ul>
+                <li><strong>Definition:</strong> The ith order statistic is the ith smallest element</li>
+                <li><strong>Minimum:</strong> 1st order statistic (i = 1)</li>
+                <li><strong>Maximum:</strong> nth order statistic (i = n)</li>
+                <li><strong>Median:</strong> Middle element; for odd n: (n+1)/2 th element</li>
+            </ul>
+
+            <h4>Worst-Case Linear Time Selection Algorithm (8 marks)</h4>
+            <pre><code>SELECT(A, p, r, i):
+1. Divide n elements into groups of 5
+2. Find median of each group by sorting
+3. Recursively find median of medians (x)
+4. Partition array around x
+5. Let k = rank of x
+6. If i = k, return x
+7. If i < k, recurse in left partition
+8. If i > k, recurse in right partition</code></pre>
+
+            <p><strong>Time Complexity:</strong></p>
+            <div class="formula">T(n) = T(n/5) + T(7n/10) + O(n) = <span class="answer">O(n)</span></div>
+        </div>
+
+        <div class="question">
+            <h3>Question 3: Dynamic Programming and Floyd-Warshall <span class="marks">(4+6)</span></h3>
+
+            <h4>Dynamic Programming Approach (4 marks)</h4>
+            <p>DP solves complex problems by breaking them into overlapping subproblems and storing solutions.</p>
+
+            <table>
+                <tr>
+                    <th>Recursion</th>
+                    <th>Dynamic Programming</th>
+                </tr>
+                <tr>
+                    <td>Top-down approach</td>
+                    <td>Bottom-up approach</td>
+                </tr>
+                <tr>
+                    <td>May solve same subproblem multiple times</td>
+                    <td>Stores solutions (memoization)</td>
+                </tr>
+                <tr>
+                    <td>Can be exponential</td>
+                    <td>Polynomial time</td>
+                </tr>
+            </table>
+
+            <h4>Floyd-Warshall Algorithm (6 marks)</h4>
+            <pre><code>FLOYD-WARSHALL(W):
+    n = W.rows
+    D⁰ = W
+    for k = 1 to n:
+        for i = 1 to n:
+            for j = 1 to n:
+                d[i][j]ᵏ = min(d[i][j]ᵏ⁻¹, d[i][k]ᵏ⁻¹ + d[k][j]ᵏ⁻¹)
+    return Dⁿ</code></pre>
+            <p><strong>Time Complexity:</strong> <span class="answer">O(n³)</span></p>
+        </div>
+
+        <hr>
+
+        <h2>Section B <span class="marks">(8 × 5 = 40)</span></h2>
+
+        <div class="question">
+            <h3>Q4: Binary Search with Divide and Conquer <span class="marks">(5)</span></h3>
+            <pre><code>BINARY-SEARCH(A, low, high, key):
+    if low > high: return -1
+    mid = (low + high) / 2
+    if A[mid] == key: return mid
+    else if A[mid] > key:
+        return BINARY-SEARCH(A, low, mid-1, key)
+    else:
+        return BINARY-SEARCH(A, mid+1, high, key)</code></pre>
+            <p><strong>Time Complexity:</strong> <span class="answer">O(log n)</span></p>
+        </div>
+
+        <div class="question">
+            <h3>Q5: Master Method for Recurrences <span class="marks">(2.5+2.5)</span></h3>
+
+            <p><strong>a) T(n) = 3T(n/2) + n</strong></p>
+            <ul>
+                <li>a = 3, b = 2, f(n) = n</li>
+                <li>n^(log₂3) = n^1.585</li>
+                <li>Case 1 applies: <span class="answer">T(n) = Θ(n^1.585)</span></li>
+            </ul>
+
+            <p><strong>b) T(n) = 2T(n/4) + √n</strong></p>
+            <ul>
+                <li>a = 2, b = 4, f(n) = √n</li>
+                <li>n^(log₄2) = n^0.5</li>
+                <li>Case 2 applies: <span class="answer">T(n) = Θ(√n · log n)</span></li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <h3>Q6: Prefix Code and Huffman Algorithm <span class="marks">(5)</span></h3>
+            <p><strong>Prefix Code:</strong> A code where no codeword is a prefix of another (ensures unique
+                decodability).</p>
+            <pre><code>HUFFMAN(C):
+    Q = min priority queue of C
+    for i = 1 to n-1:
+        z = new node
+        z.left = EXTRACT-MIN(Q)
+        z.right = EXTRACT-MIN(Q)
+        z.freq = z.left.freq + z.right.freq
+        INSERT(Q, z)
+    return EXTRACT-MIN(Q)</code></pre>
+        </div>
+
+        <div class="question">
+            <h3>Q7: Insertion Sort <span class="marks">(5)</span></h3>
+            <pre><code>INSERTION-SORT(A):
+    for j = 2 to A.length:
+        key = A[j]
+        i = j - 1
+        while i > 0 and A[i] > key:
+            A[i+1] = A[i]
+            i = i - 1
+        A[i+1] = key</code></pre>
+            <p><strong>Best: O(n)</strong> | <strong>Worst: O(n²)</strong> | <strong>Average: O(n²)</strong></p>
+        </div>
+
+        <div class="question">
+            <h3>Q8: Memoization vs Dynamic Programming <span class="marks">(5)</span></h3>
+            <table>
+                <tr>
+                    <th>Memoization</th>
+                    <th>Dynamic Programming</th>
+                </tr>
+                <tr>
+                    <td>Top-down approach</td>
+                    <td>Bottom-up approach</td>
+                </tr>
+                <tr>
+                    <td>Recursive with caching</td>
+                    <td>Iterative with table</td>
+                </tr>
+                <tr>
+                    <td>Solves only needed subproblems</td>
+                    <td>Solves all subproblems</td>
+                </tr>
+                <tr>
+                    <td>Uses recursion stack</td>
+                    <td>No recursion overhead</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            <h3>Q9: Backtracking <span class="marks">(5)</span></h3>
+            <p>Backtracking systematically tries different decisions until finding a valid solution, undoing choices
+                that lead to dead ends.</p>
+            <pre><code>N-QUEENS(board, col):
+    if col >= N: return true
+    for row = 0 to N-1:
+        if isSafe(board, row, col):
+            board[row][col] = 1
+            if SOLVE(board, col+1): return true
+            board[row][col] = 0  // Backtrack
+    return false</code></pre>
+        </div>
+
+        <div class="question">
+            <h3>Q10: Euclid's Method for Modular Equations <span class="marks">(5)</span></h3>
+            <p><strong>Problem:</strong> Solve ax ≡ b (mod n)</p>
+            <p><strong>Example:</strong> Solve 14x ≡ 30 (mod 100)</p>
+            <ol>
+                <li>gcd(14, 100) = 2, since 2|30, solution exists</li>
+                <li>Extended GCD: 14(-7) + 100(1) = 2</li>
+                <li>Multiply by 15: x ≡ -105 ≡ <span class="answer">45 (mod 50)</span></li>
+            </ol>
+        </div>
+
+        <div class="question">
+            <h3>Q11: Complexity Classes P, NP, NP-Complete <span class="marks">(5)</span></h3>
+            <ul>
+                <li><strong>P:</strong> Problems solvable in polynomial time O(n^k). Ex: Sorting, searching</li>
+                <li><strong>NP:</strong> Problems whose solutions can be verified in polynomial time. Ex: SAT,
+                    Hamiltonian cycle</li>
+                <li><strong>NP-Complete:</strong> Hardest problems in NP. Every NP problem reduces to them. Ex: 3-SAT,
+                    Vertex Cover</li>
+            </ul>
+            <p><strong>Relationship:</strong> P ⊆ NP, NP-Complete ⊆ NP</p>
+        </div>
+
+        <div class="question">
+            <h3>Q12: Short Notes <span class="marks">(2.5+2.5)</span></h3>
+
+            <h4>a) Tractable and Intractable Problems</h4>
+            <ul>
+                <li><strong>Tractable:</strong> Solvable in polynomial time (P class). Practical for large inputs.</li>
+                <li><strong>Intractable:</strong> Require super-polynomial time. Not practical for large inputs.</li>
+            </ul>
+
+            <h4>b) Approximation Algorithms</h4>
+            <ul>
+                <li>Find near-optimal solutions for NP-hard problems</li>
+                <li>Provide performance guarantee (approximation ratio)</li>
+                <li>Example: Vertex Cover 2-approximation</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

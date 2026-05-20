@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Viva: Exhaustive Simple Questions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #475569;
+            --bg-color: #f1f5f9;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        header {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.3;
+            animation: moveBg 30s linear infinite;
+        }
+        @keyframes moveBg {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            max-width: 900px;
+            margin: -3rem auto 3rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+            border-left: 6px solid var(--secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            border-left-width: 10px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.35rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            background-color: var(--light);
+            color: var(--primary);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .question {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        .answer {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            position: relative;
+        }
+        .answer p {
+            margin-bottom: 0.75rem;
+        }
+        .answer p:last-child {
+            margin-bottom: 0;
+        }
+        .highlight {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--secondary);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .nav-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .unit-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin: 3rem 0 1.5rem;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DAA Viva: Exhaustive Simple Questions</h1>
+        <p class="subtitle">A comprehensive list of fundamental questions covering every unit of your syllabus.</p>
+    </header>
+    
+    <div class="container">
+        <div class="nav-links">
+            <a href="daa_viva_simple.html" class="nav-link active">1. Simple Recurring</a>
+            <a href="daa_viva_advanced.html" class="nav-link ">2. Advanced Syllabus</a>
+            <a href="daa_viva_out_of_box.html" class="nav-link ">3. Out of the Box</a>
+        </div>
+        
+        <h2 class='unit-header'>Unit 1: Foundation</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">What is an algorithm?</div>
+            <div class="answer"><p>An algorithm is a finite set of instructions that, if followed, accomplishes a particular task. It must have Input, Output, Definiteness, Finiteness, and Effectiveness.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">What is the RAM model in algorithm analysis?</div>
+            <div class="answer"><p>The Random Access Machine (RAM) model is a theoretical machine used to analyze algorithms. In this model, instructions are executed one after another, and each basic operation (like +, -, *, /, memory access) takes exactly one step (or constant time).</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">Define Time Complexity and Space Complexity.</div>
+            <div class="answer"><p>Time complexity is the total time required by the algorithm to run as a function of the input size. Space complexity is the total memory space required by the algorithm to run as a function of the input size.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">What is Big-O notation?</div>
+            <div class="answer"><p>Big-O notation represents the upper bound of the running time of an algorithm. It gives the worst-case complexity, meaning the algorithm will take no more time than this.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">What is Big-Omega (Ω) notation?</div>
+            <div class="answer"><p>Big-Omega notation represents the lower bound of the running time. It gives the best-case complexity, meaning the algorithm will take at least this much time.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">What is Big-Theta (Θ) notation?</div>
+            <div class="answer"><p>Big-Theta represents both the upper and lower bounds. It means the algorithm's running time grows exactly at the same rate as the function, providing a tight bound.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">What is a Recurrence Relation?</div>
+            <div class="answer"><p>It is an equation or inequality that describes a function in terms of its value on smaller inputs. Used to define the time complexity of recursive algorithms.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">Name the methods to solve Recurrence Relations.</div>
+            <div class="answer"><p>1. Substitution Method
+2. Recursion Tree Method
+3. Master Method</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 2: Iterative</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 2: Iterative</span>
+            <div class="question">What is the time complexity of GCD using Euclid's algorithm?</div>
+            <div class="answer"><p>The time complexity is <span class='highlight'>O(log(min(a, b)))</span>.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 2: Iterative</span>
+            <div class="question">What is Sequential Search (Linear Search) and its time complexity?</div>
+            <div class="answer"><p>It is a basic search algorithm that checks every element in a list one by one until the target is found. Time complexity is <span class='highlight'>O(n)</span>.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 2: Iterative</span>
+            <div class="question">What is Bubble Sort?</div>
+            <div class="answer"><p>A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. Complexity is <span class='highlight'>O(n²)</span>.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 2: Iterative</span>
+            <div class="question">What is Selection Sort?</div>
+            <div class="answer"><p>It divides the list into a sorted and an unsorted region. It repeatedly selects the smallest element from the unsorted region and swaps it with the leftmost unsorted element. Complexity is <span class='highlight'>O(n²)</span>.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 2: Iterative</span>
+            <div class="question">What is Insertion Sort?</div>
+            <div class="answer"><p>It builds the final sorted array one item at a time by picking elements from the unsorted part and inserting them at their correct position in the sorted part. Complexity is <span class='highlight'>O(n²)</span>.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 3: Divide & Conquer</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 3: Divide & Conquer</span>
+            <div class="question">What are the three steps in Divide and Conquer?</div>
+            <div class="answer"><p>1. Divide: Break the problem into smaller subproblems.
+2. Conquer: Solve subproblems recursively.
+3. Combine: Merge the subproblem solutions to form the final solution.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 3: Divide & Conquer</span>
+            <div class="question">What is the time complexity of Binary Search?</div>
+            <div class="answer"><p>Best case: <span class='highlight'>O(1)</span>. Average and Worst case: <span class='highlight'>O(log n)</span>.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 3: Divide & Conquer</span>
+            <div class="question">What is the recurrence relation for Merge Sort?</div>
+            <div class="answer"><p><span class='highlight'>T(n) = 2T(n/2) + O(n)</span>. It solves to <span class='highlight'>O(n log n)</span>.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 3: Divide & Conquer</span>
+            <div class="question">How does Quick Sort work?</div>
+            <div class="answer"><p>It picks an element as pivot and partitions the given array around the picked pivot by placing smaller elements to the left and larger to the right, then recursively applies this to the sub-arrays.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 3: Divide & Conquer</span>
+            <div class="question">What is the worst-case and best-case time complexity of Quick Sort?</div>
+            <div class="answer"><p>Best case: <span class='highlight'>O(n log n)</span>. Worst case: <span class='highlight'>O(n²)</span> (when array is already sorted or reverse sorted).</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 3: Divide & Conquer</span>
+            <div class="question">What is Heap Sort?</div>
+            <div class="answer"><p>A comparison-based sorting algorithm based on Binary Heap data structure. First, we build a Max-Heap from the data, then repeatedly extract the maximum element and place it at the end of the array. Complexity: <span class='highlight'>O(n log n)</span>.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 4: Greedy</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 4: Greedy</span>
+            <div class="question">What is a Greedy Algorithm?</div>
+            <div class="answer"><p>An algorithmic paradigm that builds up a solution piece by piece, always choosing the next piece that offers the most immediate (local) benefit, aiming for a global optimum.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 4: Greedy</span>
+            <div class="question">What is Fractional Knapsack problem?</div>
+            <div class="answer"><p>Given weights and values of n items, we need to put these items in a knapsack of capacity W to get the maximum total value. We are allowed to break items (take fractions). Solved using Greedy approach.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 4: Greedy</span>
+            <div class="question">What does Dijkstra's Algorithm do?</div>
+            <div class="answer"><p>It solves the single-source shortest path problem for a graph with non-negative edge weights, producing a shortest path tree.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 4: Greedy</span>
+            <div class="question">What are Kruskal's and Prim's Algorithms used for?</div>
+            <div class="answer"><p>They are Greedy algorithms used to find the Minimum Spanning Tree (MST) of a connected, undirected graph.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 4: Greedy</span>
+            <div class="question">What is Huffman Coding?</div>
+            <div class="answer"><p>A lossless data compression algorithm that assigns variable-length codes to input characters, with shorter codes assigned to more frequent characters. It uses a Greedy approach to build a prefix tree.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 5: Dynamic Programming</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 5: Dynamic Programming</span>
+            <div class="question">What is Dynamic Programming?</div>
+            <div class="answer"><p>A method for solving optimization problems by breaking them down into simpler overlapping subproblems and storing the results of these subproblems to avoid redundant computation.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 5: Dynamic Programming</span>
+            <div class="question">How is DP different from Divide and Conquer?</div>
+            <div class="answer"><p>Divide and Conquer breaks problems into independent subproblems. DP breaks problems into overlapping subproblems, meaning the same subproblems are solved repeatedly, so it stores their results (memoization/tabulation).</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 5: Dynamic Programming</span>
+            <div class="question">What is the 0/1 Knapsack Problem?</div>
+            <div class="answer"><p>Similar to fractional knapsack, but you cannot break items. You either take the whole item or leave it. It is solved using DP, not Greedy.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 5: Dynamic Programming</span>
+            <div class="question">What does Floyd Warshall algorithm find?</div>
+            <div class="answer"><p>It finds shortest paths between all pairs of vertices in a weighted graph. Complexity is <span class='highlight'>O(V³)</span>.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 6: Backtracking</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 6: Backtracking</span>
+            <div class="question">What is Backtracking?</div>
+            <div class="answer"><p>An algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, removing those solutions that fail to satisfy the constraints of the problem at any point in time (pruning).</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 6: Backtracking</span>
+            <div class="question">Name two classic problems solved by Backtracking.</div>
+            <div class="answer"><p>1. N-Queens Problem
+2. Subset-Sum Problem</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 7: Number Theoretic</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 7: Number Theoretic</span>
+            <div class="question">What does the Extended Euclidean Algorithm do?</div>
+            <div class="answer"><p>Besides finding the GCD of integers a and b, it also finds coefficients x and y such that <span class='highlight'>ax + by = gcd(a, b)</span>.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 7: Number Theoretic</span>
+            <div class="question">What is the Miller-Rabin test?</div>
+            <div class="answer"><p>A randomized primality test that determines whether a given number is likely prime or definitely composite.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 8: NP Completeness</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 8: NP Completeness</span>
+            <div class="question">Define Tractable and Intractable problems.</div>
+            <div class="answer"><p>Tractable problems can be solved in polynomial time (P). Intractable problems cannot be solved in polynomial time (they take super-polynomial/exponential time).</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 8: NP Completeness</span>
+            <div class="question">What is the class P?</div>
+            <div class="answer"><p>The set of decision problems that can be solved by a deterministic Turing machine in polynomial time.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 8: NP Completeness</span>
+            <div class="question">What is the class NP?</div>
+            <div class="answer"><p>The set of decision problems for which a 'yes' solution can be verified by a deterministic Turing machine in polynomial time (or solved by a non-deterministic Turing machine in polynomial time).</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 8: NP Completeness</span>
+            <div class="question">What is an NP-Complete problem?</div>
+            <div class="answer"><p>A problem is NP-Complete if it is in NP, and every other problem in NP can be reduced to it in polynomial time. (e.g., Boolean Satisfiability (SAT)).</p></div>
+        </div>
+    
+    </div>
+</body>
+</html>

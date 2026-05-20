@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 6 Detailed Notes</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 6: Backtracking</h1>
+    
+<h2>6.1 Concept of Backtracking</h2>
+<div class="box">
+    <p>Backtracking is an algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time. It uses a <strong>State Space Tree</strong> constraint mechanism. Unlike naive recursion which brute-forces absolutely all paths, if Backtracking determines that building on the current partial solution cannot possibly yield a valid solution, it abandons (<strong>prunes</strong>) it immediately, reversing the last action and moving backward to try a different path.</p>
+    <h3>Recursion vs Backtracking</h3>
+    <ul>
+        <li><strong>Recursion:</strong> Computes the function calls indiscriminately until base cases are forcefully hit.</li>
+        <li><strong>Backtracking:</strong> Evaluates a boolean <em>Bounding Function (isSafe check)</em> before attempting the recursive step. If false, it completely ignores the entire subtree node branch!</li>
+    </ul>
+</div>
+
+<h2>6.2 Backtracking Algorithms</h2>
+<div class="box">
+    <h3>N-Queen Problem</h3>
+    <p>Given an N x N chessboard, place N Queens such that no two attack each other (not in same row, column, or diagonals).<br>
+    <strong>Strategy:</strong> Place Queen in column 1, row 1. Proceed to column 2. Try row 1 (attacked!), row 2 (attacked!), try row 3 (Safe). Place it. If column 3 fails for all rows, abandon column 2's placement, move column 2's queen down one row, and recompute!</p>
+
+    <h3>Subset-Sum Problem</h3>
+    <p>Given an array of integer values and a target Sum $M$, find all possible subsets that accurately sum to $M$.<br>
+    <strong>Bounding Function (Pruning):</strong> Let $S$ be the current running sum and $A[k]$ be the next element. If $(S + A[k] > M)$, immediately halt and prune. Do not explore the inclusion of $A[k]$. Also, ignore generating further subsets if adding every remaining element left in the array still yields $< M$.</p>
+
+    <h3>0/1 Knapsack via Backtracking</h3>
+    <p>Instead of DP Table, we explore the $2^N$ tree explicitly.<br>
+    <strong>Bounding Function:</strong> If adding the next item breaches maximum Weight $W$, prune the branch immediately. To optimize further, keep a `max_profit` global tracker. If the current accumulated profit + the optimistic remaining possible profit (if we mathematically took fractions of the rest) is ALREADY mathematically less than `max_profit`, prune the branch immediately because it's a dead end!</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 7 Advanced Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 7: P-Class Boundaries & Crypto Maths</h1>
+    
+<h2>Advanced Theoretical Analysis: AKS Primality & Crypto</h2>
+<div class="box">
+    <h3>Why is Miller-Rabin Probability Acceptable?</h3>
+    <p>If you generate a prime number for securing billions of dollars in a banking database using RSA, relying on a "probability" test seems dangerous. What if Miller-Rabin mistakenly flags a composite number as Prime (a false-positive) and the Bank's encryption key is structurally broken?</p>
+    <p>If the test is run 40 times natively ($k=40$), the probability of a false-positive is $4^{-40}$, which is approximately $\approx 8.27 \times 10^{-25}$. The chance of a stray cosmic ray flipping a memory transistor in the bank's CPU and corrupting the key physically is mathematically trillions of times higher than Miller-Rabin failing. Therefore, probabilistic testing is considered effectively absolute truth in the encryption industry.</p>
+
+    <h3>The AKS Primality Breakthrough (2002)</h3>
+    <p>For decades, Computer Science struggled to find a deterministic absolute proof test faster than Trial Division. Up until 2002, we relied solely on probabilistic tests (Miller-Rabin). Then three Indian researchers (Agrawal, Kayal, Saxena) dropped a bombshell paper proving definitively that <strong>"PRIMES is in P"</strong>!</p>
+    <p>The <strong>AKS Primality Test</strong> was the first algorithm to calculate deterministic prime identity entirely theoretically in unconditional polynomial time $O(\log^{12} N)$. While a historic computational breakthrough proving non-probabilistic P-class evaluation, the heavy math polynomials render it ironically <em>slower</em> than Miller-Rabin practically. But mathematically, its invention revolutionized understanding Polynomial Complexity Class boundaries!</p>
+</div>
+
+</body>
+</html>

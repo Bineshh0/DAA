@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 2 Questions</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}
+.container{max-width:900px;margin:0 auto}
+h1{font-size:1.8rem;background:linear-gradient(135deg,#6b9bff,#8eeaff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px;text-align:center}
+.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}
+h2{color:#6b9bff;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#6b9bff10;border-left:4px solid #6b9bff;border-radius:0 8px 8px 0}
+h3{color:#8eeaff;font-size:1.05rem;margin:20px 0 8px}
+h4{color:#aaccff;font-size:.95rem;margin:14px 0 6px}
+p{margin-bottom:10px;font-size:.92rem}
+ul,ol{padding-left:22px;margin-bottom:12px;font-size:.92rem}
+li{margin-bottom:6px}
+.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}
+.def strong{color:#8eeaff}
+.formula{background:#1a1020;border:1px solid #9b59b640;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#dda0dd}
+.table-wrap{overflow-x:auto;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{padding:10px;border:1px solid #1e1e30;text-align:left}
+th{background:#1a1a2e;color:#8eeaff;font-weight:600}
+tr:nth-child(even){background:#0e0e18}
+.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}
+.note strong{color:#6bcb77}
+.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.85rem}
+.warn strong{color:#ffd93d}
+.diagram{background:#0f0f1a;border:1px solid #4d96ff40;border-radius:10px;padding:16px;margin:14px 0;text-align:center;font-size:.85rem;color:#88aaff; white-space:pre}
+code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#ff8888}
+</style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>📘 Unit 2: Board Exam Past Papers</h1>
+        <p class="sub">Detailed Notes — CSC 314 Design and Analysis of Algorithms | Exam Orientated</p>
+        
+<!-- IMPORTANT QUESTIONS -->
+<h2>Unit 2 Board & Pre-board Analysis</h2>
+
+<div class="warn">
+    <strong>⚠️ Analytical Insight:</strong> The majority of structural board questions from Iterative Algorithms strictly revolve around explicitly defining the Insertion Sort algorithm and dissecting its operational boundaries. Selection/Bubble is almost completely ignored!
+</div>
+
+<div class="step">
+    <h3>Q1. Write the algorithm for insertion sort and explain its time complexity. (5 Marks) [Boards]</h3>
+    <br>
+    <strong>Requirement 1: Algorithm Code</strong>
+<pre>
+INSERTION-SORT(Array A)
+    for j = 1 to A.length - 1
+        key = A[j]
+        i = j - 1
+        
+        // Scan backward through sorted partition
+        while i >= 0 and A[i] > key
+            A[i + 1] = A[i]    // Shift elements right
+            i = i - 1
+            
+        A[i + 1] = key         // Insert explicitly into correct tier
+</pre>
+
+    <strong>Requirement 2: Complexity Analysis Derivation</strong>
+    <p>To acquire maximum marks, you absolutely MUST break the structural complexity bounds individually demonstrating algorithm adaptability.</p>
+    <ul>
+        <li><strong>Best Case Mathematical Analysis [$\Omega(N)$]</strong><br>
+        If the memory input vector is fully pre-sorted sequentially $[1, 2, 3, 4, 5]$, the fundamental evaluating while condition `A[i] > key` functionally evaluates to `False` entirely on the absolute first check every external iteration. No internal rightwards shifting executes physically. The secondary internal nested while-loop aborts instantly. Consequently, the external algorithm traverses natively precisely $N-1$ basic linear increments. Final theoretical constraint maps exactly to polynomial magnitude $\Omega(N)$.</li>
+        
+        <li><strong>Worst Case Mathematical Analysis [$O(N^2)$]</strong><br>
+        If the sequence structure vectors completely reverse $[9, 8, 7, 6, 5]$, when evaluating index $j$, the internal mechanism traces recursively fundamentally backwards completely evaluating and physically overwriting every singular element located spanning interval sequence $0$ to $j-1$. The absolute cumulative summation evaluates directly to structural form $1 + 2 + 3 + \dots + N-1$. Using Arithmetic sequence geometric mathematics, $Sum = N(N-1)/2$. Discarding static integers, we isolate structural limit $O(N^2)$.</li>
+        
+        <li><strong>Space Constraint Properties [$O(1)$]</strong><br>
+        Because memory overrides operate structurally strictly internally displacing index assignments in-place without generating cloned arrays explicitly, it completely functions natively inside $1$ constant allocation boundary. Space requirement resolves strictly to optimal scaling limit $O(1)$.</li>
+    </ul>
+</div>
+
+    </div>
+</body>
+</html>

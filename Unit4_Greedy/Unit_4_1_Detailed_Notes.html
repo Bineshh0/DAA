@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 4 Detailed Notes</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 4: Greedy Algorithms</h1>
+    
+<h2>4.1 Elements of Greedy Strategy</h2>
+<div class="box">
+    <p>A greedy algorithm makes the local optimal choice at every step with the hope that these local optimal choices will lead to a globally optimal solution. It never reconsiders previous choices (no backtracking).</p>
+    <ul>
+        <li><strong>Greedy Choice Property:</strong> A global optimum can be logically built by making a series of local optimum choices.</li>
+        <li><strong>Optimal Substructure:</strong> An optimal solution to the problem contains optimal solutions to its sub-problems.</li>
+    </ul>
+</div>
+
+<h2>4.2 Classic Greedy Algorithms</h2>
+<div class="box">
+    <h3>Fractional Knapsack</h3>
+    <p>We can take fractions of items. Strategy: Sort items descending by value-to-weight ratio (Value/Weight). Take as much of the highest ratio item as possible until the capacity is full.</p>
+    <p><strong>Complexity:</strong> $O(N \log N)$ strictly due to the prerequisite sorting.</p>
+
+    <h3>Job Sequencing with Deadlines</h3>
+    <p>Given $N$ jobs, each with a deadline and a profit (earned if completed before deadline), schedule them to maximize profit.</p>
+    <p><strong>Strategy:</strong> Sort jobs descending by profit. Track the days available using boolean slots. Always assign the job to the latest completely possible empty slot on or before its deadline.</p>
+
+    <h3>Prim's Algorithm (Minimum Spanning Tree)</h3>
+    <p>Starts from an arbitrary starting vertex. Keeps tracking the minimum weight edge that connects an unvisited vertex to the already visited MST set. Grabs the cheapest edge iteratively.</p>
+    <p><strong>Complexity:</strong> $O(E \log V)$ using a Min Priority Queue (Binary Heap).</p>
+
+    <h3>Kruskal's Algorithm (Minimum Spanning Tree)</h3>
+    <p>Considers Edges rather than vertices. Sorts all edges by strict ascending weight. Iteratively adds edges to the spanning forest as long as they don't form a Cycle.</p>
+    <p><strong>Complexity:</strong> $O(E \log E)$ due to sorting the edges, and requires a Disjoint-Set (Union-Find) data structure to verify cycles.</p>
+
+    <h3>Dijkstra's Shortest Path Algorithm</h3>
+    <p>Finds shortest paths from a single source vertex to all other vertices. Continually relaxes outward edges from the currently closest unvisited node.</p>
+    <p><strong>Complexity:</strong> $O((V+E) \log V)$ utilizing a Min-Heap. Extremely similar to Prim's, but it computes the *cumulative* distance from the source instead of just the edge weight itself.</p>
+</div>
+
+<h2>4.3 Huffman Coding (Prefix Codes)</h2>
+<div class="box">
+    <p>An optimal prefix-free binary encoding for data compression. Frequencies of characters determine their bit length (frequent characters get short paths, rare characters get long paths).</p>
+    <p>No code is a prefix of another (e.g. if '0' is `'a'`, no other code can start with '0').</p>
+    
+    <p><strong>Algorithm:</strong></p>
+    <ul>
+        <li>Sort characters as leaf nodes in a Min-Priority Queue by their occurrence frequency.</li>
+        <li>Extract the two lowest frequencies, merge them under a parent node with a combined frequency, and re-insert the parent back in.</li>
+        <li>Repeat until $1$ tree remains. Left branch paths = 0, Right branch paths = 1.</li>
+    </ul>
+    <p><strong>Complexity:</strong> $O(N \log N)$ to construct the tree.</p>
+</div>
+
+</body>
+</html>

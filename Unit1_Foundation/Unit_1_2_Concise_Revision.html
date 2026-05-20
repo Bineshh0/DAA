@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 1 Revision Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 1: Quick Revision</h1>
+    
+<h2>Summary: Foundation of Algorithm Analysis</h2>
+<ul>
+    <li><strong>Algorithm Properties:</strong> Finiteness, Definiteness, Input, Output, Effectiveness.</li>
+    <li><strong>RAM Model:</strong> Single processor, sequential execution, memory access = $O(1)$, operations = $O(1)$, ignores Cache/Hardware latency.</li>
+    <li><strong>Asymptotic Limits:</strong></li>
+    <ul>
+        <li>$O(g(n))$: Upper bound (Worst Case). $f(n) \le c \cdot g(n)$.</li>
+        <li>$\Omega(g(n))$: Lower bound (Best Case). $f(n) \ge c \cdot g(n)$.</li>
+        <li>$\Theta(g(n))$: Tight bound. $c_1 g(n) \le f(n) \le c_2 g(n)$.</li>
+    </ul>
+    <li><strong>Master Theorem:</strong> For $T(n) = aT(n/b) + f(n)$. Compare $f(n)$ with $n^{\log_b a}$.</li>
+    <ul>
+        <li>If $n^{\log_b a}$ is larger $\Rightarrow T(n) = \Theta(n^{\log_b a})$</li>
+        <li>If they are equal $\Rightarrow T(n) = \Theta(n^{\log_b a} \log n)$</li>
+        <li>If $f(n)$ is larger $\Rightarrow T(n) = \Theta(f(n))$</li>
+    </ul>
+    <li><strong>Recursion Tree:</strong> A visual tree of costs. Sum the costs across all levels to find total recurrence complexity. Used when Master Theorem doesn't perfectly fit.</li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Viva: Out of the Box Questions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ec4899;
+            --secondary: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #475569;
+            --bg-color: #f1f5f9;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        header {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.3;
+            animation: moveBg 30s linear infinite;
+        }
+        @keyframes moveBg {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            max-width: 900px;
+            margin: -3rem auto 3rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+            border-left: 6px solid var(--secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            border-left-width: 10px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.35rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            background-color: var(--light);
+            color: var(--primary);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .question {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        .answer {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            position: relative;
+        }
+        .answer p {
+            margin-bottom: 0.75rem;
+        }
+        .answer p:last-child {
+            margin-bottom: 0;
+        }
+        .highlight {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--secondary);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .nav-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .unit-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin: 3rem 0 1.5rem;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DAA Viva: Out of the Box Questions</h1>
+        <p class="subtitle">Tricky, application-based, edge-case, and critical thinking questions.</p>
+    </header>
+    
+    <div class="container">
+        <div class="nav-links">
+            <a href="daa_viva_simple.html" class="nav-link ">1. Simple Recurring</a>
+            <a href="daa_viva_advanced.html" class="nav-link ">2. Advanced Syllabus</a>
+            <a href="daa_viva_out_of_box.html" class="nav-link active">3. Out of the Box</a>
+        </div>
+        
+        
+        <div class="question-card">
+            <span class="tag">Concept Application</span>
+            <div class="question">Can Binary Search be used on an unsorted array?</div>
+            <div class="answer"><p>No. Binary Search strictly requires a monotonic property (usually sorted). Without it, we cannot safely discard half of the search space because the target element could be on either side.</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">Real World Algorithm</span>
+            <div class="question">In a real-world web server managing millions of connections, which sorting algorithm is used for the connection list?</div>
+            <div class="answer"><p>Usually none of the basic ones. They might use a highly tuned hybrid like Timsort (Merge + Insertion), or more likely, they use a data structure that keeps elements naturally sorted upon insertion, like a Balanced Binary Search Tree (Red-Black Tree) or a Priority Queue (Heap).</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">Edge Case: Dijkstra</span>
+            <div class="question">Why exactly does Dijkstra fail with negative weight edges?</div>
+            <div class="answer"><p>Dijkstra marks a node as 'visited/finalized' once it is popped from the priority queue, assuming no shorter path to it will ever be found. A negative edge can create a shortcut that makes a path shorter *after* a node has been finalized, violating Dijkstra's greedy assumption. Use Bellman-Ford instead.</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">Edge Case: DP</span>
+            <div class="question">Is Merge Sort a Dynamic Programming algorithm?</div>
+            <div class="answer"><p>No. While it uses Divide and Conquer, Merge Sort's subproblems are entirely independent; they do not overlap. You never sort the exact same sub-array twice. DP requires overlapping subproblems to benefit from memoization/tabulation.</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">Greedy vs DP</span>
+            <div class="question">If you are giving change for Rs. 40 using coins of Rs. 25, 20, 10, 5. Will the greedy algorithm work?</div>
+            <div class="answer"><p>No! Greedy would pick 25, then 10, then 5 (3 coins). But the optimal answer is two 20s (2 coins). This is why Greedy fails for general coin change, and we must use Dynamic Programming. Greedy only works for specific coin systems (like standard US/Nepal currency).</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">Complexity Tricks</span>
+            <div class="question">Is an O(2^n) algorithm always completely useless?</div>
+            <div class="answer"><p>Not entirely. For extremely small values of n (e.g., n < 20), an O(2^n) algorithm will run in fractions of a second. If the problem constraints guarantee that n will always be tiny, a brute force exponential algorithm is perfectly acceptable and often easier to write than a complex polynomial one.</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">NP-Hard Logic</span>
+            <div class="question">If someone claims they wrote an algorithm that solves the Travelling Salesman Problem (TSP) exactly in O(n^3) time, what does that imply?</div>
+            <div class="answer"><p>If true, it would be the greatest mathematical breakthrough of the century. TSP is NP-Hard. Solving it in polynomial time (<span class='highlight'>O(n^3)</span>) would prove that P = NP, meaning all NP problems (including cracking all modern encryption) could be solved efficiently.</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">Randomization</span>
+            <div class="question">Would you ever prefer a Randomized Algorithm in a critical life-support medical system?</div>
+            <div class="answer"><p>Usually, no. Medical systems require strict determinism and absolute worst-case guarantees. Even if a randomized algorithm is faster on average, the infinitesimally small chance of it hitting its worst-case (or failing) is unacceptable where human lives are at stake.</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">Memory vs Time</span>
+            <div class="question">What is a 'Space-Time Tradeoff'?</div>
+            <div class="answer"><p>It is the concept where you can reduce the time an algorithm takes by using more memory, or reduce memory usage by taking more time. Example: Dynamic Programming uses extra memory (tabulation arrays) to drastically reduce the time complexity from exponential to polynomial.</p></div>
+        </div>
+    
+
+        <div class="question-card">
+            <span class="tag">Graph Theory Application</span>
+            <div class="question">How does the Internet route packets? Which algorithm?</div>
+            <div class="answer"><p>Routing protocols like OSPF use Dijkstra's Algorithm to find the shortest path based on link bandwidth. BGP uses a distance-vector approach similar to the Bellman-Ford algorithm to find routes across different autonomous networks.</p></div>
+        </div>
+    
+    </div>
+</body>
+</html>

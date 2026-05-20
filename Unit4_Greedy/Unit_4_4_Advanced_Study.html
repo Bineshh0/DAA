@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 4 Advanced Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 4: Advanced Optimizations</h1>
+    
+<h2>Advanced Theoretical Analysis</h2>
+<div class="box">
+    <h3>Why does Greedy fail the discrete 0-1 Knapsack problem?</h3>
+    <p>Consider a Knapsack with Capacity 50. Items (Weight, Value): Item A (10, $60, Ratio 6), Item B (20, $100, Ratio 5), Item C (30, $120, Ratio 4).</p>
+    <p><strong>Greedy Choice:</strong> Picks highest ratio first. It will select Item A (Ratio 6). Weight used = 10, space left = 40. Then it picks Item B. Total weight = 30, space left = 20. It cannot fit Item C ($30 > 20$). The algorithm halts. <strong>Total Val: $160</strong>.</p>
+    <p><strong>Globally Optimal Reality:</strong> If it entirely ignored the "Greedy Metric" and skipped Item A completely, it could select Item B (20) and Item C (30). Total weight = 50. Capacity perfectly filled. <strong>Total Val: $220.</strong></p>
+    <p>Greedy assumes a fully fluid (fractional) continuum! If items are solid indivisible discrete chunks, one greedy action permanently locks out larger interlocking combinations.</p>
+
+    <h3>Modern World: Deflate & Huffman</h3>
+    <p>Huffman coding alone isn't used today. Instead, modern software relies on `DEFLATE`, the core algorithm powering `.ZIP` files, `.PNG` images, and HTTP web traffic. DEFLATE combines two algorithms:</p>
+    <ul>
+        <li><strong>LZ77:</strong> Eliminates duplicate recurring phrases in a file via sliding window pointers.</li>
+        <li><strong>Huffman Coding:</strong> Takes the result of LZ77 and compresses the alphabetic distribution. By stripping out grammatical duplicates first, the entropy drops severely, allowing the Greedy Huffman algorithm to build incredibly dense prefix trees compared to plain text!</li>
+    </ul>
+</div>
+
+</body>
+</html>

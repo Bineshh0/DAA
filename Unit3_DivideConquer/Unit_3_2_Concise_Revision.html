@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 3 Revision Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 3: Quick Revision</h1>
+    
+<h2>Summary: Divide and Conquer Algorithms</h2>
+<ul>
+    <li><strong>Concept:</strong> Divide $\rightarrow$ Conquer $\rightarrow$ Combine. Reduces time bounds exponentially.</li>
+    <li><strong>Binary Search:</strong> $O(\log N)$. Halves the scope. Array must be sorted.</li>
+    <li><strong>Merge Sort:</strong> $O(N \log N)$. Always splits array in exact half. Stable sort. Heavily memory dependent ($O(N)$ space required).</li>
+    <li><strong>Quick Sort:</strong> $O(N \log N)$ on average. In-place. Not stable. Vulnerable to $O(N^2)$ worst-case if pivot selection is skewed.</li>
+    <li><strong>Randomized Quicksort:</strong> Stops hackers from inputting adversarial edge cases by selecting the pivot via RNG. Averages $O(N \log N)$ guaranteed.</li>
+    <li><strong>Heap Sort:</strong> Creates complete binary tree using array indexes ($2i$ left, $2i+1$ right). Root is max. Constant Space $O(1)$, Time $O(N \log N)$.</li>
+    <li><strong>Min-Max:</strong> Divide & conquer reduces brute force comparisons from $2n-2$ to $3n/2 - 2$.</li>
+    <li><strong>Order Statistics (Worst Case Linear $O(N)$):</strong> The Median of Medians approach groups into 5s to avoid $O(N^2)$ QuickSelect crashes, guaranteeing 30/70 partitioning.</li>
+</ul>
+
+</body>
+</html>

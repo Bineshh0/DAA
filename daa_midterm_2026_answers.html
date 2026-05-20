@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAA Mid-Term 2026 - Answers</title>
+<style>
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.7; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #e94560; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #f0f0f0; padding: 10px 15px; border-left: 5px solid #0f3460; margin-top: 45px; }
+  h3 { color: #e94560; margin-top: 20px; border-bottom: 1px dashed #ccc; display: inline-block; padding-bottom: 3px; }
+  .group-label { text-align: center; font-size: 1.4em; font-weight: bold; color: #1a1a2e; margin-top: 40px; text-transform: uppercase; letter-spacing: 2px; }
+  .marks { float: right; color: #666; font-weight: normal; font-size: 0.85em; }
+  .box { background: #e8f4f8; padding: 12px 15px; border-left: 4px solid #0077b6; margin: 12px 0; border-radius: 4px; }
+  .answer-box { background: #e8f5e9; padding: 10px 15px; border-left: 4px solid #2e7d32; margin: 12px 0; font-weight: bold; border-radius: 4px; }
+  .math { font-family: 'Courier New', monospace; background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-weight: bold; color: #d62828; }
+  pre.pseudo { background: #1a1a2e; color: #e0e0e0; padding: 14px 18px; border-radius: 6px; font-size: 0.92em; line-height: 1.5; overflow-x: auto; margin: 10px 0; }
+  pre.pseudo .kw { color: #ff6b6b; font-weight: bold; }
+  pre.pseudo .fn { color: #4ecdc4; }
+  pre.pseudo .cm { color: #888; font-style: italic; }
+  ul, ol { margin-left: 18px; }
+  li { margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  th, td { border: 1px solid #ccc; padding: 7px 12px; text-align: center; }
+  th { background-color: #eee; }
+  .tree-level { margin: 4px 0; padding: 4px 0; }
+</style>
+</head>
+<body>
+
+<h1>Design and Analysis of Algorithms (CSC 325)<br>Mid-Term 2026 — Answers</h1>
+
+<!-- ===================== GROUP A ===================== -->
+<div class="group-label">Group A — Answer All Questions (2×10=20)</div>
+
+<!-- ===== Q1 ===== -->
+<h2>Q1. Heap Sort (Max-Heapify, Build-Max-Heap) + Analysis + Example <span class="marks">[6+4 = 10]</span></h2>
+
+<h3>Definition</h3>
+<p>Heap Sort is a comparison-based, in-place sorting algorithm that uses a <strong>binary max-heap</strong> data structure. It first builds a max-heap from the array, then repeatedly extracts the maximum element to produce a sorted array.</p>
+
+<h3>Module 1: Max-Heapify(A, i)</h3>
+<p>Maintains the max-heap property at node <em>i</em>. Assumes left and right subtrees are already max-heaps but A[i] may violate the property.</p>
+<pre class="pseudo">
+<span class="fn">MAX-HEAPIFY</span>(A, i):
+    l = LEFT(i)
+    r = RIGHT(i)
+    largest = i
+    <span class="kw">if</span> l ≤ heap-size[A] <span class="kw">and</span> A[l] > A[largest]
+        largest = l
+    <span class="kw">if</span> r ≤ heap-size[A] <span class="kw">and</span> A[r] > A[largest]
+        largest = r
+    <span class="kw">if</span> largest ≠ i
+        swap A[i] ↔ A[largest]
+        <span class="fn">MAX-HEAPIFY</span>(A, largest)  <span class="cm">// recurse down</span>
+</pre>
+<p><strong>Time Complexity:</strong> <span class="math">O(log n)</span> — proportional to the height of the heap.</p>
+
+<h3>Module 2: Build-Max-Heap(A)</h3>
+<p>Converts an unordered array into a max-heap by calling Max-Heapify bottom-up on all internal (non-leaf) nodes.</p>
+<pre class="pseudo">
+<span class="fn">BUILD-MAX-HEAP</span>(A):
+    heap-size[A] = length[A]
+    <span class="kw">for</span> i = ⌊length[A]/2⌋ <span class="kw">downto</span> 1
+        <span class="fn">MAX-HEAPIFY</span>(A, i)
+</pre>
+<p><strong>Time Complexity:</strong> <span class="math">O(n)</span> — tighter analysis shows it is linear, not O(n log n).</p>
+
+<h3>Module 3: Heap-Sort(A)</h3>
+<pre class="pseudo">
+<span class="fn">HEAP-SORT</span>(A):
+    <span class="fn">BUILD-MAX-HEAP</span>(A)
+    <span class="kw">for</span> i = length[A] <span class="kw">downto</span> 2
+        swap A[1] ↔ A[i]       <span class="cm">// move max to sorted end</span>
+        heap-size[A] = heap-size[A] - 1
+        <span class="fn">MAX-HEAPIFY</span>(A, 1)   <span class="cm">// restore heap</span>
+</pre>
+<p><strong>Overall Time Complexity:</strong> <span class="math">O(n log n)</span> — Build is O(n) + n-1 calls to Max-Heapify each O(log n).</p>
+
+<h3>Example: A = [4, 1, 3, 2, 16, 9]</h3>
+<div class="box">
+<strong>Step 1 — Build-Max-Heap:</strong><br>
+Start from i = 3 (⌊6/2⌋) down to 1, calling Max-Heapify:<br>
+• Heapify(A, 3): A[3]=3, children: 9. Swap 3↔9 → [4, 1, <b>9</b>, 2, 16, <b>3</b>]<br>
+• Heapify(A, 2): A[2]=1, children: 2, 16. Swap 1↔16 → [4, <b>16</b>, 9, 2, <b>1</b>, 3]<br>
+• Heapify(A, 1): A[1]=4, children: 16, 9. Swap 4↔16 → [<b>16</b>, <b>4</b>, 9, 2, 1, 3]. Then recurse: swap 4↔2? No. → [16, 4, 9, 2, 1, 3]<br>
+<strong>Max-Heap:</strong> [16, 4, 9, 2, 1, 3]<br><br>
+<strong>Step 2 — Extract & Sort:</strong><br>
+• Swap 16↔3 → [3, 4, 9, 2, 1 | <b>16</b>]. Heapify → [9, 4, 3, 2, 1]<br>
+• Swap 9↔1 → [1, 4, 3, 2 | <b>9, 16</b>]. Heapify → [4, 2, 3, 1]<br>
+• Continue... → Final sorted array: <strong>[1, 2, 3, 4, 9, 16]</strong>
+</div>
+
+
+<!-- ===== Q2 ===== -->
+<h2>Q2. Asymptotic Notation (Geometrical Interpretation + Inequality) and Merge Sort <span class="marks">[4+4+2 = 10]</span></h2>
+
+<h3>Asymptotic Notations</h3>
+<p>Asymptotic notations describe the growth rate of an algorithm's running time as input size n → ∞.</p>
+
+<table>
+<tr><th>Notation</th><th>Name</th><th>Inequality</th><th>Geometric Meaning</th></tr>
+<tr>
+  <td><strong>O (Big-O)</strong></td>
+  <td>Upper Bound</td>
+  <td><span class="math">0 ≤ f(n) ≤ c·g(n)</span>, ∀ n ≥ n₀</td>
+  <td>f(n) curve lies <em>on or below</em> c·g(n) after n₀. The c·g(n) line acts as a ceiling.</td>
+</tr>
+<tr>
+  <td><strong>Ω (Big-Omega)</strong></td>
+  <td>Lower Bound</td>
+  <td><span class="math">0 ≤ c·g(n) ≤ f(n)</span>, ∀ n ≥ n₀</td>
+  <td>f(n) curve lies <em>on or above</em> c·g(n) after n₀. The c·g(n) line acts as a floor.</td>
+</tr>
+<tr>
+  <td><strong>Θ (Big-Theta)</strong></td>
+  <td>Tight Bound</td>
+  <td><span class="math">0 ≤ c₁·g(n) ≤ f(n) ≤ c₂·g(n)</span>, ∀ n ≥ n₀</td>
+  <td>f(n) is <em>sandwiched</em> between two curves c₁·g(n) and c₂·g(n) after n₀.</td>
+</tr>
+</table>
+
+<p><strong>Example:</strong> If f(n) = 3n + 2, then f(n) = O(n) with c=4, n₀=2, since 3n+2 ≤ 4n for all n ≥ 2.</p>
+
+<h3>Merge Sort — Divide and Conquer</h3>
+<p>Merge Sort divides the array into two halves, recursively sorts each half, and then merges the two sorted halves.</p>
+<ul>
+  <li><strong>Divide:</strong> Split the array into two halves at midpoint.</li>
+  <li><strong>Conquer:</strong> Recursively sort both halves.</li>
+  <li><strong>Combine:</strong> Merge two sorted halves into one sorted array in O(n) time.</li>
+</ul>
+<p><strong>Recurrence:</strong> T(n) = 2T(n/2) + Θ(n) → <span class="math">T(n) = O(n log n)</span></p>
+
+<div class="box">
+<strong>Example: A = [38, 27, 43, 3]</strong><br><br>
+<strong>Divide Phase:</strong><br>
+[38, 27, 43, 3] → [38, 27] and [43, 3]<br>
+[38, 27] → [38] and [27] &nbsp;|&nbsp; [43, 3] → [43] and [3]<br><br>
+<strong>Merge Phase:</strong><br>
+Merge [38],[27] → compare 38 vs 27 → <strong>[27, 38]</strong><br>
+Merge [43],[3] → compare 43 vs 3 → <strong>[3, 43]</strong><br>
+Merge [27,38],[3,43] → 3, 27, 38, 43 → <strong>[3, 27, 38, 43]</strong> ✓
+</div>
+
+
+<!-- ===================== GROUP B ===================== -->
+<div class="group-label">Group B — Answer Any Four (4×5=20)</div>
+
+<!-- ===== Q3 ===== -->
+<h2>Q3. Define Recurrence Relation and Solve T(n) = 3T(n/4) + n² using Recursion Tree <span class="marks">[1+4 = 5]</span></h2>
+
+<h3>Definition</h3>
+<p>A <strong>recurrence relation</strong> is an equation that describes a function in terms of its value on smaller inputs. It is used to express the running time of recursive algorithms.</p>
+
+<h3>Recursion Tree Solution</h3>
+<p>Each node represents the non-recursive cost at that level. The root does n² work and spawns 3 subproblems of size n/4.</p>
+
+<div class="box">
+<div class="tree-level"><strong>Level 0 (root):</strong> 1 node → Cost = <span class="math">n²</span></div>
+<div class="tree-level"><strong>Level 1:</strong> 3 nodes, each (n/4)² → Cost = <span class="math">3·(n/4)² = (3/16)·n²</span></div>
+<div class="tree-level"><strong>Level 2:</strong> 9 nodes, each (n/16)² → Cost = <span class="math">9·(n/16)² = (3/16)²·n²</span></div>
+<div class="tree-level"><strong>Level i:</strong> 3ⁱ nodes → Cost = <span class="math">(3/16)ⁱ · n²</span></div>
+<div class="tree-level"><strong>Depth:</strong> Tree ends when n/4ⁱ = 1, i.e., depth = <span class="math">log₄ n</span></div>
+</div>
+
+<p><strong>Total cost:</strong> T(n) = n² · Σ (3/16)ⁱ for i = 0 to log₄n</p>
+<p>Since <strong>3/16 < 1</strong>, this is a <em>decreasing geometric series</em>. It converges to at most 1/(1 − 3/16) = 16/13, a constant.</p>
+
+<div class="answer-box">
+∴ T(n) = Θ(n²)<br>
+The root node dominates the total cost.
+</div>
+
+
+<!-- ===== Q4 ===== -->
+<h2>Q4. Explain Insertion Sort and Analyze the Complexity <span class="marks">[5]</span></h2>
+
+<h3>Algorithm</h3>
+<p>Insertion Sort works like <strong>sorting a hand of playing cards</strong>. You pick one card at a time and insert it into its correct position among the already-sorted cards on the left.</p>
+<pre class="pseudo">
+<span class="fn">INSERTION-SORT</span>(A):
+    <span class="kw">for</span> j = 2 <span class="kw">to</span> length[A]
+        key = A[j]          <span class="cm">// pick the card</span>
+        i = j - 1
+        <span class="kw">while</span> i > 0 <span class="kw">and</span> A[i] > key
+            A[i+1] = A[i]   <span class="cm">// shift larger elements right</span>
+            i = i - 1
+        A[i+1] = key         <span class="cm">// insert in correct position</span>
+</pre>
+
+<h3>Complexity Analysis</h3>
+<table>
+<tr><th>Case</th><th>Condition</th><th>Inner Loop Runs</th><th>Complexity</th></tr>
+<tr><td><strong>Best Case</strong></td><td>Already sorted</td><td>0 times (key is always ≥ A[i])</td><td><span class="math">O(n)</span></td></tr>
+<tr><td><strong>Worst Case</strong></td><td>Reverse sorted</td><td>1+2+...+(n-1) = n(n-1)/2</td><td><span class="math">O(n²)</span></td></tr>
+<tr><td><strong>Space</strong></td><td>In-place</td><td>—</td><td><span class="math">O(1)</span></td></tr>
+</table>
+
+
+<!-- ===== Q5 ===== -->
+<h2>Q5. Explain MST (Kruskal's Algorithm) with Example <span class="marks">[5]</span></h2>
+
+<h3>Minimum Spanning Tree (MST)</h3>
+<p>An MST of a connected, weighted, undirected graph is a subset of edges that connects <strong>all V vertices</strong> with <strong>minimum total weight</strong> and <strong>no cycles</strong>. It always has exactly <strong>V−1 edges</strong>.</p>
+
+<h3>Kruskal's Algorithm (Greedy)</h3>
+<ol>
+  <li><strong>Sort</strong> all edges by weight in ascending order.</li>
+  <li><strong>Pick</strong> the smallest edge. If adding it does NOT form a cycle (checked via <strong>Union-Find / Disjoint Set</strong>), include it in the MST.</li>
+  <li><strong>Repeat</strong> until MST has V−1 edges.</li>
+</ol>
+<p><strong>Time Complexity:</strong> <span class="math">O(E log E)</span> due to sorting edges.</p>
+
+<h3>Example</h3>
+<div class="box">
+<strong>Graph (4 vertices: A, B, C, D):</strong><br>
+Edges: A—B=1, A—C=4, B—C=2, B—D=6, C—D=3<br><br>
+<strong>Step 1 — Sort edges:</strong> A—B(1), B—C(2), C—D(3), A—C(4), B—D(6)<br><br>
+<strong>Step 2 — Greedy selection:</strong><br>
+• Pick A—B = 1. No cycle. MST = {A—B}. ✓<br>
+• Pick B—C = 2. No cycle. MST = {A—B, B—C}. ✓<br>
+• Pick C—D = 3. No cycle. MST = {A—B, B—C, C—D}. ✓<br>
+• V−1 = 3 edges reached. <strong>STOP.</strong><br><br>
+<strong>MST Total Weight = 1 + 2 + 3 = 6</strong><br>
+(Edges A—C and B—D are discarded.)
+</div>
+
+
+<!-- ===== Q6 ===== -->
+<h2>Q6. Explain Worst Case Complexity of Quick Sort <span class="marks">[3+2 = 5]</span></h2>
+
+<h3>Quick Sort Overview</h3>
+<p>Quick Sort uses Divide and Conquer. It selects a <strong>pivot</strong>, partitions the array such that elements ≤ pivot go left and elements > pivot go right, then recursively sorts both sides.</p>
+
+<h3>When Does Worst Case Occur?</h3>
+<p>The worst case happens when the partition is <strong>maximally unbalanced</strong> every time — i.e., the pivot is always the <strong>smallest or largest</strong> element. This consistently produces one subproblem of size <em>n−1</em> and another of size <em>0</em>.</p>
+<p><strong>Common trigger:</strong> Array is <strong>already sorted</strong> (or reverse sorted) and we naively pick the first or last element as pivot.</p>
+
+<h3>Complexity Derivation</h3>
+<div class="box">
+<strong>Recurrence:</strong><br>
+T(n) = T(n−1) + T(0) + Θ(n)<br>
+Since T(0) = Θ(1): <span class="math">T(n) = T(n−1) + Θ(n)</span><br><br>
+<strong>Expanding:</strong><br>
+T(n) = Θ(n) + Θ(n−1) + Θ(n−2) + ... + Θ(1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= Θ(n + (n−1) + (n−2) + ... + 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= Θ(n(n+1)/2)<br>
+</div>
+<div class="answer-box">Worst Case Time Complexity of Quick Sort = <span class="math">O(n²)</span></div>
+
+
+<!-- ===== Q7 ===== -->
+<h2>Q7. a. Aggregate Analysis &nbsp; b. RAM Model <span class="marks">[2.5 + 2.5 = 5]</span></h2>
+
+<h3>a. Aggregate Analysis</h3>
+<p>Aggregate Analysis is a method of <strong>amortized analysis</strong> that determines the average cost per operation over a worst-case sequence of <em>n</em> operations.</p>
+<ul>
+  <li>Instead of analyzing each operation independently, we compute the <strong>total cost T(n)</strong> for all n operations combined.</li>
+  <li>The <strong>amortized cost</strong> per operation = <span class="math">T(n) / n</span>.</li>
+  <li>This guarantees the average even in the worst case — it does NOT rely on probability or randomness.</li>
+</ul>
+<p><strong>Example:</strong> In a dynamic array with doubling, most insertions cost O(1) but occasional resizing costs O(n). Aggregate analysis shows the total cost of n insertions is O(n), so amortized cost per insert = O(1).</p>
+
+<h3>b. RAM (Random Access Machine) Model</h3>
+<p>The RAM model is an <strong>abstract computational model</strong> used to analyze algorithms independent of actual hardware.</p>
+<ul>
+  <li><strong>Sequential execution:</strong> Instructions execute one at a time (no parallelism).</li>
+  <li><strong>Constant-time operations:</strong> Simple operations (arithmetic: +, −, ×; comparisons; assignments; array access A[i]) each take exactly <strong>1 time step</strong>.</li>
+  <li><strong>Infinite memory:</strong> Unlimited memory is available, and each memory access takes 1 step (random access — not sequential).</li>
+  <li>Complex operations like sorting or exponentiation are NOT single steps.</li>
+</ul>
+<p>The RAM model allows us to count the number of basic operations as a measure of running time, abstracting away hardware details.</p>
+
+</body>
+</html>

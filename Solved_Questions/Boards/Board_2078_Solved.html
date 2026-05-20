@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Board Question 2078 - Solved</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a1a; color: #d1d5db; line-height: 1.8; padding: 30px; }
+        .wrap { max-width: 900px; margin: auto; }
+        h1 { text-align: center; font-size: 1.8em; padding: 24px; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border-radius: 16px; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-style: italic; }
+        .group-hdr { text-align: center; font-size: 1.4em; color: #10b981; margin: 30px 0 10px; padding: 12px; border: 2px solid #10b981; border-radius: 12px; background: rgba(16, 185, 129, 0.05); }
+        .q-card { background: #18182f; border: 1px solid #2d2d4a; border-radius: 14px; padding: 22px 26px; margin: 22px 0; transition: border-color .3s; }
+        .q-card:hover { border-color: #3b82f6; }
+        .q-num { display: inline-block; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; font-weight: 700; padding: 4px 14px; border-radius: 20px; font-size: .85em; margin-bottom: 4px; }
+        .marks { display: inline-block; background: #7c3aed; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: .8em; margin-left: 8px; }
+        .q-title { color: #10b981; font-size: 1.1em; font-weight: 700; margin: 8px 0 14px; }
+        h4 { color: #3b82f6; margin: 16px 0 8px; font-size: 1em; }
+        p { margin: 8px 0; text-align: justify; }
+        b { color: #34d399; }
+        em { color: #f472b6; font-style: normal; }
+        ul, ol { margin: 8px 0 8px 22px; }
+        li { margin: 4px 0; }
+        .def { background: linear-gradient(135deg, #064e3b, #1e3a8a); padding: 14px 18px; border-radius: 10px; margin: 10px 0; border-left: 4px solid #3b82f6; }
+        .formula { text-align: center; margin: 14px auto; padding: 14px; background: #1a1a3e; border: 1px dashed #6366f1; border-radius: 10px; font-size: 1.05em; color: #c4b5fd; font-family: 'Courier New', monospace; }
+        .solve { background: #1a1a3e; border: 1px solid #3b3b5e; padding: 14px; border-radius: 10px; margin: 10px 0; overflow-x: auto;}
+        .result { background: #14532d; border: 1px solid #22c55e; padding: 10px 14px; border-radius: 8px; margin: 10px 0; color: #86efac; font-weight: 600; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; border-radius: 10px; overflow: hidden; }
+        th { background: linear-gradient(135deg, #10b981, #059669); color: #fff; padding: 10px; font-size: .9em; }
+        td { padding: 8px 10px; border: 1px solid #2d2d4a; background: #1a1a30; font-size: .9em; text-align: center; }
+        tr:nth-child(even) td { background: #1f1f3a; }
+        pre { background: #111128; padding: 14px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; color: #93c5fd; font-size: 0.95em; margin: 10px 0; border: 1px solid #2d2d4a; }
+    </style>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <h1>🚀 DAA Board Question 2078 — Solved</h1>
+    <p class="subtitle">Design and Analysis of Algorithms (CSC314)</p>
+
+    <div class="group-hdr">📋 SECTION A — 10 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q1</span><span class="marks">10 marks</span>
+        <div class="q-title">Algorithm Properties & RAM Model</div>
+        <h4>A. Elementary Properties of an Algorithm</h4>
+        <ul>
+            <li><b>Finiteness:</b> The algorithm must terminate after a finite number of steps.</li>
+            <li><b>Definiteness:</b> Each step must be precisely defined, unambiguous, and clear.</li>
+            <li><b>Input:</b> It takes zero or more inputs provided externally.</li>
+            <li><b>Output:</b> It must produce at least one output corresponding to the input.</li>
+            <li><b>Effectiveness:</b> Every operation must be basic enough to be executed exactly and in finite time.</li>
+        </ul>
+
+        <h4>B. RAM Model Analysis</h4>
+        <p>The Random Access Machine (RAM) model is a theoretical abstraction used to analyze the execution time of an algorithm independently of the specific hardware it runs on.</p>
+        <div class="def">
+            <b>Rules of RAM Model:</b><br>
+            1. Every simple operation (+, -, *, =, if, call) takes exactly 1 time step.<br>
+            2. Memory access (read/write) takes exactly 1 time step.<br>
+            3. Loops and function calls are composed of these simple operations.
+        </div>
+        <pre><code>sum = 0           // Cost: 1, Executed: 1 time
+for i=1 to n:     // Cost: 1, Executed: n+1 times (includes exit check)
+    sum = sum + i // Cost: 2 (addition+assignment), Executed: n times
+return sum        // Cost: 1, Executed: 1 time</code></pre>
+        <p>Total Time \( T(n) = 1 + (n+1) + 2n + 1 = 3n + 3 \). Thus, \( T(n) = O(n) \).</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q2</span><span class="marks">10 marks</span>
+        <div class="q-title">Divide and Conquer & Randomized Quick Sort</div>
+        <h4>A. Divide and Conquer Paradigm</h4>
+        <p>This strategy solves a problem by breaking it into smaller sub-problems of the same type, solving them independently (often recursively), and then combining their results. Example: <b>Merge Sort</b> divides an array in half until single elements remain, then merges the sorted halves.</p>
+
+        <h4>B. Randomized Quick Sort</h4>
+        <pre><code>Algorithm RandPartition(A, p, r):
+  i = Random(p, r)
+  swap(A[i], A[r])
+  return Partition(A, p, r) // Standard partition using A[r] as pivot
+
+Algorithm RandQuickSort(A, p, r):
+  if p < r:
+      q = RandPartition(A, p, r)
+      RandQuickSort(A, p, q-1)
+      RandQuickSort(A, q+1, r)</code></pre>
+        <p><b>Time Complexity:</b> By randomly selecting the pivot, the probability of consistently picking the worst pivot (producing \( 0 \) and \( n-1 \) splits) becomes astronomically low. The expected split is sufficiently balanced (like \( 1/4 \) and \( 3/4 \)). This yields an expected time complexity of <b>\( O(n \log n) \)</b> across all possible inputs, eliminating the \( O(n^2) \) worst-case scenario dependent on initial data order.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q3</span><span class="marks">10 marks</span>
+        <div class="q-title">Dynamic Programming & 0/1 Knapsack</div>
+        <h4>A. Dynamic Programming vs Recursion</h4>
+        <p><b>Dynamic Programming</b> solves optimization problems with overlapping subproblems by storing their results in a table (tabulation or memoization) to avoid redundant calculations. <b>Recursion</b> simply calls itself, and without memoization, it will recompute identical subproblems repeatedly, often leading to exponential \( O(2^n) \) time complexity.</p>
+
+        <h4>B. 0/1 Knapsack using DP</h4>
+        <div class="solve">
+            <p>Let \( V[i, w] \) be the maximum value achievable using the first \( i \) items with a knapsack capacity of \( w \).</p>
+            <p>\( V[i, w] = V[i-1, w] \) if \( wt[i] > w \) (Item is too heavy, skip it).</p>
+            <p>\( V[i, w] = \max(V[i-1, w], V[i-1, w-wt[i]] + profit[i]) \) if \( wt[i] \leq w \).</p>
+            <pre><code>Algorithm 01Knapsack(wt[], profit[], W, n):
+  Let K[0..n, 0..W] be a matrix initialized to 0
+  for i = 1 to n:
+      for w = 1 to W:
+          if wt[i-1] <= w:
+              K[i][w] = max(profit[i-1] + K[i-1][w-wt[i-1]], K[i-1][w])
+          else:
+              K[i][w] = K[i-1][w]
+  return K[n][W]</code></pre>
+        </div>
+        <p><b>Time Complexity:</b> <b>\( O(nW) \)</b> where \( n \) is number of items and \( W \) is knapsack capacity. (Note: This is pseudo-polynomial).</p>
+    </div>
+
+    <div class="group-hdr">📋 SECTION B — 5 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q4</span><span class="marks">5 marks</span>
+        <div class="q-title">Recursion Tree Method: \( T(n) = 2T(n/2) + 1 \)</div>
+        <div class="solve">
+            <p>1. Draw the tree where the root cost is \( 1 \).</p>
+            <p>2. The root has 2 children, each with cost \( 1 \). Total cost at depth 1 = \( 2 \).</p>
+            <p>3. Depth 2 has 4 nodes, each with cost \( 1 \). Total cost at depth 2 = \( 4 \).</p>
+            <p>4. The cost at depth \( k \) is \( 2^k \).</p>
+            <p>5. The tree stops when \( n/2^k = 1 \implies k = \log_2 n \).</p>
+            <p>6. Total cost is the sum of costs at all levels: \( 1 + 2 + 4 + ... + 2^{\log_2 n} \).</p>
+            <p>This is a geometric series sum: \( \sum_{i=0}^{\log_2 n} 2^i = 2^{\log_2 n + 1} - 1 = 2 \cdot 2^{\log_2 n} - 1 = 2n - 1 \).</p>
+        </div>
+        <div class="result">Complexity: \( O(n) \)</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q5</span><span class="marks">5 marks</span>
+        <div class="q-title">Maximum Element of Array & Complexity</div>
+        <pre><code>Algorithm FindMax(A, n):
+  max_val = A[0]
+  for i = 1 to n-1:
+      if A[i] > max_val:
+          max_val = A[i]
+  return max_val</code></pre>
+        <p><b>Time Complexity:</b> The loop runs exactly \( n-1 \) times. The basic operation is the comparison <code>A[i] > max_val</code>. Therefore, the time complexity is strictly <b>\( O(n) \)</b>.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q6</span><span class="marks">5 marks</span>
+        <div class="q-title">Bubble Sort Algorithm</div>
+        <pre><code>Algorithm BubbleSort(A):
+  n = length(A)
+  for i = 0 to n-1:
+      for j = 0 to n-i-2:
+          if A[j] > A[j+1]:
+              swap(A[j], A[j+1])</code></pre>
+        <p><b>Time Complexity:</b> The outer loop runs \( n \) times, inner loop runs \( n-i \) times. Total comparisons = \( n(n-1)/2 \). Complexity is <b>\( O(n^2) \)</b> in both worst and average cases. (Can be optimized to \( O(n) \) best case with a 'swapped' flag).</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q7</span><span class="marks">5 marks</span>
+        <div class="q-title">Optimization Problem & Greedy Strategy</div>
+        <p>An <b>Optimization Problem</b> is a problem where the goal is to find the "best" solution (maximum profit, shortest path, minimum cost) from all feasible solutions.</p>
+        <p>The <b>Greedy Strategy</b> solves optimization problems by making a sequence of choices. At each step, it makes the choice that looks locally the best at that moment, without looking ahead or revising previous choices. It works well for problems with the <i>Greedy Choice Property</i> and <i>Optimal Substructure</i> (like Kruskal's MST).</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q8</span><span class="marks">5 marks</span>
+        <div class="q-title">Job Sequencing with Deadlines</div>
+        <pre><code>Algorithm JobSequencing(Jobs):
+  Sort Jobs in descending order of Profit
+  max_deadline = find max deadline among all jobs
+  slots = array of size max_deadline initialized to empty
+  
+  for each job in Jobs:
+      Find a free slot from min(job.deadline, max_deadline) down to 1
+      if free slot found:
+          slots[found_slot] = job
+  return slots</code></pre>
+        <p><b>Time Complexity:</b> Sorting takes \( O(n \log n) \). The nested loop for slot finding takes \( O(n^2) \) worst-case. Overall complexity is <b>\( O(n^2) \)</b>.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q9</span><span class="marks">5 marks</span>
+        <div class="q-title">Memoization Strategy vs DP</div>
+        <ul>
+            <li><b>Memoization:</b> A <i>Top-Down</i> approach. It writes a standard recursive algorithm but saves (caches) the result of each subproblem in a lookup table before returning it. Future recursive calls just fetch the cached value.</li>
+            <li><b>Tabulation (DP):</b> A <i>Bottom-Up</i> approach. It iteratively builds a table starting from the smallest base cases up to the final answer, avoiding recursion overhead completely.</li>
+        </ul>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q10</span><span class="marks">5 marks</span>
+        <div class="q-title">Backtracking vs Recursion</div>
+        <p><b>Recursion</b> is a coding technique where a function calls itself. <b>Backtracking</b> is an algorithmic <i>methodology</i> that uses recursion to explore a search space. Crucially, backtracking uses a "bounding function" to kill off paths that lead to dead ends. If a partial solution violates the constraints, backtracking immediately abandons it and explores the next branch, whereas pure recursion would mindlessly explore everything.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q11</span><span class="marks">5 marks</span>
+        <div class="q-title">P, NP, and NP-Complete</div>
+        <ul>
+            <li><b>P (Polynomial Time):</b> Problems solvable by a deterministic machine in \( O(n^k) \) time. (e.g., MST, Sorting).</li>
+            <li><b>NP (Non-deterministic Polynomial Time):</b> Problems whose solutions can be <i>verified</i> in polynomial time. (e.g., Sudoku solution check).</li>
+            <li><b>NP-Complete:</b> A problem X is NP-Complete if X is in NP, and every problem in NP can be reduced to X in polynomial time. They are the hardest problems in NP. (e.g., TSP, SAT).</li>
+        </ul>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q12</span><span class="marks">5 marks</span>
+        <div class="q-title">Short Notes</div>
+        <h4>(a) NP-Hard Problems and NP Completeness</h4>
+        <p>A problem is <b>NP-Hard</b> if all problems in NP are polynomial-time reducible to it, but it does NOT have to be in NP itself (e.g., the Halting Problem). <b>NP-Complete</b> problems are simply NP-Hard problems that also belong to the class NP.</p>
+
+        <h4>(b) Problem Reduction</h4>
+        <p>A technique to prove a problem is hard. If we know Problem A is NP-Complete, and we can transform (reduce) Problem A into Problem B in polynomial time, it implies Problem B is at least as hard as A. Thus, B is also NP-Hard. This creates a chain of proofs starting from Cook's Theorem (SAT).</p>
+    </div>
+
+</div>
+</body>
+</html>

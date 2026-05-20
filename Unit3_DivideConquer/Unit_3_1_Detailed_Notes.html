@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 3 Detailed Notes</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 3: Divide and Conquer</h1>
+    
+<h2>3.1 Divide and Conquer Paradigm</h2>
+<div class="box">
+    <p>A recursive algorithm design paradigm that solves a problem by applying three steps:</p>
+    <ul>
+        <li><strong>Divide:</strong> Break the main problem into several smaller sub-problems of the same type.</li>
+        <li><strong>Conquer:</strong> Solve the sub-problems recursively. If they are small enough, solve them directly (base case).</li>
+        <li><strong>Combine:</strong> Merge the solutions of the sub-problems to form the solution to the original problem.</li>
+    </ul>
+    <h3>Binary Search</h3>
+    <p>Finds the target in a sorted list by halving the search space recursively.</p>
+    <p><strong>Recurrence:</strong> $T(N) = T(N/2) + O(1)$. <strong>Time:</strong> $O(\log N)$.</p>
+    <h3>Min-Max Finding</h3>
+    <p>Instead of $2N - 2$ comparisons iteratively, we split the array in half, find min/max in left and right, and compare. Total comparisons drop to $3N/2 - 2$.</p>
+</div>
+
+<h2>3.2 Sorting Algorithms</h2>
+<div class="box">
+    <h3>Merge Sort</h3>
+    <p>Splits the list exactly in half until 1 element remains. Merges the halves recursively.</p>
+    <p><strong>Recurrence:</strong> $T(N) = 2T(N/2) + O(N)$.<br>
+    <strong>Time:</strong> $O(N \log N)$ always. <strong>Space:</strong> $O(N)$ auxiliary array.</p>
+    
+    <h3>Quick Sort</h3>
+    <p>Divides based on a Pivot element, ensuring elements on the left are smaller and on the right are larger.</p>
+    <p><strong>Worst Case Time:</strong> $O(N^2)$ (When sorted natively and Pivot is 1st element. Partition is highly skewed $N-1$ and $1$).<br>
+    <strong>Average Best Time:</strong> $O(N \log N)$. <strong>Space:</strong> $O(\log N)$ recursion stack.</p>
+    
+    <h3>Heap Sort</h3>
+    <p>Treats array as a Complete Binary Tree. Builds a Max-Heap where parent > children.</p>
+    <ol>
+        <li><strong>BuildHeap:</strong> Call `Heapify` on all non-leaf nodes. Time: $O(N)$.</li>
+        <li><strong>HeapSort:</strong> Swap the root (max element) with the last node, reduce array size, and call `Heapify` top-down to repair property. Time: $O(N \log N)$.</li>
+    </ol>
+    <p><strong>Complexity:</strong> $O(N \log N)$ worst-case. In-place, Space: $O(1)$.</p>
+</div>
+
+<h2>3.3 Order Statistics</h2>
+<div class="box">
+    <p>Finding the $i$-th smallest element in an unordered array. If $i = 1$, it's Minimum. If $i = N/2$, it's Median.</p>
+    <h3>Selection in Expected Linear Time (Quick Select)</h3>
+    <p>Randomly pick a pivot. Partition the list. If pivot lands at index $k$, and $i = k$, you are done! If $i < k$, search only the left partition.<br>
+    <strong>Time:</strong> $O(N)$ average, but $O(N^2)$ worst-case.</p>
+
+    <h3>Worst Case Linear Time Selection (Median of Medians)</h3>
+    <p>Forces a good pivot to guarantee worst-case $O(N)$ partitioning limit.</p>
+    <ol>
+        <li>Divide $N$ elements into groups of 5.</li>
+        <li>Find median of each group (takes $O(1)$). You get $\lceil N/5 \rceil$ medians.</li>
+        <li>Recursively invoke the algorithm to find the Median of the $N/5$ medians. Call this $X$.</li>
+        <li>Use $X$ as the Partition Pivot!</li>
+    </ol>
+    <p><strong>Recurrence:</strong> $T(n) = T(n/5) + T(7n/10) + O(n)$. Total Time: strictly $O(N)$.</p>
+</div>
+
+</body>
+</html>

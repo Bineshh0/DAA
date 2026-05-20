@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 7 Detailed Notes</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 7: Number Theoretic Algorithms</h1>
+    
+<h2>7.1 Euclid's and Extended Euclid Algorithms</h2>
+<div class="box">
+    <h3>Euclid's GCD</h3>
+    <p>Finds the Greatest Common Divisor of two numbers $a$ and $b$. Recursively uses the property: $\gcd(a, b) = \gcd(b, a \pmod b)$. Base case is $b = 0$.</p>
+
+    <h3>Extended Euclidean Algorithm</h3>
+    <p>Not only finds $d = \gcd(a,b)$, but also finds coefficients $x$ and $y$ such that $a \cdot x + b \cdot y = d$. Formally known as Bezout's Identity. It is heavily used in cryptography strictly to find the Modulo Multiplicative Inverse $d$ of RSA keys.</p>
+</div>
+
+<h2>7.2 Solving Modular Linear Equations</h2>
+<div class="box">
+    <p>Equation format: $aX \equiv b \pmod n$.</p>
+    <p><strong>Solution Existence:</strong> The equation only has a valid integer solution if $b$ is perfectly divisible by $d$, where $d = \gcd(a, n)$. If it exists, there will be exactly $d$ distinct modular solutions.</p>
+    <p><strong>Method:</strong></p>
+    <ol>
+        <li>Find $d = \gcd(a, n)$ using Extended Euclid. Also gives coefficients $x'$ and $y'$ such that $a \cdot x' + n \cdot y' = d$.</li>
+        <li>Initial base solution: $x_0 = x' \cdot (b/d) \pmod n$.</li>
+        <li>The full sequence of $d$ modular solutions are generated using: $x_i = (x_0 + i \cdot (n/d)) \pmod n$ for $i = 0, 1 \dots d-1$.</li>
+    </ol>
+
+    <h3>Chinese Remainder Theorem (CRT)</h3>
+    <p>Solves systems of simultaneous congruences. <br>
+    $x \equiv a_1 \pmod{m_1}$<br>
+    $x \equiv a_2 \pmod{m_2}$<br>
+    ...<br>
+    Condition: The moduli $m_1, m_2...$ MUST be pairwise coprime.</p>
+    <p><strong>Steps to solve:</strong></p>
+    <ol>
+        <li>Find $M = m_1 \times m_2 \times \dots \times m_k$.</li>
+        <li>For each equation $i$, find $M_i = M / m_i$.</li>
+        <li>Find the inverse $y_i$ such that $M_i \cdot y_i \equiv 1 \pmod{m_i}$.</li>
+        <li>Calculate solution: $x = (a_1 \cdot M_1 \cdot y_1 + a_2 \cdot M_2 \cdot y_2 + \dots) \pmod M$.</li>
+    </ol>
+
+    <h3>Primality Testing & Miller-Rabin</h3>
+    <p><strong>Miller-Rabin Randomized Test:</strong> Instead of checking division up to $\sqrt{N}$ ($O(N^{0.5})$), it uses modular exponentiation properties related to Fermat's Little Theorem. As a randomized algorithm, it tests a random base $A$. If it returns "composite", $N$ is 100% composite. If it returns "prime", $N$ is probably prime. By running the test $k$ times independently, the error probability shrinks exponentially to $4^{-k}$. This enables analyzing $2048$-bit RSA keys in mere milliseconds.</p>
+    <p><strong>Time Complexity:</strong> $O(k \log^3 N)$ where $k$ is the number of iterations and $N$ is the number being tested. Extremely efficient for large numbers.</p>
+</div>
+
+</body>
+</html>

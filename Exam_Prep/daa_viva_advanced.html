@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Viva: Exhaustive Advanced Questions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #475569;
+            --bg-color: #f1f5f9;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        header {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.3;
+            animation: moveBg 30s linear infinite;
+        }
+        @keyframes moveBg {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            max-width: 900px;
+            margin: -3rem auto 3rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+            border-left: 6px solid var(--secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            border-left-width: 10px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.35rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            background-color: var(--light);
+            color: var(--primary);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .question {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        .answer {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            position: relative;
+        }
+        .answer p {
+            margin-bottom: 0.75rem;
+        }
+        .answer p:last-child {
+            margin-bottom: 0;
+        }
+        .highlight {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--secondary);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .nav-link:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .unit-header {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin: 3rem 0 1.5rem;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DAA Viva: Exhaustive Advanced Questions</h1>
+        <p class="subtitle">In-depth conceptual questions from every chapter, testing true understanding.</p>
+    </header>
+    
+    <div class="container">
+        <div class="nav-links">
+            <a href="daa_viva_simple.html" class="nav-link ">1. Simple Recurring</a>
+            <a href="daa_viva_advanced.html" class="nav-link active">2. Advanced Syllabus</a>
+            <a href="daa_viva_out_of_box.html" class="nav-link ">3. Out of the Box</a>
+        </div>
+        
+        <h2 class='unit-header'>Unit 1: Foundation</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">How does Aggregate Analysis differ from the Accounting Method?</div>
+            <div class="answer"><p>In Aggregate Analysis, we find the total cost T(n) for a sequence of n operations and calculate the amortized cost as T(n)/n for all operations. In the Accounting Method, we overcharge cheap operations to store 'credit', which is later used to pay for expensive operations.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 1: Foundation</span>
+            <div class="question">What are the limitations of the Master Theorem?</div>
+            <div class="answer"><p>It cannot solve recurrences if:
+1. T(n) is not monotone (e.g., T(n) = sin(n))
+2. f(n) is not a polynomial (e.g., f(n) = 2^n)
+3. b cannot be expressed as a constant (e.g., T(n) = T(n/log n))
+4. The gap between f(n) and n^(log_b a) is not polynomial (e.g., log factors exist that don't fit the extended cases).</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 2: Iterative</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 2: Iterative</span>
+            <div class="question">Why is Insertion Sort considered better than Selection Sort and Bubble Sort in practice?</div>
+            <div class="answer"><p>Because Insertion Sort is highly adaptive. If the array is almost sorted, its time complexity drops to <span class='highlight'>O(n)</span>. It also has very low overhead and excellent cache locality, making it the algorithm of choice for small or nearly-sorted datasets (e.g., used internally by Python's Timsort or C++'s std::sort for small partitions).</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 3: Divide & Conquer</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 3: Divide & Conquer</span>
+            <div class="question">How do we achieve O(n) Worst Case time for the Selection Problem (Order Statistics)?</div>
+            <div class="answer"><p>By using the Median of Medians algorithm. Instead of picking a random pivot like in Quick Select, we divide the array into groups of 5, find the median of each group, and then recursively find the median of those medians to use as the pivot. This guarantees a good split and <span class='highlight'>O(n)</span> worst-case time.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 3: Divide & Conquer</span>
+            <div class="question">Why is Randomized Quick Sort's Expected time complexity O(n log n)?</div>
+            <div class="answer"><p>By picking a random pivot, the probability of consistently picking the extreme elements is incredibly small. On average, the pivot will split the array in a ratio no worse than 1/4 to 3/4, which leads to a recursion tree of depth <span class='highlight'>O(log n)</span>, thus <span class='highlight'>O(n log n)</span> overall.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 4: Greedy</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 4: Greedy</span>
+            <div class="question">Explain the difference in data structures used for Prim's vs Kruskal's algorithm.</div>
+            <div class="answer"><p>Prim's uses a Priority Queue (Min-Heap) to quickly find the minimum weight edge connected to the growing MST. Kruskal's uses a Disjoint Set (Union-Find) data structure to detect cycles when adding edges sorted by weight.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 4: Greedy</span>
+            <div class="question">Why does Job Sequencing with Deadlines use a Greedy approach?</div>
+            <div class="answer"><p>It sorts jobs in descending order of profit, and then greedily assigns each job to the latest possible free time slot before its deadline. This maximizes profit because we always prioritize high-profit jobs and reserve early slots for other jobs.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 5: Dynamic Programming</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 5: Dynamic Programming</span>
+            <div class="question">What are the core elements of a Dynamic Programming strategy?</div>
+            <div class="answer"><p>1. Optimal Substructure: The optimal solution to the main problem is composed of optimal solutions to its subproblems.
+2. Overlapping Subproblems: The algorithm visits the same subproblems repeatedly. DP solves each subproblem once and saves its answer in a table.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 5: Dynamic Programming</span>
+            <div class="question">Explain Matrix Chain Multiplication.</div>
+            <div class="answer"><p>It's a DP algorithm that determines the most efficient way to multiply a sequence of matrices. We don't actually perform the multiplications; we just decide the parenthesization (order) that minimizes the total scalar multiplications, finding the optimal split point <span class='highlight'>k</span> for every sub-chain.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 5: Dynamic Programming</span>
+            <div class="question">Differentiate between Memoization and Tabulation.</div>
+            <div class="answer"><p>Memoization (Top-Down): Uses recursion. Checks if the result is in the cache before making a recursive call. Saves computing time but has recursion stack overhead.
+Tabulation (Bottom-Up): Iterative approach. Solves all subproblems starting from the smallest, filling up an n-dimensional array. No recursion overhead.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 6: Backtracking</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 6: Backtracking</span>
+            <div class="question">How does the Bounding Function work in Backtracking?</div>
+            <div class="answer"><p>The bounding function evaluates whether the current partial solution can lead to a valid final solution. If it violates problem constraints (e.g., placing a Queen where it's under attack, or sum exceeds target in Subset Sum), the bounding function returns false, and the algorithm prunes that branch of the state space tree.</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 7: Number Theoretic</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 7: Number Theoretic</span>
+            <div class="question">What is the Chinese Remainder Theorem (CRT)?</div>
+            <div class="answer"><p>CRT states that if you know the remainders of a number 'x' when divided by several pairwise coprime integers, you can uniquely determine 'x' modulo the product of those integers. It's used to solve systems of modular linear equations.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 7: Number Theoretic</span>
+            <div class="question">Why is Primality Testing important and how does Miller-Rabin work?</div>
+            <div class="answer"><p>It's vital for generating large keys in Cryptography (like RSA). Miller-Rabin is a probabilistic test based on Fermat's Little Theorem. It uses a random base 'a'. If it declares a number composite, it's 100% composite. If it declares it prime, there's a small probability of error (1/4), which we make negligible by running it 'k' times (<span class='highlight'>(1/4)^k</span> error rate).</p></div>
+        </div>
+    <h2 class='unit-header'>Unit 8: NP Completeness</h2>
+
+        <div class="question-card">
+            <span class="tag">Unit 8: NP Completeness</span>
+            <div class="question">What is Cook's Theorem?</div>
+            <div class="answer"><p>Cook's Theorem (or Cook-Levin Theorem) states that the Boolean Satisfiability Problem (SAT) is NP-Complete. It was the first problem proven to be NP-Complete. It proved that any NP problem can be reduced to SAT in polynomial time by representing the computation of a Non-Deterministic Turing Machine as a boolean formula.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 8: NP Completeness</span>
+            <div class="question">What is Polynomial Reducibility?</div>
+            <div class="answer"><p>Problem A is polynomially reducible to Problem B if we can write an algorithm that transforms any instance of A into an instance of B in polynomial time, such that the answer to B is the answer to A. This is used to prove NP-Completeness.</p></div>
+        </div>
+    
+        <div class="question-card">
+            <span class="tag">Unit 8: NP Completeness</span>
+            <div class="question">What is an Approximation Algorithm?</div>
+            <div class="answer"><p>When an optimization problem is NP-Hard, we cannot find an exact optimal solution in polynomial time. An approximation algorithm runs in polynomial time and finds a solution that is close to the optimal solution. The 'approximation ratio' guarantees how close the result is (e.g., a 2-approximation algorithm for Vertex Cover).</p></div>
+        </div>
+    
+    </div>
+</body>
+</html>

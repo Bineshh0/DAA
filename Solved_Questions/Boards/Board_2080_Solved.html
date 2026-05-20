@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Board Question 2080 - Solved</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a1a; color: #d1d5db; line-height: 1.8; padding: 30px; }
+        .wrap { max-width: 900px; margin: auto; }
+        h1 { text-align: center; font-size: 1.8em; padding: 24px; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border-radius: 16px; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-style: italic; }
+        .group-hdr { text-align: center; font-size: 1.4em; color: #10b981; margin: 30px 0 10px; padding: 12px; border: 2px solid #10b981; border-radius: 12px; background: rgba(16, 185, 129, 0.05); }
+        .q-card { background: #18182f; border: 1px solid #2d2d4a; border-radius: 14px; padding: 22px 26px; margin: 22px 0; transition: border-color .3s; }
+        .q-card:hover { border-color: #3b82f6; }
+        .q-num { display: inline-block; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; font-weight: 700; padding: 4px 14px; border-radius: 20px; font-size: .85em; margin-bottom: 4px; }
+        .marks { display: inline-block; background: #7c3aed; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: .8em; margin-left: 8px; }
+        .q-title { color: #10b981; font-size: 1.1em; font-weight: 700; margin: 8px 0 14px; }
+        h4 { color: #3b82f6; margin: 16px 0 8px; font-size: 1em; }
+        p { margin: 8px 0; text-align: justify; }
+        b { color: #34d399; }
+        em { color: #f472b6; font-style: normal; }
+        ul, ol { margin: 8px 0 8px 22px; }
+        li { margin: 4px 0; }
+        .def { background: linear-gradient(135deg, #064e3b, #1e3a8a); padding: 14px 18px; border-radius: 10px; margin: 10px 0; border-left: 4px solid #3b82f6; }
+        .formula { text-align: center; margin: 14px auto; padding: 14px; background: #1a1a3e; border: 1px dashed #6366f1; border-radius: 10px; font-size: 1.05em; color: #c4b5fd; font-family: 'Courier New', monospace; }
+        .solve { background: #1a1a3e; border: 1px solid #3b3b5e; padding: 14px; border-radius: 10px; margin: 10px 0; overflow-x: auto;}
+        .result { background: #14532d; border: 1px solid #22c55e; padding: 10px 14px; border-radius: 8px; margin: 10px 0; color: #86efac; font-weight: 600; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; border-radius: 10px; overflow: hidden; }
+        th { background: linear-gradient(135deg, #10b981, #059669); color: #fff; padding: 10px; font-size: .9em; }
+        td { padding: 8px 10px; border: 1px solid #2d2d4a; background: #1a1a30; font-size: .9em; text-align: center; }
+        tr:nth-child(even) td { background: #1f1f3a; }
+        pre { background: #111128; padding: 14px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; color: #93c5fd; font-size: 0.95em; margin: 10px 0; border: 1px solid #2d2d4a; }
+    </style>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <h1>🚀 DAA Board Question 2080 — Solved</h1>
+    <p class="subtitle">Design and Analysis of Algorithms (CSC314)</p>
+
+    <div class="group-hdr">📋 SECTION A — 10 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q1</span><span class="marks">10 marks</span>
+        <div class="q-title">Recurrence Relation & Substitution Method</div>
+        
+        <h4>A. What is a recurrence relation? How can it be solved?</h4>
+        <p>A <b>recurrence relation</b> is an equation or inequality that describes a function in terms of its value on smaller inputs. It is used heavily to analyze the time complexity of divide-and-conquer algorithms (like Merge Sort). Methods to solve it include:</p>
+        <ul>
+            <li>Substitution Method (Guess and prove by mathematical induction)</li>
+            <li>Recursion Tree Method (Visualizing the recursive calls)</li>
+            <li>Master's Theorem (Direct formula for \( T(n) = aT(n/b) + f(n) \))</li>
+        </ul>
+
+        <h4>B. Substitution Method for \( T(n) = 2T(n/2) + 1 \)</h4>
+        <div class="solve">
+            <p><b>Goal:</b> Prove \( T(n) = O(n) \).</p>
+            <p><b>Guess:</b> \( T(n) \leq cn - d \) for some constants \( c > 0, d > 0 \).</p>
+            <p><b>Inductive Step:</b> Assume the guess holds for \( n/2 \), i.e., \( T(n/2) \leq c(n/2) - d \).</p>
+            <p>Substitute into the recurrence:</p>
+            <p>\( T(n) = 2T(n/2) + 1 \)</p>
+            <p>\( T(n) \leq 2(c(n/2) - d) + 1 \)</p>
+            <p>\( T(n) \leq cn - 2d + 1 \)</p>
+            <p>We want \( T(n) \leq cn - d \). This holds if:</p>
+            <p>\( cn - 2d + 1 \leq cn - d \)</p>
+            <p>\( -2d + 1 \leq -d \implies d \geq 1 \).</p>
+            <p>Therefore, with \( d \geq 1 \), the guess holds. Thus, <b>\( T(n) = O(n) \)</b>.</p>
+        </div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q2</span><span class="marks">10 marks</span>
+        <div class="q-title">DP vs Greedy & Matrix Chain Multiplication</div>
+
+        <h4>A. Advantages of Dynamic Programming over Greedy Strategy</h4>
+        <ul>
+            <li><b>Guaranteed Optimality:</b> DP checks all possible subproblems to make an informed decision, guaranteeing a global optimum. Greedy makes local optimum choices, which sometimes fail globally.</li>
+            <li><b>Overlapping Subproblems:</b> DP efficiently caches repeated subproblem results (memoization/tabulation), avoiding redundant work that greedy might struggle with in certain tree structures.</li>
+        </ul>
+
+        <h4>B. Matrix Chain Multiplication (2x4, 4x2, 4x5)</h4>
+        <div class="solve">
+            <p>Matrices: \( A_1(2 \times 4) \), \( A_2(4 \times 2) \), \( A_3(2 \times 5) \).</p>
+            <p>Dimensions array \( P = [2, 4, 2, 5] \).</p>
+            
+            <p><b>Calculate cost for chain length 2:</b></p>
+            <p>\( M[1,2] = A_1 \times A_2 = 2 \times 4 \times 2 = 16 \).</p>
+            <p>\( M[2,3] = A_2 \times A_3 = 4 \times 2 \times 5 = 40 \).</p>
+            
+            <p><b>Calculate cost for chain length 3:</b></p>
+            <p>\( M[1,3] = \min \begin{cases} M[1,1] + M[2,3] + P_0 P_1 P_3 = 0 + 40 + (2 \times 4 \times 5) = 40 + 40 = 80 \\ M[1,2] + M[3,3] + P_0 P_2 P_3 = 16 + 0 + (2 \times 2 \times 5) = 16 + 20 = 36 \end{cases} \)</p>
+            <p>The minimum is 36, which occurs when splitting at \( k=2 \).</p>
+        </div>
+        <div class="result">Optimal Parenthesization: (A₁A₂)A₃ with minimum cost = 36</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q3</span><span class="marks">10 marks</span>
+        <div class="q-title">Heapify Operation</div>
+
+        <div class="def">
+            <b>Heapify</b> is the process of reshaping a binary tree into a Max-Heap or Min-Heap. In a Max-Heap, it ensures that every parent node is greater than or equal to its child nodes. It works by "sifting down" a node that violates the heap property.
+        </div>
+
+        <h4>Example</h4>
+        <p>If we have tree <code>[4, 10, 3, 5, 1]</code> where 4 violates Max-Heap property. We compare 4 with its children (10 and 3). Max is 10. Swap 4 and 10. Tree becomes <code>[10, 4, 3, 5, 1]</code>. Check children of 4 (5 and 1). Max is 5. Swap 4 and 5. Tree becomes <code>[10, 5, 3, 4, 1]</code>.</p>
+
+        <h4>Algorithm</h4>
+        <pre><code>MAX-HEAPIFY(A, i, n)
+  l = 2i       // left child
+  r = 2i + 1   // right child
+  largest = i
+  if l <= n and A[l] > A[largest]
+      largest = l
+  if r <= n and A[r] > A[largest]
+      largest = r
+  if largest != i
+      swap(A[i], A[largest])
+      MAX-HEAPIFY(A, largest, n)</code></pre>
+
+        <h4>Complexity Analysis</h4>
+        <ul>
+            <li><b>Time Complexity:</b> \( O(\log n) \). In the worst case, a node drops all the way to the leaf, taking time proportional to the height of the tree.</li>
+            <li><b>Space Complexity:</b> \( O(\log n) \) due to the recursion call stack, or \( O(1) \) if implemented iteratively.</li>
+        </ul>
+    </div>
+
+    <div class="group-hdr">📋 SECTION B — 5 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q4</span><span class="marks">5 marks</span>
+        <div class="q-title">RAM Model & Iterative Factorial Analysis</div>
+        
+        <p><b>RAM Model (Random Access Machine):</b> A theoretical machine model used to analyze algorithms independent of specific hardware. It assumes each simple instruction (add, multiply, assignment) takes 1 unit of time, and memory access takes 1 unit of time.</p>
+
+        <pre><code>Algorithm Factorial(n):
+  fact = 1           // 1 cost
+  for i = 1 to n     // n+1 comparisons, n increments
+      fact = fact * i  // n multiplications, n assignments
+  return fact        // 1 cost</code></pre>
+        <p><b>Analysis:</b> Total operations \( = 1 + (n+1) + n + 2n + 1 = 4n + 3 \). Time complexity is <b>\( O(n) \)</b>.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q5</span><span class="marks">5 marks</span>
+        <div class="q-title">Insertion Sort Algorithm</div>
+        <pre><code>INSERTION-SORT(A)
+  for j = 2 to A.length
+      key = A[j]
+      i = j - 1
+      while i > 0 and A[i] > key
+          A[i + 1] = A[i]
+          i = i - 1
+      A[i + 1] = key</code></pre>
+        <ul>
+            <li><b>Time Complexity:</b> Best Case \( O(n) \) (already sorted), Worst/Average Case <b>\( O(n^2) \)</b> (reverse sorted).</li>
+            <li><b>Space Complexity:</b> <b>\( O(1) \)</b> since it sorts in-place.</li>
+        </ul>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q6</span><span class="marks">5 marks</span>
+        <div class="q-title">Minimax Algorithm</div>
+        <pre><code>function MINIMAX(node, depth, isMaximizingPlayer)
+  if depth == 0 or node is terminal
+      return heuristic_value_of_node
+  
+  if isMaximizingPlayer
+      bestVal = -INFINITY
+      for each child of node
+          val = MINIMAX(child, depth - 1, FALSE)
+          bestVal = MAX(bestVal, val)
+      return bestVal
+  else
+      bestVal = +INFINITY
+      for each child of node
+          val = MINIMAX(child, depth - 1, TRUE)
+          bestVal = MIN(bestVal, val)
+      return bestVal</code></pre>
+        <p><b>Complexity:</b> Time: \( O(b^m) \) where b is branching factor and m is maximum depth. Space: \( O(bm) \) for recursion stack.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q7</span><span class="marks">5 marks</span>
+        <div class="q-title">Greedy Strategy & Job Sequencing</div>
+        <p>A greedy strategy provides an optimal solution only if the problem exhibits <b>Optimal Substructure</b> and the <b>Greedy Choice Property</b> (meaning a sequence of locally optimal choices leads to a globally optimal solution).</p>
+
+        <pre><code>Algorithm JobSequencing(Jobs)
+  1. Sort Jobs in descending order of profit.
+  2. Initialize an array slots[] to keep track of free time slots.
+  3. For each Job i from 1 to N:
+        Find a free slot from min(deadline(i), N) down to 1
+        If slot is found, assign Job i to that slot.</code></pre>
+        <p><b>Time Complexity:</b> Sorting takes \( O(n \log n) \). Placing jobs takes \( O(n^2) \) in worst case. Total = <b>\( O(n^2) \)</b>. (Can be optimized to \( O(n \log n) \) using Disjoint Sets).</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q8</span><span class="marks">5 marks</span>
+        <div class="q-title">Huffman Coding</div>
+        <p><b>Frequencies:</b> a=30, b=20, c=25, d=15, e=35. Total = 125.</p>
+        <div class="solve">
+            <p>1. Min two: (d=15, b=20) → Node1(35)</p>
+            <p>2. New Set: {c=25, a=30, e=35, Node1=35}</p>
+            <p>3. Min two: (c=25, a=30) → Node2(55)</p>
+            <p>4. New Set: {e=35, Node1=35, Node2=55}</p>
+            <p>5. Min two: (e=35, Node1=35) → Node3(70)</p>
+            <p>6. New Set: {Node2=55, Node3=70}</p>
+            <p>7. Root: Node4(125)</p>
+            <p><i>Assuming Left = 0, Right = 1</i>:</p>
+        </div>
+        <div class="result">Codes: c: 00, a: 01, e: 10, d: 110, b: 111</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q9</span><span class="marks">5 marks</span>
+        <div class="q-title">Backtracking Multiple Solutions & Subset Sum Trace</div>
+        <p><b>Yes</b>, backtracking inherently explores the entire state-space tree. It can be programmed to print <i>all valid solutions</i> or stop after finding the first one.</p>
+        
+        <p><b>Trace {1, 2, 3, 4, 7} for Sum = 8:</b></p>
+        <div class="solve">
+            <ul>
+                <li>Include 1 → Sum=1. Include 2 → Sum=3. Include 3 → Sum=6. Include 4 → Sum=10 (Backtrack!).</li>
+                <li>Exclude 4, Include 7 → Sum=13 (Backtrack!).</li>
+                <li>Exclude 3, Include 4 → Sum=7. Include 7 → Sum=14 (Backtrack!).</li>
+                <li>... tracing reveals combinations:</li>
+            </ul>
+        </div>
+        <div class="result">Solutions: {1, 3, 4} and {1, 7}</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q10</span><span class="marks">5 marks</span>
+        <div class="q-title">Extended Euclidean Algorithm</div>
+        <p><b>Why used:</b> It finds the Greatest Common Divisor (GCD) of two integers, but importantly, it also finds the coefficients x and y such that \( ax + by = \gcd(a, b) \). This is crucial in cryptography (like RSA) for calculating <b>Modular Multiplicative Inverses</b>.</p>
+        
+        <pre><code>function extGCD(a, b)
+  if b == 0
+      return (a, 1, 0)
+  (d, x1, y1) = extGCD(b, a mod b)
+  x = y1
+  y = x1 - floor(a/b) * y1
+  return (d, x, y)</code></pre>
+        <p><b>Complexity:</b> <b>\( O(\log(\min(a,b))) \)</b></p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q11</span><span class="marks">5 marks</span>
+        <div class="q-title">NP-Complete Problems & SAT</div>
+        <p><b>NP-Complete:</b> The most difficult problems in NP. If any NP-Complete problem can be solved in polynomial time, then P = NP. (Examples: TSP, Vertex Cover, 3-SAT).</p>
+        <p><b>"SAT is NP-complete" (Cook's Theorem Sketch):</b></p>
+        <ul>
+            <li>SAT is in NP because a given truth assignment can be verified in polynomial time.</li>
+            <li>Any problem in NP is solvable by a non-deterministic Turing machine in polynomial time. Cook showed that the execution of any such Turing machine can be encoded as a massive Boolean formula (SAT). Since any NP problem reduces to SAT, SAT is NP-Complete.</li>
+        </ul>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q12</span><span class="marks">5 marks</span>
+        <div class="q-title">Short Notes</div>
+        <h4>(a) Aggregate Analysis</h4>
+        <p>A technique in amortized analysis where we compute the total upper bound \( T(n) \) for a sequence of \( n \) operations. The amortized cost per operation is then simply \( T(n) / n \). It guarantees an average performance over a worst-case sequence.</p>
+
+        <h4>(b) Selection Problems</h4>
+        <p>The problem of selecting the \( k^{th} \) smallest (or largest) element from an unsorted list. While sorting takes \( O(n \log n) \), selection algorithms (like QuickSelect or Median-of-Medians) can solve this in <b>\( O(n) \)</b> expected or worst-case time.</p>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 5 Questions</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 5: Board & Pre-board Analysis</h1>
+    
+<h2>Board & Pre-Board Important Questions</h2>
+
+<div class="step">
+    <h3>Q1. Explain Matrix Chain Multiplication, write recurrence relation and find the optimal cost for chain (4 x 10) (10 x 3) (3 x 12) (12 x 20) (20 x 7). (2+8) [Pre-board 2024]</h3>
+    <p><strong>Answer Plan:</strong></p>
+    <ul>
+        <li><strong>Explanation:</strong> Emphasize that matrix multiplication is associative but NOT commutative. Parentheses placement drastically shifts total scalar operations without altering the final content algorithm layout. Dynamic programming breaks the interval $i$ to $j$ exploring every pivot partition $k$.</li>
+        <li><strong>Recurrence Relation:</strong><br>
+        $m[i, j] = 0$ if $i = j$<br>
+        $m[i, j] = \min_{i \le k < j} \{m[i, k] + m[k+1, j] + p_{i-1} \cdot p_k \cdot p_j\}$ if $i < j$</li>
+        <li><strong>Numerical Calculation:</strong> Build an $N \times N$ DP table. You have 5 dimensions $[4, 10, 3, 12, 20, 7]$. Iteratively compute lengths 2, 3, 4, 5. Show minimum costs dynamically updating $m[1..2]$ etc. Result yields optimal parens.</li>
+    </ul>
+</div>
+
+<div class="step">
+    <h3>Q2. Explain Dynamic Programming Approach. Differ with recursion? Floyd Warshall algorithm to compute shortest path and analyze its time complexity. (4+6) [Boards]</h3>
+    <p><strong>Answer:</strong><br>
+    DP is problem solving via tabular history, ensuring you solve a unique problem exactly once.<br>
+    <strong>DP vs Recursion:</strong><br>
+    1. DP is Bottom-Up, explicit memory state array. Recursion is Top-Down, Call Stack.<br>
+    2. DP resolves in Polynomial time (efficient). Uncached Recursion handles overlapping problems repeatedly, resulting in severe Exponential Time.<br>
+    <strong>Floyd-Warshall:</strong> Write the 3 nested loops. $k$ is the intermediate vertex, evaluating rows $i$ expanding to targets $j$. Matrix is strictly updated $N$ times. Due to 3 loops over $N$ vertices, total time strictly evaluates to exactly $O(V^3)$.</p>
+</div>
+
+<div class="step">
+    <h3>Q3. What do you mean by memoization strategy? Compare memoization with dynamic programming. (5) [Boards]</h3>
+    <p><strong>Answer:</strong><br>
+    Memoization is caching the output of a deterministic recursive function directly into a HashMap or array based on its exact input parameters.<br>
+    <strong>Comparison:</strong><br>
+    - DP (Tabulation) computes $100\%$ of all subproblems systematically inside iterative `for`-loops. Eager evaluation. High space density.<br>
+    - Memoization evaluates 'lazy'. It exclusively computes branches triggered actively by the recursive request. It bypasses mathematically impossible logic branches directly, potentially saving table space if states are extremely sparse. Prone to Call Stack Overflow exception on vast data sets.</p>
+</div>
+
+</body>
+</html>

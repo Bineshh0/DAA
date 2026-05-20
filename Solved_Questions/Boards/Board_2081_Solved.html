@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Board Question 2081 - Solved</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a1a; color: #d1d5db; line-height: 1.8; padding: 30px; }
+        .wrap { max-width: 900px; margin: auto; }
+        h1 { text-align: center; font-size: 1.8em; padding: 24px; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border-radius: 16px; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 20px; font-style: italic; }
+        .group-hdr { text-align: center; font-size: 1.4em; color: #10b981; margin: 30px 0 10px; padding: 12px; border: 2px solid #10b981; border-radius: 12px; background: rgba(16, 185, 129, 0.05); }
+        .q-card { background: #18182f; border: 1px solid #2d2d4a; border-radius: 14px; padding: 22px 26px; margin: 22px 0; transition: border-color .3s; }
+        .q-card:hover { border-color: #3b82f6; }
+        .q-num { display: inline-block; background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; font-weight: 700; padding: 4px 14px; border-radius: 20px; font-size: .85em; margin-bottom: 4px; }
+        .marks { display: inline-block; background: #7c3aed; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: .8em; margin-left: 8px; }
+        .q-title { color: #10b981; font-size: 1.1em; font-weight: 700; margin: 8px 0 14px; }
+        h4 { color: #3b82f6; margin: 16px 0 8px; font-size: 1em; }
+        p { margin: 8px 0; text-align: justify; }
+        b { color: #34d399; }
+        em { color: #f472b6; font-style: normal; }
+        ul, ol { margin: 8px 0 8px 22px; }
+        li { margin: 4px 0; }
+        .def { background: linear-gradient(135deg, #064e3b, #1e3a8a); padding: 14px 18px; border-radius: 10px; margin: 10px 0; border-left: 4px solid #3b82f6; }
+        .formula { text-align: center; margin: 14px auto; padding: 14px; background: #1a1a3e; border: 1px dashed #6366f1; border-radius: 10px; font-size: 1.05em; color: #c4b5fd; font-family: 'Courier New', monospace; }
+        .solve { background: #1a1a3e; border: 1px solid #3b3b5e; padding: 14px; border-radius: 10px; margin: 10px 0; overflow-x: auto;}
+        .result { background: #14532d; border: 1px solid #22c55e; padding: 10px 14px; border-radius: 8px; margin: 10px 0; color: #86efac; font-weight: 600; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; border-radius: 10px; overflow: hidden; }
+        th { background: linear-gradient(135deg, #10b981, #059669); color: #fff; padding: 10px; font-size: .9em; }
+        td { padding: 8px 10px; border: 1px solid #2d2d4a; background: #1a1a30; font-size: .9em; text-align: center; }
+        tr:nth-child(even) td { background: #1f1f3a; }
+        pre { background: #111128; padding: 14px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; color: #93c5fd; font-size: 0.95em; margin: 10px 0; border: 1px solid #2d2d4a; }
+        .warn { background: #451a03; border-left: 4px solid #f59e0b; padding: 10px 14px; border-radius: 0 10px 10px 0; margin: 12px 0; color: #fde68a; font-size: .95em; }
+    </style>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <h1>🚀 DAA Board Question 2081 — Solved</h1>
+    <p class="subtitle">Design and Analysis of Algorithms (CSC314)</p>
+
+    <div class="group-hdr">📋 SECTION A — 10 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q1</span><span class="marks">10 marks</span>
+        <div class="q-title">DP vs Memoization & Floyd Warshall Algorithm</div>
+        
+        <h4>A. Dynamic Programming vs Memoization</h4>
+        <table>
+            <tr><th>Dynamic Programming (Tabulation)</th><th>Memoization (Top-Down)</th></tr>
+            <tr><td>Bottom-up approach. Solves smallest subproblems first.</td><td>Top-down approach. Solves problems recursively as needed.</td></tr>
+            <tr><td>Uses an iterative table (array/matrix) to store results.</td><td>Uses a cache (hash map/array) to store results of recursive calls.</td></tr>
+            <tr><td>No recursion overhead; generally faster in practice.</td><td>Involves recursion overhead (call stack memory).</td></tr>
+            <tr><td>Computes <b>all</b> subproblems, even if not needed.</td><td>Computes <b>only</b> the required subproblems (lazy evaluation).</td></tr>
+        </table>
+
+        <h4>B. Floyd-Warshall Algorithm</h4>
+        <div class="warn">⚠️ Note: The specific graph matrix was missing from the text transcript. The following explains the algorithm steps for an arbitrary weighted graph.</div>
+        <div class="solve">
+            <p>Floyd-Warshall is used to find the shortest paths between <b>all pairs</b> of vertices in a weighted graph (even with negative edges, but no negative cycles).</p>
+            <p><b>Algorithm:</b></p>
+            <p>Let \( D^0 \) be the initial weight matrix of the graph. For \( k = 1 \) to \( n \) (where \( n \) is number of vertices):</p>
+            <p>\( D^k[i][j] = \min(D^{k-1}[i][j], D^{k-1}[i][k] + D^{k-1}[k][j]) \)</p>
+            <p>This means: "Is the path from \( i \) to \( j \) shorter if we go through intermediate vertex \( k \)?"</p>
+        </div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q2</span><span class="marks">10 marks</span>
+        <div class="q-title">Quick Sort: Worst Case, Randomized Quick Sort & Trace</div>
+
+        <h4>A. Worst Case of Quick Sort</h4>
+        <div class="def">
+            The worst-case scenario for standard Quick Sort occurs when the chosen pivot is always the <b>greatest or smallest</b> element. This happens when the array is already sorted (ascending or descending) and the last/first element is picked as the pivot.
+            <br><br>Time Complexity drops to <b>O(n²)</b> because the partition heavily unbalances (one sub-array of size \( n-1 \), and one of size 0).
+        </div>
+
+        <h4>B. Randomized Quick Sort</h4>
+        <p>Instead of picking a fixed pivot (like the last element), Randomized Quick Sort picks a <b>random element</b> from the array and swaps it with the last element before partitioning. This guarantees that the worst-case \( O(n^2) \) behavior depends purely on random chance, making the expected average time complexity consistently <b>O(n log n)</b> regardless of the input data's initial sorting.</p>
+
+        <h4>C. Trace Quick Sort for {2, 4, 3, 6, 12, 10, 11, 13, 9}</h4>
+        <div class="solve">
+            <p>Initial Array: <code>[2, 4, 3, 6, 12, 10, 11, 13, 9]</code></p>
+            <p><b>Pass 1:</b> Pivot = 9 (last element). Partition around 9.</p>
+            <ul>
+                <li>i points to smaller elements. Iterate j from start to end-1.</li>
+                <li>2 < 9, swap(2,2). 4 < 9, swap(4,4). 3 < 9, swap(3,3). 6 < 9, swap(6,6).</li>
+                <li>12 > 9 (ignore). 10 > 9 (ignore). 11 > 9 (ignore). 13 > 9 (ignore).</li>
+                <li>Swap pivot 9 with first greater element (12).</li>
+            </ul>
+            <p>Array becomes: <code>[2, 4, 3, 6, <b>9</b>, 10, 11, 13, 12]</code></p>
+            <p><b>Pass 2 (Left):</b> <code>[2, 4, 3, 6]</code>. Pivot = 6. All < 6. Array becomes: <code>[2, 4, 3, <b>6</b>]</code></p>
+            <p><b>Pass 3 (Left of 6):</b> <code>[2, 4, 3]</code>. Pivot = 3. 2 < 3. 4 > 3. Swap 3 and 4.</p>
+            <p>Array becomes: <code>[2, <b>3</b>, 4]</code></p>
+            <p><b>Pass 4 (Right of 9):</b> <code>[10, 11, 13, 12]</code>. Pivot = 12. 10 < 12. 11 < 12. 13 > 12. Swap 12 and 13.</p>
+            <p>Array becomes: <code>[10, 11, <b>12</b>, 13]</code></p>
+        </div>
+        <div class="result">Sorted Array: {2, 3, 4, 6, 9, 10, 11, 12, 13}</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q3</span><span class="marks">10 marks</span>
+        <div class="q-title">Greedy Algorithm & Fractional Knapsack</div>
+
+        <h4>A. Does Greedy Algorithm guarantee optimal solution?</h4>
+        <p><b>No</b>, greedy algorithms do not always guarantee an optimal solution for every problem (e.g., they fail on the 0/1 Knapsack problem and Travelling Salesman). A greedy strategy only provides an optimal solution if the problem exhibits <b>Greedy Choice Property</b> (a local optimum leads to a global optimum) and <b>Optimal Substructure</b> (like in Fractional Knapsack or MST).</p>
+
+        <h4>B. Fractional Knapsack Problem</h4>
+        <div class="warn">⚠️ Note: Knapsack capacity was missing from transcript. Assuming Capacity <b>W = 15 kg</b> for this solution trace.</div>
+        
+        <p>1. Calculate Value/Weight ratio for each item:</p>
+        <table>
+            <tr><th>Item</th><th>Value (V)</th><th>Weight (W)</th><th>Ratio (V/W)</th></tr>
+            <tr><td>7</td><td>50</td><td>1</td><td>50.0</td></tr>
+            <tr><td>2</td><td>10</td><td>1</td><td>10.0</td></tr>
+            <tr><td>4</td><td>15</td><td>2</td><td>7.5</td></tr>
+            <tr><td>3</td><td>20</td><td>3</td><td>6.67</td></tr>
+            <tr><td>1</td><td>12</td><td>2</td><td>6.0</td></tr>
+            <tr><td>6</td><td>3</td><td>10</td><td>0.3</td></tr>
+            <tr><td>5</td><td>2</td><td>12</td><td>0.16</td></tr>
+        </table>
+
+        <div class="solve">
+            <p>2. Sort descending by Ratio: Items order = {7, 2, 4, 3, 1, 6, 5}</p>
+            <p>3. Fill Knapsack (Capacity = 15):</p>
+            <ul>
+                <li>Take Item 7: wt = 1. Remaining cap = 14. Profit = 50.</li>
+                <li>Take Item 2: wt = 1. Remaining cap = 13. Profit = 50 + 10 = 60.</li>
+                <li>Take Item 4: wt = 2. Remaining cap = 11. Profit = 60 + 15 = 75.</li>
+                <li>Take Item 3: wt = 3. Remaining cap = 8. Profit = 75 + 20 = 95.</li>
+                <li>Take Item 1: wt = 2. Remaining cap = 6. Profit = 95 + 12 = 107.</li>
+                <li>Take fraction of Item 6: Need 6kg, but Item 6 has 10kg. Take (6/10). Profit = 107 + (6/10 * 3) = 107 + 1.8 = 108.8.</li>
+            </ul>
+        </div>
+        <div class="result">Total Maximum Profit = 108.8 (for W=15)</div>
+    </div>
+
+    <div class="group-hdr">📋 SECTION B — 5 Marks Each</div>
+
+    <div class="q-card">
+        <span class="q-num">Q4</span><span class="marks">5 marks</span>
+        <div class="q-title">Subset Sum Problem (Backtracking)</div>
+        <p><b>Set A:</b> {5, 7, 10, 12, 15, 18, 20}. <b>Target Sum:</b> 35.</p>
+        <div class="solve">
+            <p>Using a State Space Tree, we sequentially include/exclude items and backtrack if the running sum exceeds 35.</p>
+            <ul>
+                <li>Solution 1: {15, 20} (15 + 20 = 35)</li>
+                <li>Solution 2: {5, 12, 18} (5 + 12 + 18 = 35)</li>
+                <li>Solution 3: {7, 10, 18} (7 + 10 + 18 = 35)</li>
+                <li>Solution 4: {5, 10, 20} (5 + 10 + 20 = 35)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q5</span><span class="marks">5 marks</span>
+        <div class="q-title">Master's Method</div>
+        
+        <h4>(a) \( T(n) = 2T(n/2) + n^2 \)</h4>
+        <div class="solve">
+            <p>Form: \( T(n) = aT(n/b) + f(n) \). Here \( a = 2, b = 2, f(n) = O(n^2) \).</p>
+            <p>Compute \( n^{\log_b a} = n^{\log_2 2} = n^1 \).</p>
+            <p>Since \( f(n) = n^2 \) is polynomially larger than \( n^1 \) (i.e., \( n^2 = \Omega(n^{1+\epsilon}) \) for \( \epsilon=1 \)), we are in <b>Case 3</b>.</p>
+            <p>Check regularity condition: \( af(n/b) \leq cf(n) \implies 2(n/2)^2 \leq cn^2 \implies \frac{1}{2}n^2 \leq cn^2 \) (True for c=1/2).</p>
+        </div>
+        <div class="result">Complexity: \( \Theta(n^2) \)</div>
+
+        <h4>(b) \( T(n) = 2T(n/2) + 1 \)</h4>
+        <div class="solve">
+            <p>Here \( a = 2, b = 2, f(n) = O(1) \).</p>
+            <p>Compute \( n^{\log_b a} = n^{\log_2 2} = n^1 \).</p>
+            <p>Since \( f(n) = O(1) \) is polynomially smaller than \( n^1 \) (i.e., \( 1 = O(n^{1-\epsilon}) \) for \( \epsilon=1 \)), we are in <b>Case 1</b>.</p>
+        </div>
+        <div class="result">Complexity: \( \Theta(n) \)</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q6</span><span class="marks">5 marks</span>
+        <div class="q-title">nth Fibonacci Algorithm & Complexity</div>
+        <pre><code>Algorithm Fibonacci_DP(n)
+  if n <= 1 return n
+  Let F[0..n] be a new array
+  F[0] = 0
+  F[1] = 1
+  for i = 2 to n
+      F[i] = F[i-1] + F[i-2]
+  return F[n]</code></pre>
+        <ul>
+            <li><b>Time Complexity:</b> \( O(n) \) — Single loop running n times.</li>
+            <li><b>Space Complexity:</b> \( O(n) \) — Array of size n (can be optimized to \( O(1) \) using two variables).</li>
+        </ul>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q7</span><span class="marks">5 marks</span>
+        <div class="q-title">Order Statistics & Edit Distance</div>
+        <h4>Order Statistics Problem</h4>
+        <p>The problem of finding the \( i^{th} \) smallest element in an unordered array of \( n \) elements. The minimum (i=1), maximum (i=n), and median are special cases. This can be solved in \( O(n) \) expected time using QuickSelect.</p>
+
+        <h4>Edit Distance ("cat" to "car")</h4>
+        <div class="solve">
+            <p>Using DP table. String 1 (x-axis) = "cat", String 2 (y-axis) = "car".</p>
+            <p>1. "c" matches "c" (cost 0)</p>
+            <p>2. "a" matches "a" (cost 0)</p>
+            <p>3. "t" does not match "r" (cost 1 for substitution)</p>
+        </div>
+        <div class="result">Edit Distance = 1 (1 substitution)</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q8</span><span class="marks">5 marks</span>
+        <div class="q-title">Recursion vs Backtracking & Miller-Rabin</div>
+        <h4>Recursion vs Backtracking</h4>
+        <p><b>Recursion</b> is a programming technique where a function calls itself to solve smaller instances of the same problem. <b>Backtracking</b> is an algorithmic strategy that uses recursion to explore the state-space tree depth-first, but includes a <i>bounding function</i> to stop evaluating paths that cannot possibly lead to a solution (pruning).</p>
+
+        <h4>Miller-Rabin Randomized Primality Test Complexity</h4>
+        <p>The algorithm performs \( k \) independent iterations to test if a number \( n \) is prime. In each iteration, it does modular exponentiation. Therefore, the time complexity is <b>\( O(k \log^3 n) \)</b>. It's highly efficient for very large primes compared to deterministic algorithms.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q9</span><span class="marks">5 marks</span>
+        <div class="q-title">Chinese Remainder Theorem (CRT)</div>
+        <div class="solve">
+            <p>Equations: \( x \equiv 1 \pmod 3 \), \( x \equiv 2 \pmod 5 \), \( x \equiv 0 \pmod 7 \).</p>
+            <p>Moduli: \( m_1=3, m_2=5, m_3=7 \). Total \( M = 3 \times 5 \times 7 = 105 \).</p>
+            <p>\( M_1 = 105/3 = 35 \). Inverse \( y_1 \): \( 35y_1 \equiv 1 \pmod 3 \implies 2y_1 \equiv 1 \pmod 3 \implies y_1 = 2 \)</p>
+            <p>\( M_2 = 105/5 = 21 \). Inverse \( y_2 \): \( 21y_2 \equiv 1 \pmod 5 \implies 1y_2 \equiv 1 \pmod 5 \implies y_2 = 1 \)</p>
+            <p>\( M_3 = 105/7 = 15 \). Inverse \( y_3 \): \( 15y_3 \equiv 1 \pmod 7 \implies 1y_3 \equiv 1 \pmod 7 \implies y_3 = 1 \)</p>
+            
+            <p>Formula: \( x = (a_1 M_1 y_1 + a_2 M_2 y_2 + a_3 M_3 y_3) \pmod M \)</p>
+            <p>\( x = (1 \cdot 35 \cdot 2 + 2 \cdot 21 \cdot 1 + 0 \cdot 15 \cdot 1) \pmod{105} \)</p>
+            <p>\( x = (70 + 42 + 0) \pmod{105} = 112 \pmod{105} = 7 \).</p>
+        </div>
+        <div class="result">x = 7</div>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q10</span><span class="marks">5 marks</span>
+        <div class="q-title">Approximation Algorithm for Vertex Cover</div>
+        <div class="def">
+            <b>Vertex Cover:</b> Finding a subset of vertices such that every edge in the graph is incident to at least one vertex in the subset. Finding the minimum cover is NP-Complete.
+        </div>
+        <p><b>Approximation Algorithm (Factor 2):</b></p>
+        <pre><code>C = empty set
+E' = all edges in Graph
+while E' is not empty:
+   Pick an arbitrary edge (u, v) from E'
+   Add both u and v to C
+   Remove all edges from E' that are incident to u or v
+return C</code></pre>
+        <p>This greedy strategy guarantees finding a vertex cover that is at most <b>2 times</b> the size of the optimal minimum vertex cover.</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q11</span><span class="marks">5 marks</span>
+        <div class="q-title">Cook's Theorem & Problem Reducibility</div>
+        <p><b>Cook's Theorem (Cook-Levin Theorem):</b> States that the Boolean Satisfiability Problem (SAT) is NP-Complete. It proves that any problem in NP can be reduced to SAT in polynomial time. If a polynomial time algorithm is found for SAT, it implies P = NP.</p>
+        
+        <p><b>Problem Reducibility (\( \propto \)):</b> Problem A is polynomial-time reducible to Problem B (denoted A \( \leq_p \) B) if any instance of A can be transformed into an instance of B in polynomial time, such that the answer to B provides the answer to A. It is used to prove NP-Completeness (e.g., reducing SAT to 3-SAT to Vertex Cover).</p>
+    </div>
+
+    <div class="q-card">
+        <span class="q-num">Q12</span><span class="marks">5 marks</span>
+        <div class="q-title">Short Notes</div>
+        <h4>(a) Big Oh (O), Big Omega (\( \Omega \)), Big Theta (\( \Theta \))</h4>
+        <ul>
+            <li><b>Big Oh (O):</b> Asymptotic upper bound. Represents worst-case complexity. \( f(n) \leq cg(n) \).</li>
+            <li><b>Big Omega (\( \Omega \)):</b> Asymptotic lower bound. Represents best-case complexity. \( f(n) \geq cg(n) \).</li>
+            <li><b>Big Theta (\( \Theta \)):</b> Asymptotic tight bound. Represents average/exact complexity. \( c_1g(n) \leq f(n) \leq c_2g(n) \).</li>
+        </ul>
+
+        <h4>(b) Class P, Class NP, and NP-Complete</h4>
+        <ul>
+            <li><b>Class P:</b> Problems that can be <i>solved</i> by a deterministic Turing machine in polynomial time. (e.g., Sorting).</li>
+            <li><b>Class NP:</b> Problems where a given solution can be <i>verified</i> in polynomial time. (e.g., Sudoku, Knapsack).</li>
+            <li><b>NP-Complete:</b> The hardest problems in NP. A problem is NP-Complete if it is in NP, and every other problem in NP can be reduced to it in polynomial time (e.g., SAT, TSP).</li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

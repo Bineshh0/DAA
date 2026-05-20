@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 5 Advanced Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 5: Bio-Informatics & NP-Deception</h1>
+    
+<h2>Advanced DP Memory Economics</h2>
+<div class="box">
+    <h3>The Viterbi Algorithm & DNA Decoding</h3>
+    <p>While Matrix Chain and TSP are strictly computer science concepts, the highest peak of Dynamic Programming governs biological evolution computational discovery currently actively used today. The <strong>Viterbi Algorithm</strong> is a DP framework used to analyze Hidden Markov Models (HMMs).</p>
+    <p>When sequencing raw nucleotide data (interpreting electrical noise from rapid DNA genome strands A,C,T,G sequence), Viterbi DP is executed to calculate the highest probability exact path of correct nucleotides backwards through the matrix, correcting for genetic read variations computationally. If done recursively without DP, sequencing one genome would mathematically exceed the universe's total processing lifespan!</p>
+
+    <h3>Why 0/1 Knapsack is Fake Polynomial (Pseudo-Polynomial)</h3>
+    <p>You memorize that 0/1 Knapsack is $O(N \times W)$. This feels like Polynomial Time, putting it in Class 'P'. So why is Knapsack labeled exactly as NP-Complete Intractable?</p>
+    <p>In complexity theory, inputs are measured strictly by bit length. A knapsack capacity $W=1,000,000$ requires exactly $20$ binary bits of input memory string space natively (since $2^{20} \approx 1,000,000$). However, implementing the DP solution forces us to construct a full 2D loop computing memory locations up to $W$.<br>
+    The algorithm's strict Time Execution corresponds to $2^{\text{input bits}}$. The time grows EXPONENTIALLY relative strictly to the bit capacity representation length of $W$. So if a hacker provides $W=10^{15}$, the bit length is merely 50 bytes of JSON payload string, which crashes the server matrix DP generation, failing completely.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 3 Advanced Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 3: Security Vectors & Deep Math</h1>
+    
+<h2>Advanced Industry Usage: Defeating DoS Attacks</h2>
+<div class="box">
+    <h3>1. QuickSort Denial-of-Service Vulnerability</h3>
+    <p>Normally, programming languages default sorting arrays to QuickSort because it's very cache-friendly. However, hackers realized that if they feed web servers specific reverse-engineered malformed input data, they can trigger QuickSort's $O(n^2)$ worst-case. This forces the server's CPU to max out for minutes just to sort a small 100,000 item list, effectively executing an Algorithmic Denial of Service (DoS) attack.</p>
+    <p><strong>The Fix: IntroSort (Introspective Sort)</strong><br>
+    Modern libraries (C++ `std::sort`, Rust `sort`) use a hybrid algorithm called IntroSort. It starts by using QuickSort for its blazing speed. BUT, if the recursion depth exceeds $2 \cdot \log_2 N$, the algorithm formally "introspects" (realizes it's being hacked or fed extremely bad data), and instantly switches entirely to <strong>Heap Sort</strong>. Heap Sort guarantees $O(N \log N)$ execution regardless of data skew!</p>
+
+    <h3>2. "Median of Medians" Why the magic number 5?</h3>
+    <p>In the Worst-Case Linear Time Selection algorithm, why do we group elements in sets of 5? Why not 3 or 7?</p>
+    <p>If we group by 3, the recurrence becomes $T(n/3) + T(2n/3) + O(n)$. Notice that $n/3 + 2n/3 = n$. The work isn't shrinking fast enough, and the total complexity expands mathematically to $O(N \log N)$, failing the "Linear Time" requirement. <br>
+    Grouping by 5 correctly reduces the branches to $n/5$ and $7n/10$. The sum is $9n/10$. Since $9/10 < 1$, it strictly converges geometrically bounding execution at $O(N)$. While grouping by 7 or 9 also achieves $O(N)$, grouping by 5 possesses the smallest known constant factor multiplying the asymptotic notation.</p>
+</div>
+
+</body>
+</html>

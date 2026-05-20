@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 1 Advanced Note</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 1: Advanced Hardware & Math Formulations</h1>
+    
+<h2>Advanced Real-World Algorithm Analysis</h2>
+<div class="box">
+    <h3>1. CPU Cache Limitations of the RAM Model</h3>
+    <p>The standard RAM model assumes all memory access costs $O(1)$. In real, modern computing, CPUs use a complex multi-tiered cache hierarchy (L1, L2, L3). A Cache Hit costs ~1 nanosecond, while a Main Memory Cache Miss (RAM access) can cost ~100 nanoseconds - a 100x penalty!</p>
+    <p><strong>Cache-Aware Algorithms:</strong> Algorithms are now designed acknowledging "Spatial Locality" (accessing memory in contiguous blocks is faster because CPU fetches whole cache lines, e.g. 64 bytes) and "Temporal Locality". This is why an $O(n^2)$ algorithm with perfect memory locality can sometimes outperform an $O(n \log n)$ algorithm with randomized, sparse pointer jumps (like large Linked Lists) due to constant Cache misses.</p>
+
+    <h3>2. Akra-Bazzi Theorem</h3>
+    <p>The Master Theorem you study is a simplified subset. The <strong>Akra-Bazzi Theorem</strong> is the advanced, generalized mathematical method used in theoretical algorithm design to solve divide-and-conquer recurrences with extremely uneven sub-problem sizes.<br>
+    For example, $T(n) = T(n/3) + T(2n/3) + n$. The Master Theorem completely fails here because sub-problems ($1/3$ and $2/3$) are asymmetrical. Akra-Bazzi uses calculus integration directly over the recursion functions to derive tight bounds!</p>
+
+    <h3>3. Amortized Analysis</h3>
+    <p>Instead of looking at the worst case of a single operation, <strong>Amortized Analysis</strong> looks at the worst-case performance of an entire sequence of operations. For example, a Dynamic Array (e.g., Python Lists or Java ArrayList) inserting an element is usually $O(1)$. However, when it hits max capacity, it must resize and copy everything, taking $O(n)$ time. Amortized analysis proves that averaging this rare $O(n)$ penalty across $n$ elements means the amortized time remains exactly $O(1)$ per operation.</p>
+</div>
+
+</body>
+</html>

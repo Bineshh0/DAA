@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 4 Questions</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 4: Board & Pre-board Analysis</h1>
+    
+<h2>Board & Pre-Board Important Questions</h2>
+
+<div class="step">
+    <h3>Q1. Explain greedy paradigm how prims algorithm uses this approach. (3+2 Marks) [Pre-board 2024]</h3>
+    <p><strong>Answer:</strong><br>
+    <strong>Greedy Paradigm:</strong> It is a problem-solving approach where we make the locally optimal choice at each stage with the hope of eventually reaching a global optimal solution. It lacks backtracking. <br>
+    <strong>How Prim's uses it:</strong> In Prim's algorithm, we have an MST set (the visited vertices) and unvisited vertices. The 'Greedy' action is iterating across all cross-edges connecting these two sets, and indiscriminately picking the bridge edge that has the absolute minimum weight. It instantly accepts this cheapest local edge without calculating alternative future branching paths.</p>
+</div>
+
+<div class="step">
+    <h3>Q2. Explain Dijkstra's shortest path algorithm and its complexity. (3+2 Marks) [Pre-board 2023]</h3>
+    <p><strong>Answer Algorithm:</strong></p>
+    <pre>
+DIJKSTRA(Graph G, Source S):
+   1. set dist[v] = infinity for all v, dist[S] = 0
+   2. Q = MinPriorityQueue(all vertices keyed by dist)
+   3. while Q is not empty:
+   4.     u = ExtractMin(Q)
+   5.     for each neighbor v of u:
+   6.         if dist[u] + weight(u,v) < dist[v]:  // RELAXATION
+   7.              dist[v] = dist[u] + weight(u,v)
+   8.              DecreaseKey(Q, v, dist[v])
+    </pre>
+    <p><strong>Complexity:</strong><br>
+    The algorithm extracts minimum $V$ times ($O(V \log V)$). It relaxes edges $E$ times ($O(E \log V)$). The total complexity is mathematically scaled to $O((V + E) \log V)$ using a binary min-heap.</p>
+</div>
+
+<div class="step">
+    <h3>Q3. What is prefix code? Explain Huffman algorithm to compute the prefix codes. (5 Marks) [Boards]</h3>
+    <p><strong>Answer:</strong><br>
+    A <strong>Prefix Code</strong> is a variable-length binary code where it is guaranteed that no codeword forms the starting prefix sequence of any other valid codeword. This explicitly eliminates all ambiguity during binary string decoding without needing spaces or commas.<br>
+    <strong>Algorithm Explanation:</strong> Start with an array of distinct characters mapped to frequencies in a queue. Pluck the two smallest values, attach them as children to a synthetic master Parent node containing their sum frequency. Re-insert this Parent into the queue. Repeat iteratively until only the final tree root is left. To generate the codes, trace paths from the root to the leaf, assigning '0' for left-child steps and '1' for right.</p>
+</div>
+
+</body>
+</html>

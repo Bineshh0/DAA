@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unit 8 Detailed Notes</title>
+
+<style>
+  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
+  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
+  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
+  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
+  th { background: #e0e0e0; font-weight: bold; }
+  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
+  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
+  li { margin-bottom: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
+  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
+  .diagram { background: #fff; border: 2px dashed #aaa; padding: 20px; text-align: center; margin: 15px 0; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 0.9em; }
+</style>
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Unit 8: NP Completeness</h1>
+    
+<h2>8.1 Tractable vs Intractable Problems</h2>
+<div class="box">
+    <p><strong>Tractable Problems:</strong> Problems that can be definitively solved in Polynomial Time (i.e. $O(N^k)$). Examples: Sorting $O(N \log N)$, Matrix Multiplication $O(N^3)$.</p>
+    <p><strong>Intractable Problems:</strong> Problems that strictly require Super-Polynomial Time (Exponential $O(2^N)$ or Factorial $O(N!)$) on all known computational algorithms. If input size scales, they crash the computer. Examples: 0/1 Knapsack, TSP.</p>
+</div>
+
+<h2>8.2 Complexity Classes</h2>
+<div class="box">
+    <h3>P (Polynomial Time)</h3>
+    <p>Problems that can be structurally <strong>SOLVED</strong> by a determinisitic computer in Polynomial time. (e.g. Dijkstra, Binary Search).</p>
+
+    <h3>NP (Non-deterministic Polynomial)</h3>
+    <p>Problems whose solutions cannot currently be <em>found</em> quickly, but if someone hands you a solution, you can mathematically <strong>VERIFY</strong> if that solution is correct strictly in Polynomial time natively. (e.g., Checking if a given TSP path is $< 1000$ miles takes $O(N)$, but computing the shortest path from scratch takes exponential time).</p>
+
+    <h3>NP-Hard</h3>
+    <p>A problem is NP-Hard if every other problem strictly in NP can be mathematically translated (<strong>reduced</strong>) to it in Polynomial time. They are at least as hard as the hardest problems in NP! Interestingly, an NP-Hard problem itself doesn't even have to belong to the NP class (it doesn't have to be verifiable).</p>
+
+    <h3>NP-Complete</h3>
+    <p>The VIP intersection zone! A problem is NP-Complete if it fulfills both conditions simultaneously: <strong>(1) It is in NP, AND (2) It is NP-Hard</strong>.</p>
+</div>
+
+<h2>8.3 Reduction & Cook's Theorem</h2>
+<div class="box">
+    <p><strong>Polynomial Reducibility:</strong> If you can rewrite Problem A so that an algorithm for Problem B solves it mathematically in Polynomial Time, then $A \le_P B$.</p>
+    <h3>Cook's Theorem</h3>
+    <p>Proved Stephen Cook (1971): The <strong>Boolean Satisfiability Problem (CNF-SAT)</strong> is mathematically the first explicitly proven NP-Complete problem. Every solitary computation problem belonging to NP can be explicitly re-written as a massive logical AND/OR Boolean formulation.</p>
+</div>
+
+<h2>8.4 Approximation Algorithms</h2>
+<div class="box">
+    <p>When encountering NP-Hard problems in reality, finding the exact perfect optimal solution is fundamentally impossible due to heat death of the universe math constraints. So we trade absolute exactness for massive speed! Approximation algorithms output answers that are mathematically bounded to be "close enough" to the optimum, incredibly fast (in Polynomial time).</p>
+    
+    <h3>Vertex Cover Approximation (2-Approximation)</h3>
+    <p><strong>Problem:</strong> Find the smallest set of vertices that explicitly touch EVERY edge in a graph. Exact finding is NP-C.</p>
+    <p><strong>Approximation:</strong> Pick a random edge $(u, v)$. Immediately add both vertices to your cover. Delete all edges connected to either $u$ or $v$. Repeat un-covered edge grabs until the graph is empty. This blindly crude algorithm structurally guarantees that the final cover is exactly $\le 2 \times$ the size of the true Optimal cover! Runs in $O(V+E)$.</p>
+
+    <h3>Subset Sum Approximation (FPTAS)</h3>
+    <p>Uses a mathematical scaling factor to trim trailing decimals off the subset possibilities tree, ensuring the combinatorial list of subsets doesn't logically explode to $2^N$. It bounds the output stringently to an error tolerance of exactly $(1 + \epsilon)$.</p>
+</div>
+
+</body>
+</html>
