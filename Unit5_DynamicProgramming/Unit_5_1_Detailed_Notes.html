@@ -1,67 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 5 Detailed Notes</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Unit 5 — Dynamic Programming</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}.c{max-width:920px;margin:0 auto}h1{font-size:1.85rem;background:linear-gradient(135deg,#c77dff,#e0aaff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}h2{color:#c77dff;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#c77dff10;border-left:4px solid #c77dff;border-radius:0 8px 8px 0}h3{color:#e0aaff;font-size:1.05rem;margin:18px 0 8px}h4{color:#efcfff;font-size:.95rem;margin:14px 0 6px}p{margin-bottom:10px;font-size:.93rem}ul,ol{padding-left:22px;margin-bottom:12px;font-size:.93rem}li{margin-bottom:6px}.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}.def strong{color:#e0aaff}.formula{background:#1a1020;border:1px solid #c77dff40;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#e0aaff}table{width:100%;border-collapse:collapse;font-size:.85rem;margin:12px 0}th,td{padding:8px;border:1px solid #1e1e30;text-align:left;vertical-align:top}th{background:#1a1a2e;color:#e0aaff}tr:nth-child(even){background:#0e0e18}.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.86rem}.note strong{color:#6bcb77}.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.86rem}.warn strong{color:#ffd93d}.diagram{background:#1a1020;border:1px solid #c77dff40;border-radius:10px;padding:16px;margin:14px 0;font-size:.85rem;color:#e0aaff;white-space:pre-wrap;font-family:monospace;overflow-x:auto}code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#e0aaff}</style><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🧩 Unit 5 — Dynamic Programming</h1><p class="sub">CSC 314 · 8 Hrs · Detailed Notes</p>
 
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
+<h2>5.1 Greedy vs DP vs Recursion</h2><div class="def"><strong>Dynamic Programming (DP)</strong> solves problems by combining solutions of overlapping sub-problems. It is typically applied to <em>optimization</em> problems that exhibit two properties: <strong>(1) Optimal Substructure</strong> and <strong>(2) Overlapping Sub-problems</strong>.</div>
+<table><tr><th></th><th>Recursion</th><th>Greedy</th><th>Dynamic Programming</th></tr><tr><td>Decision</td><td>Try all options recursively</td><td>Pick locally best</td><td>Try all options but <em>memoise</em> results</td></tr><tr><td>Re-computation</td><td>Yes (exponential)</td><td>No</td><td>No (table look-up)</td></tr><tr><td>Optimality</td><td>Yes</td><td>Only if greedy property holds</td><td>Always (when optimal substructure holds)</td></tr><tr><td>Typical time</td><td>Exponential</td><td>$O(n\log n)$</td><td>Polynomial</td></tr></table>
 
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 5: Dynamic Programming</h1>
-    
-<h2>5.1 Strategy: Dynamic Programming vs Greedy</h2>
-<div class="box">
-    <p><strong>Dynamic Programming (DP)</strong> solves complex optimization problems by breaking them down into simpler, overlapping subproblems. Unlike Greedy tracking only local minimums, DP computes <em>all</em> possible scenarios completely, tabulates their values to avoid redundant computation, and finally picks the optimal aggregate path.</p>
-    <ul>
-        <li><strong>Optimal Substructure:</strong> Optimal solution to problem contains optimal solutions to sub-problems.</li>
-        <li><strong>Overlapping Subproblems:</strong> Subproblems recur heavily. Recursion computes them $2^N$ times. DP computes them exactly once, fetching from an array hereafter $O(1)$.</li>
-    </ul>
-    <h3>Memoization vs Tabulation Strategy</h3>
-    <p><strong>Memoization (Top-Down):</strong> Writing a standard recursive function, but wrapping a cache array at the top. If `cache[n]` exists, return it, else compute. Pros: Only computes strictly required nodes. Cons: Heavy Call Stack overhead.</p>
-    <p><strong>Tabulation (Bottom-Up):</strong> Fully abandoning recursion. Building a massive ND-array from size 0, 1... up to N incrementally in iterative loops. Pros: No recursion limit crashes. Cons: Computes every single cell regardless of need.</p>
-</div>
+<h3>Elements of the DP strategy</h3><ol><li><strong>Characterise</strong> the structure of an optimal solution.</li><li><strong>Recursively define</strong> the value of an optimal solution.</li><li><strong>Compute</strong> the value bottom-up (filling a table).</li><li><strong>Construct</strong> an optimal solution from the table (back-tracking through choices).</li></ol>
+<h3>Two flavours of DP</h3><div class="diagram">Top-down (Memoization)            Bottom-up (Tabulation)
++-----------------------+         +-----------------------+
+| Start from problem    |         | Start from base case  |
+| Recurse on subproblems|         | Fill table iteratively|
+| Cache results in map  |         | No recursion overhead |
+| Lazy — only needed    |         | Eager — fills all     |
++-----------------------+         +-----------------------+</div>
 
-<h2>5.2 DP Algorithms</h2>
-<div class="box">
-    <h3>Floyd-Warshall (All-Pairs Shortest Path)</h3>
-    <p>Instead of running Dijkstra $V$ times, it builds a massive DP matrix. It checks if passing through an intermediate vertex $k$ creates a shorter path extending from $i$ to $j$.</p>
-    <p>Formula: $D^k[i][j] = \min(D^{k-1}[i][j], D^{k-1}[i][k] + D^{k-1}[k][j])$<br>
-    <strong>Complexity:</strong> Time $O(V^3)$, Space $O(V^2)$.</p>
+<h2>5.2 Matrix Chain Multiplication (MCM)</h2><div class="def">Given a chain of $n$ matrices $A_1 A_2\dots A_n$ where $A_i$ has dimension $p_{i-1}\times p_i$, find the parenthesisation that minimises the number of scalar multiplications.</div>
+<p>Multiplying $A_{p\times q}\cdot B_{q\times r}$ costs $pqr$ scalar operations.</p>
+<h4>Recurrence</h4><div class="formula">m[i,j] = 0&nbsp; if i = j
+m[i,j] = min over k∈[i,j-1] { m[i,k] + m[k+1,j] + p_{i-1}·p_k·p_j }</div>
+<div class="diagram">Algorithm MatrixChainOrder(p, n):
+  for i = 1 to n: m[i][i] ← 0
+  for L = 2 to n:                       // chain length
+      for i = 1 to n-L+1:
+          j ← i + L - 1
+          m[i][j] ← ∞
+          for k = i to j-1:
+              q ← m[i][k] + m[k+1][j] + p[i-1]*p[k]*p[j]
+              if q < m[i][j]: m[i][j] ← q; s[i][j] ← k
+  return m[1][n], s</div>
+<h4>Worked example: A(2×4) B(4×2) C(2×5)</h4><p>Dimensions $p=[2,4,2,5]$.</p>
+<div class="diagram">L=2:
+  m[1,2] = 2·4·2 = 16
+  m[2,3] = 4·2·5 = 40
+L=3:
+  m[1,3]: k=1 → 0+40+2·4·5=80
+          k=2 → 16+0+2·2·5=36   ← min
+  m[1,3] = 36  with split k=2 → (AB)C</div>
+<p>Optimal parenthesisation: $(AB)C$ with 36 multiplications.</p>
+<h4>Analysis</h4><ul><li>Table size $O(n^2)$, inner loop $O(n)$ → <strong>$T(n)=\Theta(n^3)$</strong>.</li><li>Space $=\Theta(n^2)$.</li></ul>
 
-    <h3>0/1 Knapsack Problem</h3>
-    <p>You cannot take partial items. Fractional Greedy fails. We build a DP matrix where rows = Items available, cols = Weight Capacity.<br>
-    Formula: `DP[i][w] = max(DP[i-1][w], val[i] + DP[i-1][w-wt[i]])`</p>
-    <p><strong>Complexity:</strong> strictly $O(N \times W)$. Note this is <em>Pseudo-polynomial</em>. If W is $10^9$, runtime hangs.</p>
+<h2>5.3 String Editing (Edit Distance / Levenshtein Distance)</h2><div class="def">Minimum number of single-character operations (insert / delete / substitute) needed to transform string $X[1..m]$ into $Y[1..n]$.</div>
+<h4>Recurrence</h4><div class="formula">dp[0][j] = j ,&nbsp; dp[i][0] = i
+if X[i]=Y[j]:  dp[i][j] = dp[i-1][j-1]
+else:          dp[i][j] = 1 + min( dp[i-1][j],     // delete
+                                    dp[i][j-1],     // insert
+                                    dp[i-1][j-1] )  // substitute</div>
+<h4>Worked example: “CAT” → “CAR”</h4><div class="diagram">        ""  C  A  R
+   ""    0  1  2  3
+   C     1  0  1  2
+   A     2  1  0  1
+   T     3  2  1  1   ← edit distance = 1 (substitute T→R)</div>
+<h4>Analysis</h4><ul><li>Table $(m+1)\times(n+1)$, each cell $O(1)$ → <strong>$T=\Theta(mn)$</strong>, $S=\Theta(mn)$.</li><li>Space can be reduced to $O(\min(m,n))$ by keeping only two rows.</li></ul>
 
-    <h3>String Editing (Edit Distance)</h3>
-    <p>Converts String A to String B using insertions, deletions, and substitutions. Forms a 2D matrix comparing prefixes.</p>
+<h2>5.4 0/1 Knapsack</h2><div class="def">$n$ items with weight $w_i$ and value $v_i$, capacity $W$. Pick a subset to maximise total value with $\sum w_i\le W$. Items are <em>indivisible</em> — unlike Fractional Knapsack (Unit 4).</div>
+<h4>Recurrence</h4><div class="formula">K[i,w] = 0 if i=0 or w=0
+K[i,w] = K[i-1,w]                                       if w_i > w
+       = max( K[i-1,w], &nbsp; K[i-1,w-w_i] + v_i )       otherwise</div>
+<div class="diagram">Algorithm Knapsack01(w, v, n, W):
+  for w = 0 to W: K[0][w] ← 0
+  for i = 1 to n:
+      for w = 0 to W:
+          if w[i] ≤ w: K[i][w] ← max(K[i-1][w], K[i-1][w-w[i]] + v[i])
+          else:        K[i][w] ← K[i-1][w]
+  return K[n][W]</div>
+<h4>Worked example</h4><p>Items: w=(2,3,4,5), v=(3,5,6,10), capacity W=10.</p>
+<div class="diagram">K[ ][w]:  0  1  2  3  4  5  6  7  8  9 10
+i=0      0  0  0  0  0  0  0  0  0  0  0
+i=1 (2,3)  0  0  3  3  3  3  3  3  3  3  3
+i=2 (3,5)  0  0  3  5  5  8  8  8  8  8  8
+i=3 (4,6)  0  0  3  5  6  8  9 11 11 14 14
+i=4 (5,10) 0  0  3  5  6 10 10 13 15 16 18
+Max value = K[4][10] = 18  (items 1+2+4)</div>
+<h4>Analysis</h4><ul><li><strong>$T=\Theta(nW)$</strong> — <em>pseudo-polynomial</em> (depends on numeric value $W$, not just $\log W$).</li><li>$S=\Theta(nW)$, reducible to $\Theta(W)$ using one row.</li></ul>
 
-    <h3>Matrix Chain Multiplication</h3>
-    <p>Determines the perfectly optimal Parenthesization sequence for multiplying $N$ matrices to minimize scalar arithmetic multiplications. It calculates all split intervals $k$ across sequence length $i$ to $j$. Time: $O(N^3)$.</p>
-</div>
+<h2>5.5 Floyd–Warshall (All-Pairs Shortest Path)</h2><div class="def">Computes shortest distances between every pair of vertices in a weighted directed graph (allows negative weights but no negative cycles).</div>
+<h4>Recurrence — idea: allow paths using only vertices $\{1,\dots,k\}$ as intermediates.</h4><div class="formula">D^{(0)}[i][j] = w(i,j) &nbsp;(∞ if no edge, 0 if i=j)
+D^{(k)}[i][j] = min( D^{(k-1)}[i][j] ,&nbsp; D^{(k-1)}[i][k] + D^{(k-1)}[k][j] )</div>
+<div class="diagram">Algorithm FloydWarshall(W, n):
+  D ← W
+  for k = 1 to n:
+      for i = 1 to n:
+          for j = 1 to n:
+              if D[i][k] + D[k][j] < D[i][j]:
+                  D[i][j] ← D[i][k] + D[k][j]
+  return D</div>
+<h4>Worked example</h4><p>Graph with 4 vertices, weight matrix (∞ where no edge):</p>
+<div class="diagram">      1   2   3   4
+  1   0   5   ∞  10
+  2   ∞   0   3   ∞
+  3   ∞   ∞   0   1
+  4   ∞   ∞   ∞   0
 
-</body>
-</html>
+After k=1: no change (only 1 connects outward)
+After k=2: D[1][3]=min(∞, 5+3)=8 ; D[1][4] still 10
+After k=3: D[1][4]=min(10, 8+1)=9 ; D[2][4]=min(∞, 3+1)=4
+After k=4: no change
+Final D[1..4][1..4]:
+      1   2   3   4
+  1   0   5   8   9
+  2   ∞   0   3   4
+  3   ∞   ∞   0   1
+  4   ∞   ∞   ∞   0</div>
+<h4>Analysis</h4><ul><li><strong>$T=\Theta(n^3)$</strong>, $S=\Theta(n^2)$.</li><li>Detect negative cycle: any $D[i][i]<0$ after the algorithm.</li></ul>
+
+<h2>5.6 Travelling Salesman Problem (TSP) — Held–Karp DP</h2><div class="def">Given $n$ cities and pairwise distances, find the shortest tour visiting every city exactly once and returning to the start.</div>
+<h4>State</h4><p>$C[S][i]$ = minimum cost of a path that starts at city 1, visits every city in subset $S$ exactly once, and ends at city $i$ (with $i\in S$).</p>
+<div class="formula">C[{1}][1] = 0
+C[S][i] = min over j ∈ S, j≠i { C[S\{i}][j] + d(j,i) }
+Answer = min over i≠1 { C[V][i] + d(i,1) }</div>
+<h4>Analysis</h4><ul><li>$2^n$ subsets × $n$ end-cities × $n$ transitions → <strong>$T=\Theta(n^2 2^n)$</strong>, $S=\Theta(n\,2^n)$.</li><li>Brute force is $\Theta(n!)$ — DP exponential but much smaller.</li><li>TSP is NP-Hard (Unit 8); DP is the best <em>exact</em> algorithm known.</li></ul>
+
+<h2>5.7 Memoization Strategy vs Tabulation</h2><div class="def"><strong>Memoization</strong> = top-down recursion + cache. The first call computes the value and stores it in a table; subsequent calls return the cached value in $O(1)$.</div>
+<table><tr><th></th><th>Memoization (Top-Down)</th><th>Tabulation (Bottom-Up)</th></tr><tr><td>Direction</td><td>Problem → sub-problems</td><td>Sub-problems → problem</td></tr><tr><td>Execution</td><td>Recursive, lazy</td><td>Iterative, eager</td></tr><tr><td>Sub-problems solved</td><td>Only those needed</td><td>Every sub-problem in the table</td></tr><tr><td>Overhead</td><td>Function-call stack</td><td>None</td></tr><tr><td>When preferable</td><td>Sparse state space</td><td>Dense state space, tight loops</td></tr></table>
+<p>Both have the same asymptotic complexity — each unique sub-problem is solved exactly once.</p>
+
+<div class="note"><strong>Take-away:</strong> After Unit 5 you must be able to (a) explain optimal substructure &amp; overlapping sub-problems, (b) compare greedy / recursion / DP, (c) derive the recurrence and fill the DP table for MCM, Edit Distance, 0/1 Knapsack, Floyd–Warshall and TSP, (d) state the time / space complexity of each, and (e) explain when memoization is preferable to tabulation and vice-versa.</div>
+
+</div></body></html>

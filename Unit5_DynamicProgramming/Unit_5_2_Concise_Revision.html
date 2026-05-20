@@ -1,47 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 5 Revision Note</title>
-
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
-
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 5: Quick Revision</h1>
-    
-<h2>Summary: Dynamic Programming</h2>
-<ul>
-    <li><strong>Core Pillars:</strong> Overlapping Subproblems & Optimal Substructure.</li>
-    <li><strong>Approach:</strong> Tabulation (Bottom-up DP table) vs Memoization (Top-down Recursive Cache). DP executes entirely in Polynomial Time, while naïve recursion hits Exponential Time.</li>
-    <li><strong>Matrix Chain:</strong> $O(N^3)$. Minimizes floating point operations natively. Formula: $M[i][j] = \min_{k}(M[i][k] + M[k+1][j] + p_{i-1}p_k p_j)$.</li>
-    <li><strong>String Editing:</strong> $O(M \times N)$. Table compares strings. If chars match, copy diagonal `[i-1][j-1]`. Else `1 + min(delete, insert, substitute)`.</li>
-    <li><strong>0/1 Knapsack:</strong> $O(N \times W)$. Items indivisible. You either explicitly take it (add val, subtract weight index), or explicitly discard it. DP matrices store highest val tracked at all strict weight tiers.</li>
-    <li><strong>Floyd-Warshall:</strong> $O(V^3)$. Computes shortest path matrix iteratively funneling routes strictly restricted through interim vertex $K=1..N$.</li>
-    <li><strong>TSP (Travelling Salesman):</strong> $O(N^2 2^N)$. DP heavily reduces plain recursion from $O(N!)$, saving vast calculations, but still remains NP-hard.</li>
-</ul>
-
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 5 — Revision</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.7}.c{max-width:850px;margin:0 auto}h1{color:#c77dff;text-align:center}h2{color:#e0aaff;border-left:4px solid #c77dff;padding-left:10px;margin-top:22px}.b{background:#12121a;border:1px solid #1e1e30;border-radius:8px;padding:12px;margin:10px 0;font-size:.9rem}code{background:#1a1a2e;color:#e0aaff;padding:2px 6px;border-radius:4px}table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.85rem}td,th{border:1px solid #2a2a40;padding:8px}th{background:#1a1a2e;color:#e0aaff}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>⚡ Unit 5 — Quick Revision</h1>
+<h2>DP applicability</h2><div class="b">Optimal substructure + Overlapping sub-problems ⟹ DP.</div>
+<h2>Memoization vs Tabulation</h2><div class="b">Same asymptotic cost. Memo = top-down recursion + cache. Tab = bottom-up table fill.</div>
+<h2>Recurrence cheat-sheet</h2><table><tr><th>Problem</th><th>Recurrence</th><th>Time</th><th>Space</th></tr><tr><td>MCM</td><td>$m[i,j]=\min_k\{m[i,k]+m[k+1,j]+p_{i-1}p_kp_j\}$</td><td>$\Theta(n^3)$</td><td>$\Theta(n^2)$</td></tr><tr><td>Edit Distance</td><td>$dp[i,j]=1+\min$(ins,del,sub)</td><td>$\Theta(mn)$</td><td>$\Theta(mn)$</td></tr><tr><td>0/1 Knapsack</td><td>$K[i,w]=\max(K[i-1,w],K[i-1,w-w_i]+v_i)$</td><td>$\Theta(nW)$</td><td>$\Theta(nW)$</td></tr><tr><td>Floyd–Warshall</td><td>$D[i,j]=\min(D[i,j],D[i,k]+D[k,j])$</td><td>$\Theta(n^3)$</td><td>$\Theta(n^2)$</td></tr><tr><td>TSP (Held–Karp)</td><td>$C[S,i]=\min_j\{C[S\setminus\{i\},j]+d(j,i)\}$</td><td>$\Theta(n^2 2^n)$</td><td>$\Theta(n2^n)$</td></tr></table>
+<h2>Greedy vs DP — picking the right tool</h2><div class="b">Greedy when greedy-choice property holds (Fractional Knapsack). DP otherwise (0/1 Knapsack, MCM, TSP).</div>
+<h2>Common DP signatures</h2><div class="b">• 2-D table indexed by (i, j) where i,j are positions → $\Theta(n^2)$.<br>• 2-D table indexed by (item, capacity) → $\Theta(nW)$ pseudo-polynomial.<br>• 3-D table (subset, end-vertex, length) → exponential.</div>
+</div></body></html>
