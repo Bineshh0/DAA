@@ -1,16 +1,40 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 1 — Important Questions</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.75}.c{max-width:900px;margin:0 auto}h1{color:#ff6b6b;text-align:center}h2{color:#ff8e8e;margin-top:25px;padding:8px 12px;background:#ff6b6b15;border-left:4px solid #ff6b6b}.q{background:#1a0f1a;border:1px solid #ff6b6b40;border-radius:8px;padding:10px;margin:8px 0;color:#ffaaaa;font-weight:600}.a{background:#12121a;border:1px solid #1e1e30;border-radius:8px;padding:12px;margin:8px 0 18px;font-size:.92rem}.diag{background:#0f0f1a;border:1px solid #4d96ff40;padding:12px;font-family:monospace;font-size:.85rem;color:#88aaff;white-space:pre-wrap;border-radius:6px;margin:8px 0}code{background:#1a1a2e;color:#ff8888;padding:2px 5px;border-radius:4px}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🎯 Unit 1 — Important Questions (Model + Boards)</h1><h2>Q1. [Model 10M / Board 2078] Need of algorithm analysis + RAM model + Big-O,Ω,Θ with examples</h2><div class="a"><strong>Need:</strong> compare algorithms, predict resource use, prove correctness, choose best for input size — independent of language/hardware.<br><br><strong>RAM Model:</strong> theoretical machine; every primitive op (arithmetic, compare, assign, array index, call/return) = $O(1)$; memory random-access; no cache or parallelism.<br><br><strong>Big-O:</strong> $f(n)\le c\cdot g(n)$ ⟹ upper bound. e.g. $3n+5=O(n)$.<br><strong>Big-Ω:</strong> $f(n)\ge c\cdot g(n)$ ⟹ lower bound. e.g. $3n+5=\Omega(n)$.<br><strong>Big-Θ:</strong> both ⟹ tight bound. $3n+5=\Theta(n)$.</div><h2>Q2. [Board 2080] Iterative factorial + detailed analysis</h2><div class="a"><div class="diag">Factorial(n):
-  fact ← 1            // c1, 1 time
-  for i = 1 to n:     // c2, n+1 times
-      fact ← fact * i // c3, n times
-  return fact         // c4, 1 time</div>$T(n)=c_1+c_2(n+1)+c_3 n+c_4 = \Theta(n)$. Space $=\Theta(1)$.</div><h2>Q3. [Model Q5 / Board 2081 Q5] Master Method</h2><div class="a"><strong>(a) T(n)=3T(n/2)+n</strong>: $n^{\log_2 3}\approx n^{1.58}$; $f=n$ is smaller ⟹ Case 1 ⟹ $\Theta(n^{\log_2 3})$.<br><strong>(b) T(n)=2T(n/4)+\sqrt{n}</strong>: $n^{\log_4 2}=n^{0.5}=\sqrt n=f$ ⟹ Case 2 ⟹ $\Theta(\sqrt n\log n)$.<br><strong>(c) Board 2081(a) T(n)=2T(n/2)+n²</strong> ⟹ Case 3 ⟹ $\Theta(n^2)$.<br><strong>(d) Board 2081(b) T(n)=2T(n/2)+1</strong> ⟹ Case 1 ⟹ $\Theta(n)$.<br><strong>(e) Board 2076(a) T(n)=7T(n/2)+n²</strong>: $n^{\log_2 7}\approx n^{2.81}$ ⟹ Case 1 ⟹ $\Theta(n^{\log_2 7})$.<br><strong>(f) Board 2076(b) T(n)=4T(n/4)+n</strong>: $n^1=f$ ⟹ Case 2 ⟹ $\Theta(n\log n)$.</div><h2>Q4. [Board 2080 Q1] T(n)=2T(n/2)+1 by Substitution → O(n)</h2><div class="a"><div class="diag">Guess: T(n) ≤ cn − 1
-Base: T(1)=1 ≤ c−1 ⟹ c≥2
-IH:  T(n/2) ≤ c(n/2) − 1
-Step: T(n) = 2T(n/2)+1 ≤ 2[c(n/2)−1]+1 = cn−1 ✓
-∴ T(n) = O(n)</div></div><h2>Q5. [Board 2078 Q4] Recursion-tree method for T(n)=2T(n/2)+1</h2><div class="a"><div class="diag">Level   nodes   cost/node   level cost
-  0       1        1            1
-  1       2        1            2
-  2       4        1            4
-  …
-  k      2^k       1           2^k
-Depth = log₂n; leaves = n
-Total = 1+2+…+n = 2n−1 = O(n)</div></div><h2>Q6. [Board 2080 Q12a] Aggregate Analysis</h2><div class="a">Total cost of n ops divided by n gives amortized cost. Example: binary counter — incrementing from 0 to n flips $\sum n/2^k < 2n$ bits ⟹ $O(1)$ amortized per increment.</div><h2>Q7. [Board 2079 Q8a] Best, Worst, Average case</h2><div class="a"><strong>Best</strong> ($\Omega$): least operations (Linear Search → $O(1)$).<br><strong>Worst</strong> ($O$): max operations — gives guarantee ($O(n)$).<br><strong>Average</strong> ($\Theta$): expected over input distribution ($O(n/2)$).</div></div></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 1 — Practice Drill</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.75}.c{max-width:900px;margin:0 auto}h1{color:#ff6b6b;text-align:center}h2{color:#ff8e8e;margin-top:22px;padding:8px 12px;background:#ff6b6b15;border-left:4px solid #ff6b6b}.t{background:#12121a;border:1px solid #1e1e30;border-radius:8px;padding:12px;margin:10px 0;font-size:.92rem}.diag{background:#0f0f1a;border:1px solid #4d96ff40;padding:12px;font-family:monospace;font-size:.85rem;color:#88aaff;white-space:pre-wrap;border-radius:6px;margin:8px 0;overflow-x:auto}code{background:#1a1a2e;color:#ff8888;padding:2px 5px;border-radius:4px}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🎯 Unit 1 — Topic-wise Practice Drill</h1>
+<p style="text-align:center;color:#888;font-size:.85rem">Use these worked examples to internalise every syllabus topic. They naturally cover every board / model question pattern.</p>
+
+<h2>Drill 1 — Deriving $T(n)$ from pseudocode</h2><div class="t">Given the nested-loop snippet:<div class="diag">for i = 1 to n:
+   for j = 1 to i:
+        x = x + 1</div>Counting primitive operations: inner loop runs $i$ times for each outer $i$. Total $= \sum_{i=1}^{n} i = n(n+1)/2 = \Theta(n^2)$. This pattern (summation of arithmetic series) is the standard way exam questions test the RAM model.</div>
+
+<h2>Drill 2 — Proving a function is $O$, $\Omega$, $\Theta$</h2><div class="t">Show $f(n)=3n^2+5n+7 = \Theta(n^2)$.<br><br><strong>Upper:</strong> for $n\ge 1$, $3n^2+5n+7 \le 3n^2+5n^2+7n^2 = 15n^2$. Choose $c_2=15,n_0=1$ → $O(n^2)$.<br><strong>Lower:</strong> $3n^2+5n+7 \ge 3n^2$. Choose $c_1=3$ → $\Omega(n^2)$.<br>Both hold ⟹ $\Theta(n^2)$.</div>
+
+<h2>Drill 3 — Aggregate analysis (binary counter)</h2><div class="t">k-bit counter incremented $n$ times. Bit $i$ flips $\lfloor n/2^i\rfloor$ times. Total flips $\le n\sum_{i\ge 0} 1/2^i = 2n$. Hence amortized cost per increment $= 2n/n = O(1)$ even though a single increment can cost up to $O(\log n)$.</div>
+
+<h2>Drill 4 — Substitution method</h2><div class="t">Prove $T(n)=2T(n/2)+1$ is $O(n)$.<div class="diag">Guess T(n) ≤ cn − 1
+Base  T(1)=1 ≤ c−1  ⟹ c ≥ 2  ✓
+IH    T(n/2) ≤ c(n/2)−1
+Step  T(n) = 2T(n/2)+1 ≤ 2[c(n/2)−1]+1 = cn − 1  ✓
+∴ T(n)=O(n)</div></div>
+
+<h2>Drill 5 — Recursion-tree method</h2><div class="t">Solve $T(n)=2T(n/2)+n$.<div class="diag">Level k: 2^k nodes, each of size n/2^k, cost per node n/2^k
+Level cost = 2^k · n/2^k = n  (constant per level)
+Depth = log₂ n
+Total = n · log n = Θ(n log n)</div></div>
+
+<h2>Drill 6 — Master Theorem (10 patterns)</h2><div class="t"><div class="diag">① 2T(n/2)+n          → Case 2 → Θ(n log n)
+② 2T(n/2)+n²         → Case 3 → Θ(n²)
+③ 2T(n/2)+1          → Case 1 → Θ(n)
+④ 3T(n/2)+n          → Case 1 → Θ(n^{log₂3})
+⑤ 2T(n/4)+√n         → Case 2 → Θ(√n log n)
+⑥ 4T(n/4)+n          → Case 2 → Θ(n log n)
+⑦ 7T(n/2)+n²         → Case 1 → Θ(n^{log₂7})
+⑧ 9T(n/3)+n          → Case 1 → Θ(n²)
+⑨ 2T(n/4)+n²         → Case 3 → Θ(n²)
+⑩ 5T(n/4)+kn         → Case 1 → Θ(n^{log₄5})</div>For every one: identify $a$,$b$,$f(n)$; compute $n^{\log_b a}$; compare; pick case; write answer.</div>
+
+<h2>Drill 7 — When Master fails</h2><div class="t">$T(n)=2T(n/2)+n\log n$. Here $n^{\log_2 2}=n$ and $f=n\log n$ is larger than $n$ but not polynomially larger ⟹ Case 3 fails. Use recursion tree: each level still costs $n\log(n/2^k)$, summing gives $\Theta(n\log^2 n)$.</div>
+
+<h2>Drill 8 — Geometric interpretation</h2><div class="t">Sketch $f(n)$ together with $c\,g(n)$. For $O$: the line $c\,g(n)$ stays <em>above</em> $f$ after some $n_0$. For $\Omega$: stays <em>below</em>. For $\Theta$: two lines sandwich $f$. This is the figure examiners draw for Big-O / Big-Ω / Big-Θ.</div>
+
+<h2>Drill 9 — Recursive vs iterative space</h2><div class="t">Factorial: iterative uses $\Theta(1)$ memory; recursive uses $\Theta(n)$ because each call pushes a stack frame. Always mention this distinction in space-complexity answers.</div>
+
+</div></body></html>
