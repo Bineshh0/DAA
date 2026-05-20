@@ -1,77 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 3 Questions</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 3 — Practice Drill</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.75}.c{max-width:900px;margin:0 auto}h1{color:#6bcb77;text-align:center}h2{color:#a8e6a3;margin-top:22px;padding:8px 12px;background:#6bcb7715;border-left:4px solid #6bcb77}.t{background:#12121a;border:1px solid #1e1e30;border-radius:8px;padding:12px;margin:10px 0;font-size:.92rem}.diag{background:#0f1a0f;border:1px solid #6bcb7740;padding:12px;font-family:monospace;font-size:.85rem;color:#a8e6a3;white-space:pre-wrap;border-radius:6px;margin:8px 0;overflow-x:auto}code{background:#1a1a2e;color:#a8e6a3;padding:2px 5px;border-radius:4px}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🎯 Unit 3 — Topic-wise Practice Drill</h1>
 
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
+<h2>Drill 1 — Binary Search on a sorted array</h2><div class="t">Search 13 in $[1,3,5,7,9,11,13,15,17,19]$.<div class="diag">low=0 high=9 mid=4 A[4]=9  < 13 → right
+low=5 high=9 mid=7 A[7]=15 > 13 → left
+low=5 high=6 mid=5 A[5]=11 < 13 → right
+low=6 high=6 mid=6 A[6]=13 ✓ return 6</div>4 comparisons = $⌈\log_2 10⌉$.</div>
 
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 3: Board & Pre-board Analysis</h1>
-    
-<h2>Board & Pre-Board Important Questions</h2>
+<h2>Drill 2 — MinMax on $(3,1,7,2,9,4,6,8)$</h2><div class="t"><div class="diag">Split into (3,1,7,2) & (9,4,6,8)
+Left → (min=1, max=7)
+Right → (min=4, max=9)
+Combine → (min=1, max=9)</div>Total comparisons = ⌈3·8/2⌉ − 2 = 10, vs naive 14.</div>
 
-<div class="step">
-    <h3>Q1. Write Heap Sort algorithm, explain with an example, and analyze complexity (6+2+2) [Pre-board 2024]</h3>
-    <p><strong>Algorithmic Steps:</strong></p>
-    <pre>
-1. BUILD-MAX-HEAP(A)
-      For i = floor(length/2) down to 1:
-          MAX-HEAPIFY(A, i)
-2. HEAPSORT(A)
-      For i = length(A) down to 2:
-          Exchange A[1] with A[i]
-          heap_size = heap_size - 1
-          MAX-HEAPIFY(A, 1)
-    </pre>
-    <p><strong>Complexity Analysis:</strong><br>
-    - Building the heap originally takes $O(N)$ time.<br>
-    - The main loop runs $N-1$ times, and in each iteration, extracting the root and sinking the new root down (Heapify) takes $O(\log N)$.<br>
-    - Total Time Complexity: $O(N \log N)$. Space is $O(1)$.</p>
-</div>
+<h2>Drill 3 — Merge Sort trace on $(38,27,43,3,9,82,10)$</h2><div class="t"><div class="diag">Split: (38,27,43,3) (9,82,10)
+Sort left → (3,27,38,43)
+Sort right → (9,10,82)
+Merge → (3,9,10,27,38,43,82)</div></div>
 
-<div class="step">
-    <h3>Q2. Explain Merge sort with recurrence relation and analysis its complexity. (5 Marks) [Pre-board 2024]</h3>
-    <p><strong>Answer:</strong><br>
-    Merge Sort recursively divides the array of $n$ elements into two sub-arrays of size $n/2$, sorts them independently, and merges the sorted arrays in $O(n)$ time.<br>
-    <strong>Recurrence Relation:</strong> $T(n) = 2T(n/2) + cn$<br>
-    Using the Master Method: $a=2, b=2, f(n)=n$.<br>
-    $n^{\log_2 2} = n^1 = n$.<br>
-    Since $f(n)$ optimally matches $n^{\log_b a}$ (Case 2), the overall complexity is exactly $\Theta(N \log N)$.</p>
-</div>
+<h2>Drill 4 — Quick Sort trace on $(2,4,3,6,12,10,11,13,9)$, pivot = last</h2><div class="t"><div class="diag">Partition by 9: (2,4,3,6) 9 (12,10,11,13)
+Left pivot 6 → (2,4,3) 6 ()
+   pivot 3 → (2) 3 (4)
+Right pivot 13 → (12,10,11) 13 ()
+   pivot 11 → (10) 11 (12)
+Final: (2,3,4,6,9,10,11,12,13)</div></div>
 
-<div class="step">
-    <h3>Q3. Discuss the order statistics. Explain worst-case linear time selection algorithm and time complexity. (2+8) [Boards]</h3>
-    <p><strong>Answer Plan:</strong></p>
-    <ul>
-        <li><strong>Order Statistics:</strong> Define finding the i-th smallest element. Median is $\lceil N/2 \rceil$.</li>
-        <li><strong>Algorithm:</strong> Write SELECT(A, p, r, i). Detail the "group by 5" and "median of medians" pivot selection.</li>
-        <li><strong>Complexity Analysis:</strong> State recursion $T(n) = T(n/5) + T(7n/10) + c \cdot n$. The total sum equals $n$. So worst-case is strictly $O(N)$ linear time.</li>
-    </ul>
-</div>
+<h2>Drill 5 — Why sorted input is QuickSort's worst case</h2><div class="t">If A is already sorted and pivot is the last element, every partition produces sizes $(n-1, 0)$. Recurrence $T(n)=T(n-1)+\Theta(n) \Rightarrow T(n)=\Theta(n^2)$. Randomized version: each pivot is uniformly random → expected balanced splits → $\Theta(n\log n)$.</div>
 
-</body>
-</html>
+<h2>Drill 6 — Build-Heap on $(2,9,3,12,15,8,11)$</h2><div class="t"><div class="diag">i=3 (node 3=A[3]):  3 vs children 8,11 → swap → (2,9,11,12,15,8,3)
+i=2 (node 9):       9 vs 12,15 → swap with 15 → (2,15,11,12,9,8,3)
+i=1 (node 2):       2 vs 15,11 → swap with 15 → (15,2,11,12,9,8,3)
+                    sink 2 vs 12,9 → swap with 12 → (15,12,11,2,9,8,3)
+Max-heap built.
+
+Now extract max repeatedly:
+swap(15,3) → (3,12,11,2,9,8 | 15); heapify → (12,9,11,2,3,8)
+swap(12,8) → (8,9,11,2,3 | 12,15); heapify → (11,9,8,2,3)
+... continue until sorted.
+Final: (2,3,8,9,11,12,15)</div></div>
+
+<h2>Drill 7 — Maximum element via D&amp;C</h2><div class="t"><div class="diag">Max(A,l,r):
+  if l=r: return A[l]
+  mid ← (l+r)/2
+  return max(Max(A,l,mid), Max(A,mid+1,r))</div>$T(n)=2T(n/2)+1 = \Theta(n)$, but uses $\Theta(\log n)$ stack — iterative is preferred.</div>
+
+<h2>Drill 8 — Randomized Select for median of $(7,10,4,3,20,15)$, i=3</h2><div class="t"><div class="diag">Suppose random pivot = 10 → partition → (7,4,3) 10 (20,15)
+k = 4. i=3 < 4 → recurse left with i=3
+Pivot 4 → (3) 4 (7); k = 2. i=3 > 2 → recurse right with i=1
+Return 7.
+Expected runtime Θ(n).</div></div>
+
+<h2>Drill 9 — Why Median-of-Medians is $\Theta(n)$</h2><div class="t">Pivot from groups-of-5 medians is guaranteed to be ≥ 30 % of A and ≤ 30 % of A. Largest recursive call works on ≤ 7n/10. Recurrence $T(n)\le T(n/5)+T(7n/10)+cn$; since $1/5+7/10=9/10<1$, the geometric series sums to $\Theta(n)$.</div>
+
+<h2>Drill 10 — When to use which sort?</h2><div class="t"><strong>Merge:</strong> when stability is needed and extra memory is fine.<br><strong>Quick:</strong> in-memory, average case fastest with small constants.<br><strong>Randomized Quick:</strong> when worst-case-adversarial input is possible.<br><strong>Heap:</strong> when $O(1)$ extra space + guaranteed $O(n\log n)$ are required (e.g. embedded systems).</div>
+
+</div></body></html>

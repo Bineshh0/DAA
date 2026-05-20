@@ -1,49 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 3 Advanced Note</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 3 — Advanced</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.7}.c{max-width:900px;margin:0 auto}h1{color:#6bcb77;text-align:center}h2{color:#a8e6a3;border-left:4px solid #6bcb77;padding-left:10px;margin-top:22px}.b{background:#12121a;border:1px solid #1e1e30;padding:12px;border-radius:8px;margin:10px 0;font-size:.9rem}.w{background:#1a1a0a;border:1px solid #ffd93d40;padding:10px;border-radius:8px;margin:10px 0;font-size:.85rem;color:#ffd93d}code{background:#1a1a2e;color:#a8e6a3;padding:2px 5px;border-radius:4px}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>🧠 Unit 3 — Advanced &amp; Viva Edge</h1>
 
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
+<h2>Lower bound on comparison sorts</h2><div class="b">Decision-tree argument: there are $n!$ permutations of the input and any comparison sort must produce a distinct leaf for each → tree height $\ge \log_2 n! = \Theta(n\log n)$. Merge / Heap meet this bound; quadratic sorts do not.</div>
 
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 3: Security Vectors & Deep Math</h1>
-    
-<h2>Advanced Industry Usage: Defeating DoS Attacks</h2>
-<div class="box">
-    <h3>1. QuickSort Denial-of-Service Vulnerability</h3>
-    <p>Normally, programming languages default sorting arrays to QuickSort because it's very cache-friendly. However, hackers realized that if they feed web servers specific reverse-engineered malformed input data, they can trigger QuickSort's $O(n^2)$ worst-case. This forces the server's CPU to max out for minutes just to sort a small 100,000 item list, effectively executing an Algorithmic Denial of Service (DoS) attack.</p>
-    <p><strong>The Fix: IntroSort (Introspective Sort)</strong><br>
-    Modern libraries (C++ `std::sort`, Rust `sort`) use a hybrid algorithm called IntroSort. It starts by using QuickSort for its blazing speed. BUT, if the recursion depth exceeds $2 \cdot \log_2 N$, the algorithm formally "introspects" (realizes it's being hacked or fed extremely bad data), and instantly switches entirely to <strong>Heap Sort</strong>. Heap Sort guarantees $O(N \log N)$ execution regardless of data skew!</p>
+<h2>Why Build-Heap is $\Theta(n)$, not $\Theta(n\log n)$</h2><div class="b">Number of nodes at height $h$ in a heap of size $n$ is at most $\lceil n/2^{h+1}\rceil$. Heapify at height $h$ costs $O(h)$. Total: $\sum_{h=0}^{\log n} \lceil n/2^{h+1}\rceil h = O\big(n\sum_{h=0}^{\infty} h/2^h\big) = O(n)$, since $\sum h/2^h = 2$.</div>
 
-    <h3>2. "Median of Medians" Why the magic number 5?</h3>
-    <p>In the Worst-Case Linear Time Selection algorithm, why do we group elements in sets of 5? Why not 3 or 7?</p>
-    <p>If we group by 3, the recurrence becomes $T(n/3) + T(2n/3) + O(n)$. Notice that $n/3 + 2n/3 = n$. The work isn't shrinking fast enough, and the total complexity expands mathematically to $O(N \log N)$, failing the "Linear Time" requirement. <br>
-    Grouping by 5 correctly reduces the branches to $n/5$ and $7n/10$. The sum is $9n/10$. Since $9/10 < 1$, it strictly converges geometrically bounding execution at $O(N)$. While grouping by 7 or 9 also achieves $O(N)$, grouping by 5 possesses the smallest known constant factor multiplying the asymptotic notation.</p>
-</div>
+<h2>Partition schemes (Lomuto vs Hoare)</h2><div class="b"><strong>Lomuto</strong>: simpler, pivot at the end, one index walks forward. More swaps.<br><strong>Hoare</strong>: two indices walk towards each other, fewer swaps, returns the split point rather than pivot's final position. Used in real-world libraries.</div>
 
-</body>
-</html>
+<h2>3-way partition (Dutch National Flag)</h2><div class="b">Splits into &lt; pivot, = pivot, &gt; pivot. Excellent for arrays with many duplicates — turns $\Theta(n^2)$ duplicate worst case into $\Theta(n)$.</div>
+
+<h2>Randomized algorithms — what "expected" means</h2><div class="w">Expected $\Theta(n\log n)$ is over the algorithm's random choices, NOT over the input. Worst input gives expected $\Theta(n\log n)$; no adversary can force quadratic behaviour by crafting input.</div>
+
+<h2>External sorting</h2><div class="b">When data doesn't fit in memory, Merge Sort wins because it accesses data sequentially. The k-way merge from disk runs in $O(n\log_k(n/M))$ I/Os.</div>
+
+<h2>Tail-call elimination in Quick Sort</h2><div class="b">Recurse on the smaller partition, iterate on the larger one → stack depth bounded by $O(\log n)$ even in the worst case.</div>
+
+<h2>Viva quick-fire</h2><div class="b"><strong>Q:</strong> Why is Quick Sort preferred over Merge Sort in practice? <strong>A:</strong> Smaller constant factors, in-place, cache-friendly.<br><strong>Q:</strong> Why is Heap Sort not the universal choice? <strong>A:</strong> Poor cache locality compared with Quick / Merge.<br><strong>Q:</strong> Can Quick Sort be made stable? <strong>A:</strong> Not without extra space.<br><strong>Q:</strong> What is the minimum number of comparisons to find both min and max? <strong>A:</strong> $\lceil 3n/2 \rceil - 2$ — the MinMax algorithm achieves it.<br><strong>Q:</strong> Is binary search faster than hashing? <strong>A:</strong> Binary search is $O(\log n)$; hashing $O(1)$ expected. Hashing wins unless ordering / range queries are also required.</div>
+</div></body></html>

@@ -1,48 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 3 Revision Note</title>
-
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
-
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 3: Quick Revision</h1>
-    
-<h2>Summary: Divide and Conquer Algorithms</h2>
-<ul>
-    <li><strong>Concept:</strong> Divide $\rightarrow$ Conquer $\rightarrow$ Combine. Reduces time bounds exponentially.</li>
-    <li><strong>Binary Search:</strong> $O(\log N)$. Halves the scope. Array must be sorted.</li>
-    <li><strong>Merge Sort:</strong> $O(N \log N)$. Always splits array in exact half. Stable sort. Heavily memory dependent ($O(N)$ space required).</li>
-    <li><strong>Quick Sort:</strong> $O(N \log N)$ on average. In-place. Not stable. Vulnerable to $O(N^2)$ worst-case if pivot selection is skewed.</li>
-    <li><strong>Randomized Quicksort:</strong> Stops hackers from inputting adversarial edge cases by selecting the pivot via RNG. Averages $O(N \log N)$ guaranteed.</li>
-    <li><strong>Heap Sort:</strong> Creates complete binary tree using array indexes ($2i$ left, $2i+1$ right). Root is max. Constant Space $O(1)$, Time $O(N \log N)$.</li>
-    <li><strong>Min-Max:</strong> Divide & conquer reduces brute force comparisons from $2n-2$ to $3n/2 - 2$.</li>
-    <li><strong>Order Statistics (Worst Case Linear $O(N)$):</strong> The Median of Medians approach groups into 5s to avoid $O(N^2)$ QuickSelect crashes, guaranteeing 30/70 partitioning.</li>
-</ul>
-
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit 3 — Revision</title><style>body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;padding:20px;line-height:1.7}.c{max-width:850px;margin:0 auto}h1{color:#6bcb77;text-align:center}h2{color:#a8e6a3;border-left:4px solid #6bcb77;padding-left:10px;margin-top:22px}.b{background:#12121a;border:1px solid #1e1e30;border-radius:8px;padding:12px;margin:10px 0;font-size:.9rem}code{background:#1a1a2e;color:#a8e6a3;padding:2px 6px;border-radius:4px}table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.85rem}td,th{border:1px solid #2a2a40;padding:8px}th{background:#1a1a2e;color:#a8e6a3}</style><script>MathJax={tex:{inlineMath:[['$','$']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>⚡ Unit 3 — Quick Revision</h1>
+<h2>D&amp;C template</h2><div class="b">Divide → Conquer recursively → Combine. Yields $T(n)=aT(n/b)+f(n)$.</div>
+<h2>Binary Search</h2><div class="b">$T(n)=T(n/2)+1 = \Theta(\log n)$. Requires sorted array.</div>
+<h2>MinMax</h2><div class="b">$T(n)=2T(n/2)+2 = \Theta(n)$. Comparisons $=\lceil 3n/2\rceil-2$ vs naive $2n-2$.</div>
+<h2>Sort table</h2><table><tr><th>Sort</th><th>Best</th><th>Avg</th><th>Worst</th><th>Space</th><th>Stable</th></tr><tr><td>Merge</td><td>$n\log n$</td><td>$n\log n$</td><td>$n\log n$</td><td>$\Theta(n)$</td><td>Yes</td></tr><tr><td>Quick</td><td>$n\log n$</td><td>$n\log n$</td><td>$n^2$</td><td>$\Theta(\log n)$</td><td>No</td></tr><tr><td>Rand-Quick</td><td>$n\log n$</td><td>$n\log n$</td><td>rare $n^2$</td><td>$\Theta(\log n)$</td><td>No</td></tr><tr><td>Heap</td><td>$n\log n$</td><td>$n\log n$</td><td>$n\log n$</td><td>$\Theta(1)$</td><td>No</td></tr></table>
+<h2>QuickSort worst case</h2><div class="b">Sorted/reverse-sorted input with last-element pivot → $T(n)=T(n-1)+\Theta(n)=\Theta(n^2)$. Fix: randomize the pivot.</div>
+<h2>Heap primitives</h2><div class="b">Parent $=⌊i/2⌋$, Left $=2i$, Right $=2i+1$.<br>MaxHeapify = $O(\log n)$.<br>BuildMaxHeap = $O(n)$ (tight, not $n\log n$).<br>HeapSort = $O(n\log n)$ in-place.</div>
+<h2>Selection</h2><div class="b">Randomized: expected $\Theta(n)$, worst $\Theta(n^2)$.<br>Median-of-Medians (groups of 5): worst-case $\Theta(n)$ — $T(n)\le T(n/5)+T(7n/10)+\Theta(n)$.</div>
+<h2>Why D&amp;C beats $n^2$</h2><div class="b">Splitting halves the input → $\log n$ levels of $\Theta(n)$ work = $\Theta(n\log n)$ — matches the comparison-sort lower bound.</div>
+</div></body></html>

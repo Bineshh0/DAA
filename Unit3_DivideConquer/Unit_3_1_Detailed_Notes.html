@@ -1,90 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Unit 3 Detailed Notes</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Unit 3 — Divide & Conquer</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#d4d4d4;line-height:1.8;padding:20px}.c{max-width:920px;margin:0 auto}h1{font-size:1.85rem;background:linear-gradient(135deg,#6bcb77,#a8e6a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}.sub{text-align:center;color:#666;font-size:.85rem;margin-bottom:30px}h2{color:#6bcb77;font-size:1.25rem;margin:28px 0 12px;padding:10px 16px;background:#6bcb7710;border-left:4px solid #6bcb77;border-radius:0 8px 8px 0}h3{color:#a8e6a3;font-size:1.05rem;margin:18px 0 8px}h4{color:#c8f0c3;font-size:.95rem;margin:14px 0 6px}p{margin-bottom:10px;font-size:.93rem}ul,ol{padding-left:22px;margin-bottom:12px;font-size:.93rem}li{margin-bottom:6px}.def{background:#12121a;border:1px solid #1e1e30;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}.def strong{color:#a8e6a3}.formula{background:#101a10;border:1px solid #6bcb7740;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:.88rem;color:#a8e6a3}table{width:100%;border-collapse:collapse;font-size:.85rem;margin:12px 0}th,td{padding:10px;border:1px solid #1e1e30;text-align:left;vertical-align:top}th{background:#1a1a2e;color:#a8e6a3}tr:nth-child(even){background:#0e0e18}.note{background:#0a1a0a;border:1px solid #6bcb7740;border-radius:8px;padding:12px;margin:10px 0;font-size:.86rem}.note strong{color:#6bcb77}.warn{background:#1a1a0a;border:1px solid #ffd93d40;border-radius:8px;padding:12px;margin:10px 0;font-size:.86rem}.warn strong{color:#ffd93d}.diagram{background:#0f1a0f;border:1px solid #6bcb7740;border-radius:10px;padding:16px;margin:14px 0;font-size:.85rem;color:#a8e6a3;white-space:pre-wrap;font-family:monospace;overflow-x:auto}code{background:#1a1a2e;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#a8e6a3}</style><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="c"><h1>⚔️ Unit 3 — Divide and Conquer</h1><p class="sub">CSC 314 · 8 Hrs · Detailed Notes</p>
 
-<style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fdfdfd; }
-  h1 { text-align: center; color: #1a1a2e; border-bottom: 3px solid #16213e; padding-bottom: 10px; }
-  h2 { color: #16213e; background: #e8eaf6; padding: 10px 14px; border-left: 5px solid #1a237e; margin-top: 40px; }
-  h3 { color: #283593; margin-top: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-  table { border-collapse: collapse; margin: 15px 0; width: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #bbb; padding: 10px 14px; text-align: left; }
-  th { background: #e0e0e0; font-weight: bold; }
-  .step, .box { background: #fff; border: 1px solid #ddd; padding: 15px 20px; margin: 10px 0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .answer { background: #e8f5e9; padding: 10px 15px; border-left: 5px solid #2e7d32; margin: 15px 0; font-weight: bold; font-size: 1.1em; color: #1b5e20; }
-  ul, ol { margin: 10px 0 10px 25px; padding-left: 10px; }
-  li { margin-bottom: 8px; }
-  code { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: #d32f2f; }
-  pre { background: #f4f4f4; padding: 15px; font-family: monospace; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; font-size: 1.1em; color: #0d47a1; }
-</style>
+<h2>3.0 The Divide-and-Conquer Paradigm</h2><div class="def">A <strong>Divide-and-Conquer</strong> algorithm solves a problem by:<ol><li><strong>Divide</strong> the problem into smaller sub-problems of the same type.</li><li><strong>Conquer</strong> each sub-problem recursively. Sub-problems small enough are solved directly (base case).</li><li><strong>Combine</strong> the sub-problem solutions into a solution for the original problem.</li></ol>This yields a recurrence $T(n)=aT(n/b)+f(n)$ usually solved with the Master Theorem (Unit 1).</div>
 
-    <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-    <h1>Unit 3: Divide and Conquer</h1>
-    
-<h2>3.1 Divide and Conquer Paradigm</h2>
-<div class="box">
-    <p>A recursive algorithm design paradigm that solves a problem by applying three steps:</p>
-    <ul>
-        <li><strong>Divide:</strong> Break the main problem into several smaller sub-problems of the same type.</li>
-        <li><strong>Conquer:</strong> Solve the sub-problems recursively. If they are small enough, solve them directly (base case).</li>
-        <li><strong>Combine:</strong> Merge the solutions of the sub-problems to form the solution to the original problem.</li>
-    </ul>
-    <h3>Binary Search</h3>
-    <p>Finds the target in a sorted list by halving the search space recursively.</p>
-    <p><strong>Recurrence:</strong> $T(N) = T(N/2) + O(1)$. <strong>Time:</strong> $O(\log N)$.</p>
-    <h3>Min-Max Finding</h3>
-    <p>Instead of $2N - 2$ comparisons iteratively, we split the array in half, find min/max in left and right, and compare. Total comparisons drop to $3N/2 - 2$.</p>
+<h2>3.1 Searching</h2>
+
+<h3>3.1.1 Binary Search</h3><div class="def">Pre-condition: the array $A$ is <strong>sorted</strong>. Compare the key with the middle element; if equal return; if smaller recurse on the left half; if larger recurse on the right half.</div>
+<div class="diagram">Algorithm BinarySearch(A, low, high, key):
+  if low > high: return -1
+  mid ← (low + high) / 2
+  if A[mid] = key: return mid
+  if key < A[mid]:
+      return BinarySearch(A, low, mid-1, key)
+  else:
+      return BinarySearch(A, mid+1, high, key)</div>
+<p><strong>Trace</strong> searching key = 23 in $A=[2,5,8,12,16,23,38,56,72,91]$:</p>
+<div class="diagram">low=0 high=9 mid=4 A[4]=16 < 23 → search right
+low=5 high=9 mid=7 A[7]=56 > 23 → search left
+low=5 high=6 mid=5 A[5]=23 ✓ return 5</div>
+<h4>Analysis</h4><ul><li>Recurrence: $T(n)=T(n/2)+\Theta(1)$ → Master Case 2 → <strong>$T(n)=\Theta(\log n)$</strong>.</li><li>Best $\Omega(1)$ (key at middle), worst $O(\log n)$.</li><li>Space: recursive $\Theta(\log n)$ stack; iterative $\Theta(1)$.</li></ul>
+
+<h3>3.1.2 Min-Max Finding</h3><div class="def">Find both the minimum and maximum of an array in fewer comparisons than $2(n-1)$ of the naive approach.</div>
+<h4>Divide-and-Conquer MinMax</h4><div class="diagram">Algorithm MinMax(A, low, high):
+  if low = high: return (A[low], A[low])
+  if high = low + 1:
+      if A[low] < A[high]: return (A[low], A[high])
+      else:               return (A[high], A[low])
+  mid ← (low+high)/2
+  (min1,max1) ← MinMax(A, low,  mid)
+  (min2,max2) ← MinMax(A, mid+1, high)
+  return (min(min1,min2), max(max1,max2))</div>
+<h4>Analysis</h4><p>Recurrence (comparisons): $T(n)=2T(n/2)+2,\ T(2)=1$. Solving: $T(n)=\lceil 3n/2\rceil-2$, beating the naive $2n-2$ by 25 %.</p><p>Time $=\Theta(n)$ (Master Case 1: $n^{\log_2 2}=n$ vs $f=2$ → Case 1). Space $=\Theta(\log n)$ stack.</p>
+
+<h2>3.2 Sorting</h2>
+
+<h3>3.2.1 Merge Sort</h3><div class="def">Divide the array into two halves, recursively sort each half, then <strong>merge</strong> the two sorted halves into one sorted output using a linear scan with an auxiliary array.</div>
+<div class="diagram">Algorithm MergeSort(A, l, r):
+  if l < r:
+      m ← (l+r)/2
+      MergeSort(A, l,  m)
+      MergeSort(A, m+1, r)
+      Merge(A, l, m, r)
+
+Merge(A, l, m, r):    // l..m and m+1..r are already sorted
+  copy A[l..m] → L; A[m+1..r] → R
+  i ← j ← 0; k ← l
+  while i < |L| and j < |R|:
+      if L[i] ≤ R[j]: A[k] ← L[i]; i++
+      else:          A[k] ← R[j]; j++
+      k++
+  copy any remaining L or R into A</div>
+<h4>Analysis</h4><ul><li>Recurrence $T(n)=2T(n/2)+\Theta(n)$ → Master Case 2 → <strong>$T(n)=\Theta(n\log n)$</strong> in best, average, AND worst case.</li><li>Space $=\Theta(n)$ (auxiliary L,R). Stable: yes. In-place: no.</li></ul>
+
+<h3>3.2.2 Quick Sort</h3><div class="def">Pick a <strong>pivot</strong>; <strong>partition</strong> the array so that everything ≤ pivot lies on its left and everything > pivot on its right; recurse on the two sides. The merge step is trivial because partitioning leaves the array in place.</div>
+<div class="diagram">Algorithm QuickSort(A, l, r):
+  if l < r:
+      p ← Partition(A, l, r)
+      QuickSort(A, l, p-1)
+      QuickSort(A, p+1, r)
+
+Partition(A, l, r):       // Lomuto scheme, pivot = A[r]
+  x ← A[r]; i ← l-1
+  for j = l to r-1:
+      if A[j] ≤ x: i++; swap A[i],A[j]
+  swap A[i+1], A[r]
+  return i+1</div>
+<p><strong>Trace</strong> on $(15,7,5,2,13,4,25)$ (pivot = last):</p>
+<div class="diagram">Initial: 15 7 5 2 13 4 | 25
+Partition by 25 → pivot lands at index 6 → (15,7,5,2,13,4) | 25
+Next pivot 4: → (2) (4) (15,7,5,13)
+Next pivot 13: → (7,5) (13) (15)
+Next pivot 5: → (2,4,5,7,13,15,25)</div>
+<h4>Analysis</h4><table><tr><th>Case</th><th>Recurrence</th><th>Result</th><th>When</th></tr><tr><td>Best</td><td>$T(n)=2T(n/2)+\Theta(n)$</td><td>$\Theta(n\log n)$</td><td>Pivot splits array evenly</td></tr><tr><td>Average</td><td>$T(n)=T(n/4)+T(3n/4)+\Theta(n)$</td><td>$\Theta(n\log n)$</td><td>Random input</td></tr><tr><td><strong>Worst</strong></td><td>$T(n)=T(n-1)+\Theta(n)$</td><td><strong>$\Theta(n^2)$</strong></td><td>Already sorted / reverse sorted with last-element pivot</td></tr></table>
+<p>Space $=\Theta(\log n)$ average, $\Theta(n)$ worst (recursion depth). In-place: yes. Stable: no.</p>
+
+<h3>3.2.3 Randomized Quick Sort</h3><div class="def">Before partitioning, swap $A[r]$ with $A[\text{random}(l,r)]$. The pivot is now uniformly random, so the worst case becomes <em>exponentially unlikely</em> rather than triggered by sorted input.</div>
+<div class="diagram">RandomizedPartition(A, l, r):
+  i ← random(l, r)
+  swap A[i], A[r]
+  return Partition(A, l, r)</div>
+<p><strong>Expected time</strong> $=\Theta(n\log n)$ on every input. Worst-case is still $\Theta(n^2)$ but only with probability $O(1/n!)$.</p>
+
+<h3>3.2.4 Heap Sort</h3><div class="def">A <strong>(max-)heap</strong> is a complete binary tree where every parent ≥ its children. Stored in an array: parent($i$) $=\lfloor i/2\rfloor$, left $=2i$, right $=2i+1$.</div>
+<h4>Heapify (sink an element)</h4><div class="diagram">MaxHeapify(A, i, n):
+  l ← 2i; r ← 2i+1; largest ← i
+  if l ≤ n and A[l] > A[largest]: largest ← l
+  if r ≤ n and A[r] > A[largest]: largest ← r
+  if largest ≠ i:
+      swap A[i], A[largest]
+      MaxHeapify(A, largest, n)</div>
+<p>Heapify runs in $O(\log n)$ — the height of the heap.</p>
+<h4>Build-Heap</h4><div class="diagram">BuildMaxHeap(A, n):
+  for i = ⌊n/2⌋ down to 1:
+      MaxHeapify(A, i, n)</div>
+<p>Although the naive bound is $O(n\log n)$, a tighter sum over heights gives $T(n)=O(n)$ — provable from $\sum_{h=0}^{\log n} n/2^{h+1}\cdot h = O(n)$.</p>
+<h4>Heap Sort</h4><div class="diagram">HeapSort(A, n):
+  BuildMaxHeap(A, n)              // O(n)
+  for i = n down to 2:
+      swap A[1], A[i]             // move max to end
+      MaxHeapify(A, 1, i-1)       // restore heap on size i-1
 </div>
+<p><strong>Trace</strong> Build-Heap on $(4,10,3,5,1)$ → start at i=2: heapify gives $(4,10,3,5,1)$ → $(4,10,3,5,1)$; i=1 sinks 4 → $(10,5,3,4,1)$. Now repeatedly extract max.</p>
+<h4>Analysis</h4><ul><li>Build-heap: $\Theta(n)$. Each extract-max: $\Theta(\log n)$, repeated $n-1$ times.</li><li><strong>Total time</strong> $=\Theta(n\log n)$ in best, average, AND worst case.</li><li>Space $=\Theta(1)$ in-place. Stable: no.</li></ul>
 
-<h2>3.2 Sorting Algorithms</h2>
-<div class="box">
-    <h3>Merge Sort</h3>
-    <p>Splits the list exactly in half until 1 element remains. Merges the halves recursively.</p>
-    <p><strong>Recurrence:</strong> $T(N) = 2T(N/2) + O(N)$.<br>
-    <strong>Time:</strong> $O(N \log N)$ always. <strong>Space:</strong> $O(N)$ auxiliary array.</p>
-    
-    <h3>Quick Sort</h3>
-    <p>Divides based on a Pivot element, ensuring elements on the left are smaller and on the right are larger.</p>
-    <p><strong>Worst Case Time:</strong> $O(N^2)$ (When sorted natively and Pivot is 1st element. Partition is highly skewed $N-1$ and $1$).<br>
-    <strong>Average Best Time:</strong> $O(N \log N)$. <strong>Space:</strong> $O(\log N)$ recursion stack.</p>
-    
-    <h3>Heap Sort</h3>
-    <p>Treats array as a Complete Binary Tree. Builds a Max-Heap where parent > children.</p>
-    <ol>
-        <li><strong>BuildHeap:</strong> Call `Heapify` on all non-leaf nodes. Time: $O(N)$.</li>
-        <li><strong>HeapSort:</strong> Swap the root (max element) with the last node, reduce array size, and call `Heapify` top-down to repair property. Time: $O(N \log N)$.</li>
-    </ol>
-    <p><strong>Complexity:</strong> $O(N \log N)$ worst-case. In-place, Space: $O(1)$.</p>
-</div>
+<h3>3.2.5 Sort comparison</h3><table><tr><th>Sort</th><th>Best</th><th>Avg</th><th>Worst</th><th>Space</th><th>Stable</th><th>In-place</th></tr><tr><td>Merge</td><td>$n\log n$</td><td>$n\log n$</td><td>$n\log n$</td><td>$\Theta(n)$</td><td>Yes</td><td>No</td></tr><tr><td>Quick</td><td>$n\log n$</td><td>$n\log n$</td><td>$n^2$</td><td>$\Theta(\log n)$</td><td>No</td><td>Yes</td></tr><tr><td>Rand-Quick</td><td>$n\log n$</td><td>$n\log n$ (exp.)</td><td>$n^2$ (rare)</td><td>$\Theta(\log n)$</td><td>No</td><td>Yes</td></tr><tr><td>Heap</td><td>$n\log n$</td><td>$n\log n$</td><td>$n\log n$</td><td>$\Theta(1)$</td><td>No</td><td>Yes</td></tr></table>
 
-<h2>3.3 Order Statistics</h2>
-<div class="box">
-    <p>Finding the $i$-th smallest element in an unordered array. If $i = 1$, it's Minimum. If $i = N/2$, it's Median.</p>
-    <h3>Selection in Expected Linear Time (Quick Select)</h3>
-    <p>Randomly pick a pivot. Partition the list. If pivot lands at index $k$, and $i = k$, you are done! If $i < k$, search only the left partition.<br>
-    <strong>Time:</strong> $O(N)$ average, but $O(N^2)$ worst-case.</p>
+<h2>3.3 Order Statistics — Selection Problem</h2><div class="def">The <strong>$i$-th order statistic</strong> of an $n$-element set is the $i$-th smallest element. Special cases: minimum ($i=1$), maximum ($i=n$), median ($i=\lceil n/2\rceil$).</div>
 
-    <h3>Worst Case Linear Time Selection (Median of Medians)</h3>
-    <p>Forces a good pivot to guarantee worst-case $O(N)$ partitioning limit.</p>
-    <ol>
-        <li>Divide $N$ elements into groups of 5.</li>
-        <li>Find median of each group (takes $O(1)$). You get $\lceil N/5 \rceil$ medians.</li>
-        <li>Recursively invoke the algorithm to find the Median of the $N/5$ medians. Call this $X$.</li>
-        <li>Use $X$ as the Partition Pivot!</li>
-    </ol>
-    <p><strong>Recurrence:</strong> $T(n) = T(n/5) + T(7n/10) + O(n)$. Total Time: strictly $O(N)$.</p>
-</div>
+<h3>3.3.1 Selection in Expected Linear Time (RANDOMIZED-SELECT)</h3><div class="diagram">RandomizedSelect(A, l, r, i):
+  if l = r: return A[l]
+  q ← RandomizedPartition(A, l, r)
+  k ← q - l + 1                    // rank of pivot within A[l..r]
+  if i = k: return A[q]
+  if i < k: return RandomizedSelect(A, l, q-1, i)
+  else:     return RandomizedSelect(A, q+1, r, i-k)</div>
+<p>Expected recurrence $T(n)=T(\max(k,n-k))+\Theta(n)$ with $k$ uniform → solves to $\Theta(n)$. Worst case still $\Theta(n^2)$.</p>
 
-</body>
-</html>
+<h3>3.3.2 Selection in Worst-Case Linear Time (Median-of-Medians, BFPRT)</h3><p>To guarantee $O(n)$ even in the worst case, choose a pivot smart enough to drop at least 30 % of elements on each side.</p>
+<div class="diagram">Select(A, i):
+  1. Divide A into ⌈n/5⌉ groups of ≤ 5 elements.
+  2. Sort each group; let M = list of the medians.
+  3. x ← Select(M, ⌈|M|/2⌉)                  // median of medians
+  4. Partition A around x → k elements ≤ x on left.
+  5. if i = k: return x
+     if i < k: return Select(left, i)
+     else:     return Select(right, i-k)</div>
+<h4>Why it is linear</h4><p>The chosen pivot $x$ is guaranteed to be greater than at least $3\lceil n/10\rceil$ elements and smaller than at least $3\lceil n/10\rceil$ elements. Hence each recursive call shrinks the array to at most $7n/10$.</p>
+<p>Recurrence: $T(n)\le T(n/5)+T(7n/10)+\Theta(n)$. Since $1/5+7/10=9/10<1$, expanding gives a geometric series → <strong>$T(n)=\Theta(n)$</strong>.</p>
+<div class="note"><strong>Take-away:</strong> After Unit 3 you must be able to (a) write &amp; analyse Binary Search, MinMax, Merge / Quick / Randomized Quick / Heap Sort, (b) trace each algorithm on a small input, (c) explain the worst-case input of Quick Sort and how randomization defends against it, (d) describe Heapify / Build-Heap and prove Build-Heap is $\Theta(n)$, and (e) explain both linear-time selection algorithms and the 1/5–7/10 argument.</div>
+
+</div></body></html>
